@@ -55,14 +55,16 @@ PRISM[, 18][PRISM[, 18] == "Camarines sur"] <- "Camarines Sur"
 PRISM[, 18][PRISM[, 18] == "Cam.Sur"] <- "Camarines Sur"
 PRISM[, 18][PRISM[, 18] == "Occ.Mindoro"] <- "Occidental Mindoro"
 
-
 PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"
 PRISM[, 17][PRISM[, 17] == "Sta.Cruz"] <- "Santa Cruz"
 PRISM[, 17][PRISM[, 17] == "Sta. Cruz"] <- "Santa Cruz"
 
-a <- na.omit(data.frame(PRISM$gps1.Longitude, PRISM$gps1.Latitude, as.character(PRISM$group_contact.province), as.character(PRISM$group_contact.town_name), PRISM$group_1.group_diseases_1.disease_brownspot))
+a <- na.omit(data.frame(PRISM$gps1.Longitude, 
+                        PRISM$gps1.Latitude, as.character(PRISM$group_contact.province), 
+                        as.character(PRISM$group_contact.town_name), 
+                        PRISM$group_1.group_diseases_1.disease_brownspot))
 names(a) <- c("Lon", "Lat", "Province", "Municipality", "Injury")
-
+a <- a[with(a, order(Province, Municipality)), ]
 
 # map of injuries
 b <- ggplot(a, aes(x = PRISM.gps1.Longitude, y = PRISM.gps1.Latitude)) +
@@ -75,11 +77,11 @@ b <- ggplot(a, aes(x = PRISM.gps1.Longitude, y = PRISM.gps1.Latitude)) +
   scale_colour_continuous(name = "Brown Spot\nIncidence", low = "#ffffff", high = "#ff0000", guide = "legend") +
   coord_map()
 
-# violin plot of injuries
+# violin plot of brown spot
 ggplot(a, aes(x = factor(Municipality), y = Injury)) +
-  geom_histogram(aes(colour = factor(Province), fill = factor(Province)), stat = "identity") +
+  geom_histogram(aes(colour = factor(Province), fill = factor(Province)), stat = "identity", position = "dodge") +
   scale_y_continuous(name = "Brown\nSpot\nIncidence") +
+  scale_x_discrete(name = "Munincipality") +
   scale_fill_discrete(name = "Province") +
   scale_colour_discrete(name = "Province")
   
-
