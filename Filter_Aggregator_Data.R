@@ -59,6 +59,11 @@ PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"
 PRISM[, 17][PRISM[, 17] == "Sta.Cruz"] <- "Santa Cruz"
 PRISM[, 17][PRISM[, 17] == "Sta. Cruz"] <- "Santa Cruz"
 
+names(PRISM) <- c(substr(names(PRISM[8]), 6, nchar(names(PRISM[8]))),
+                  substr(names(PRISM[9]), 6, nchar(names(PRISM[9]))),
+                  substr(names(PRISM[8]), 6, nchar(names(PRISM[8]))),
+
+
 a <- na.omit(data.frame(PRISM$gps1.Longitude, 
                         PRISM$gps1.Latitude, as.character(PRISM$group_contact.province), 
                         as.character(PRISM$group_contact.town_name), 
