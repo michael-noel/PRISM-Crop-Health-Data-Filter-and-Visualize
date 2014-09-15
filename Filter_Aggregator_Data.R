@@ -2,7 +2,8 @@
 library(rgdal) # to load shape files
 library(ggplot2) # for the map
 library(raster) # for getData
-library(doBy) # for summarising data
+library(reshape)
+library(doBy)
 #### end load packages ####
 
 PHL <- getData("GADM", country = "PHL", level = 2)
@@ -59,9 +60,36 @@ PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"
 PRISM[, 17][PRISM[, 17] == "Sta.Cruz"] <- "Santa Cruz"
 PRISM[, 17][PRISM[, 17] == "Sta. Cruz"] <- "Santa Cruz"
 
-names(PRISM) <- c(substr(names(PRISM[8]), 6, nchar(names(PRISM[8]))),
-                  substr(names(PRISM[9]), 6, nchar(names(PRISM[9]))),
-                  substr(names(PRISM[8]), 6, nchar(names(PRISM[8]))),
+# Growth stage
+gs <- PRISM[, grep(pattern = "crop_stage", colnames(PRISM), perl = TRUE)]
+
+# Tiller, panicl and leaf counts
+tiller <- apply(PRISM[, grep(pattern = "tiller_hill", colnames(PRISM), perl = TRUE)], 1, sum)
+panicle <- apply(PRISM[, grep(pattern = "panicle_hill", colnames(PRISM), perl = TRUE)], 1, sum)
+leaves <- apply(PRISM[, grep(pattern = "leaves_tiller", colnames(PRISM), perl = TRUE)], 1, sum)
+
+# generate data frames of single diseases, from 10 observations, for graphing
+bak <- data.frame(PRISM[, 17:18], gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bakanae", colnames(PRISM), perl = TRUE)], 1, sum))
+names(bak) <- c("Munincipality", "Province", "growth_stage", "tiller", "panicle", "leaves", "bakanae")
+
+blb <- apply(PRISM[, grep(pattern = "bacterialleafblight", colnames(PRISM), perl = TRUE)], 1, sum)
+bls <- apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum)
+bst <- apply(PRISM[, grep(pattern = "(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)], 1, sum)
+fsm <- apply(PRISM[, grep(pattern = "falsesmut", colnames(PRISM), perl = TRUE)], 1, sum)
+dip <- apply(PRISM[, grep(pattern = "dirtypanicle", colnames(PRISM), perl = TRUE)], 1, sum)
+lba <- apply(PRISM[, grep(pattern = "leafblast", colnames(PRISM), perl = TRUE)], 1, sum)
+nba <- apply(PRISM[, grep(pattern = "neckblast", colnames(PRISM), perl = TRUE)], 1, sum)
+nbs <- apply(PRISM[, grep(pattern = "narrowbrownspot", (colnames(PRISM)), perl = TRUE)], 1, sum)
+lsc <- apply(PRISM[, grep(pattern = "leafscald", colnames(PRISM), perl = TRUE)], 1, sum)
+rsp <- apply(PRISM[, grep(pattern = "redstripe", colnames(PRISM), perl = TRUE)], 1, sum)
+shr <- apply(PRISM[, grep(pattern = "sheathrot", colnames(PRISM), perl = TRUE)], 1, sum)
+shb <- apply(PRISM[, grep(pattern = "sheathblight", colnames(PRISM), perl = TRUE)], 1, sum)
+str <- apply(PRISM[, grep(pattern = "stemrot", colnames(PRISM), perl = TRUE)], 1, sum)
+          
+
+
+
+bak <- summaryBy(group_contact.town_name+group_contact.province_name~bak, data = bak, fun = sum, keep.names = TRUE)
 
 
 a <- na.omit(data.frame(PRISM$gps1.Longitude, 
