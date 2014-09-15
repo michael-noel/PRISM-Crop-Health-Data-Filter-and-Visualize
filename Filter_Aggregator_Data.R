@@ -2,6 +2,7 @@
 library(rgdal) # to load shape files
 library(ggplot2) # for the map
 library(raster) # for getData
+library(doBy) # for summarising data
 #### end load packages ####
 
 PHL <- getData("GADM", country = "PHL", level = 2)
@@ -16,6 +17,9 @@ PHL <- getData("GADM", country = "PHL", level = 2)
 
 PRISM <- read.csv("~/Google Drive/tmp/PRISM_Crop_and_Injuries_V1_0_results.csv")
 PRISM[, 2] <- as.Date(PRISM[, 2])
+PRISM[, 17] <- as.character(PRISM[, 17])
+PRISM[, 19] <- as.character(PRISM[, 18])
+
 PRISM <- subset(PRISM, 
                 datetime != "2014-05-10" & # Training ???
                   datetime != "2014-05-26" &
@@ -47,10 +51,20 @@ PRISM <- subset(PRISM,
                   datetime != "2014-08-21" & 
                   datetime != "2014-08-22")
 
-a <- na.omit(data.frame(PRISM$gps1.Longitude, PRISM$gps1.Latitude, PRISM$group_1.group_diseases_1.disease_brownspot))
+PRISM[, 18][PRISM[, 18] == "Camarines sur"] <- "Camarines Sur"
+PRISM[, 18][PRISM[, 18] == "Cam.Sur"] <- "Camarines Sur"
+PRISM[, 18][PRISM[, 18] == "Occ.Mindoro"] <- "Occidental Mindoro"
 
-a <- 
-  
+
+PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"
+PRISM[, 17][PRISM[, 17] == "Sta.Cruz"] <- "Santa Cruz"
+PRISM[, 17][PRISM[, 17] == "Sta. Cruz"] <- "Santa Cruz"
+
+a <- na.omit(data.frame(PRISM$gps1.Longitude, PRISM$gps1.Latitude, as.character(PRISM$group_contact.province), as.character(PRISM$group_contact.town_name), PRISM$group_1.group_diseases_1.disease_brownspot))
+names(a) <- c("Lon", "Lat", "Province", "Municipality", "Injury")
+
+
+# map of injuries
 b <- ggplot(a, aes(x = PRISM.gps1.Longitude, y = PRISM.gps1.Latitude)) +
   geom_polygon(data = PHL, aes(x = long, y = lat, group = group), fill = "#666666", color = "#666666") +
   geom_point(aes(size = PRISM.group_1.group_diseases_1.disease_brownspot, color = PRISM.group_1.group_diseases_1.disease_brownspot), alpha = 0.65) +
@@ -60,4 +74,12 @@ b <- ggplot(a, aes(x = PRISM.gps1.Longitude, y = PRISM.gps1.Latitude)) +
   scale_size_continuous(name = "Brown Spot\nIncidence") +
   scale_colour_continuous(name = "Brown Spot\nIncidence", low = "#ffffff", high = "#ff0000", guide = "legend") +
   coord_map()
+
+# violin plot of injuries
+ggplot(a, aes(x = factor(Municipality), y = Injury)) +
+  geom_histogram(aes(colour = factor(Province), fill = factor(Province)), stat = "identity") +
+  scale_y_continuous(name = "Brown\nSpot\nIncidence") +
+  scale_fill_discrete(name = "Province") +
+  scale_colour_discrete(name = "Province")
+  
 
