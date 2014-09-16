@@ -50,6 +50,14 @@ PRISM <- subset(PRISM,
                   datetime != "2014-08-15"
   )
 
+PRISM[, 19][PRISM[, 19] == "3"] <- "III"
+PRISM[, 19][PRISM[, 19] == "5"] <- "IV-B"
+PRISM[, 19][PRISM[, 19] == "6"] <- "V"
+PRISM[, 19][PRISM[, 19] == "7"] <- "VI"
+PRISM[, 19][PRISM[, 19] == "8"] <- "VII"
+PRISM[, 19][PRISM[, 19] == "9"] <- "VIII"
+PRISM[, 19][PRISM[, 19] == "16"] <- "CAR"
+
 PRISM[, 18][PRISM[, 18] == "Camarines sur"] <- "Camarines Sur"
 PRISM[, 18][PRISM[, 18] == "Cam.Sur"] <- "Camarines Sur"
 PRISM[, 18][PRISM[, 18] == "Cam. Sur"] <- "Camarines Sur"
