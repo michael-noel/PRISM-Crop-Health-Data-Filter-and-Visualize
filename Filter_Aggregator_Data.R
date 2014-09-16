@@ -54,6 +54,8 @@ PRISM[, 18][PRISM[, 18] == "Camarines sur"] <- "Camarines Sur"
 PRISM[, 18][PRISM[, 18] == "Cam.Sur"] <- "Camarines Sur"
 PRISM[, 18][PRISM[, 18] == "Cam. Sur"] <- "Camarines Sur"
 PRISM[, 18][PRISM[, 18] == "Occ.Mindoro"] <- "Occidental Mindoro"
+PRISM[, 18][PRISM[, 18] == "Occ.mindoro"] <- "Occidental Mindoro"
+PRISM[, 18][PRISM[, 18] == "occidental mindoro"] <- "Occidental Mindoro"
 
 PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"
 PRISM[, 17][PRISM[, 17] == "Sta.Cruz"] <- "Santa Cruz"
@@ -64,6 +66,7 @@ PRISM[, 17][PRISM[, 17] == "San miguel"] <- "San Miguel"
 PRISM[, 18][PRISM[, 18] == "Rizal"] <- "Kalinga"
 PRISM[, 17][PRISM[, 17] == "Tabuk"] <- "Tabuk City"
 PRISM[, 17][PRISM[, 17] == "Tabui"] <- "Tabuk City"
+PRISM[, 17][PRISM[, 17] == "sablayan"] <- "Sablayan"
 
 ## Remove all Kalinga training events
 PRISM <- sqldf("SELECT * FROM PRISM WHERE Province NOT IN ('Kalinga', 'Gkm', 'Laguna')")
