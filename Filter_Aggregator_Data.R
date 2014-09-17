@@ -21,7 +21,7 @@ library(sqldf)
 PHL <- getData("GADM", country = "PHL", level = 2)
 
 # CAR     August 18-22, 2014 (Joey)
-# Reg3    Auguust 11-15 (c/o PhilRice)
+# Reg3    August 11-15 (c/o PhilRice)
 # Reg4B   August 11-15, 2014 (Nancy)
 # Reg5    July 7-11 (c/o PhilRice)
 # Reg6    May 26-30, 2014 (Joey and Hannah)
