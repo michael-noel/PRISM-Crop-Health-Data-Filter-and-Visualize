@@ -19,6 +19,8 @@ PHL <- getData("GADM", country = "PHL", level = 2)
 
 PRISM <- read.csv("~/Google Drive/tmp/PRISM_Crop_and_Injuries_V1_0_results.csv")
 PRISM[, 2] <- as.Date(PRISM[, 2])
+PRISM[, 3] <- as.Date(PRISM[, 3])
+PRISM[, 4] <- as.Date(PRISM[, 4])
 PRISM[, 16] <- as.character(PRISM[, 16])
 PRISM[, 17] <- as.character(PRISM[, 17])
 PRISM[, 18] <- as.character(PRISM[, 18])
@@ -28,28 +30,36 @@ names(PRISM)[names(PRISM) == "group_contact.town_name"] <- "Municipality"
 names(PRISM)[names(PRISM) == "group_contact.province_name"] <- "Province"
 names(PRISM)[names(PRISM) == "group_contact.region_name"] <- "Region"
 
-PRISM <- subset(PRISM, 
-                datetime != "2014-05-10" & # Training ???
-                  datetime != "2014-05-26" &
-                  datetime != "2014-05-27" &
-                  datetime != "2014-05-28" &
-                  datetime != "2014-05-29" &
-                  datetime != "2014-05-30" &
-                  datetime != "2014-07-07" &
-                  datetime != "2014-07-08" &
-                  datetime != "2014-07-09" &
-                  datetime != "2014-07-10" &
-                  datetime != "2014-07-11" &
-                  datetime != "2014-08-11" &
-                  datetime != "2014-08-04" &
-                  datetime != "2014-08-05" &
-                  datetime != "2014-08-06" &
-                  datetime != "2014-08-07" &
-                  datetime != "2014-08-08" &
-                  datetime != "2014-08-14" &
-                  datetime != "2014-08-15"
-  )
+PRISM <- subset(PRISM, start > "2014-07-31") # No observations were taken before this date, safe to remove all these data
 
+#### Remove more training events
+PRISM <- sqldf("SELECT * FROM PRISM WHERE Province NOT IN ('Kalinga', 'J', 'Rizal', 'Bohol') AND Municipality NOT IN ('Tabuk City') AND datetime NOT IN ('2014-08-07', '2014-08-18', '2014-08-19', '2014-08-20', '2014-08-21', '2014-08-22')")
+
+#### Rename the provinces to proper names ####
+PRISM[, 18][PRISM[, 18] == "Camarines sur"] <- "Camarines Sur"
+PRISM[, 18][PRISM[, 18] == "Cam.Sur"] <- "Camarines Sur"
+PRISM[, 18][PRISM[, 18] == "Cam.sur"] <- "Camarines Sur"
+PRISM[, 18][PRISM[, 18] == "Cam.Surm"] <- "Camarines Sur"
+PRISM[, 18][PRISM[, 18] == "Cam. Sur"] <- "Camarines Sur"
+PRISM[, 18][PRISM[, 18] == "Cam Sur"] <- "Camarines Sur"
+PRISM[, 18][PRISM[, 18] == "Cam sur"] <- "Camarines Sur"
+PRISM[, 18][PRISM[, 18] == "Cs"] <- "Camarines Sur"
+PRISM[, 18][PRISM[, 18] == "Occ.Mindoro"] <- "Occidental Mindoro"
+PRISM[, 18][PRISM[, 18] == "Occ.mindoro"] <- "Occidental Mindoro"
+PRISM[, 18][PRISM[, 18] == "occidental mindoro"] <- "Occidental Mindoro"
+
+#### Rename the Munincipalities to proper names ####
+PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"
+PRISM[, 17][PRISM[, 17] == "Sta.Cruz"] <- "Santa Cruz"
+PRISM[, 17][PRISM[, 17] == "Sta. Cruz"] <- "Santa Cruz"
+PRISM[, 17][PRISM[, 17] == "RIZAL"] <- "Rizal"
+PRISM[, 17][PRISM[, 17] == "Tabuk city"] <- "Tabuk City"
+PRISM[, 17][PRISM[, 17] == "San miguel"] <- "San Miguel"
+PRISM[, 17][PRISM[, 17] == "Tabuk"] <- "Tabuk City"
+PRISM[, 17][PRISM[, 17] == "Tabui"] <- "Tabuk City"
+PRISM[, 17][PRISM[, 17] == "sablayan"] <- "Sablayan"
+
+#### Rename the regions to proper names ####
 PRISM[, 19][PRISM[, 19] == "3"] <- "III"
 PRISM[, 19][PRISM[, 19] == "5"] <- "IV-B"
 PRISM[, 19][PRISM[, 19] == "6"] <- "V"
@@ -58,30 +68,27 @@ PRISM[, 19][PRISM[, 19] == "8"] <- "VII"
 PRISM[, 19][PRISM[, 19] == "9"] <- "VIII"
 PRISM[, 19][PRISM[, 19] == "16"] <- "CAR"
 
-PRISM[, 18][PRISM[, 18] == "Camarines sur"] <- "Camarines Sur"
-PRISM[, 18][PRISM[, 18] == "Cam.Sur"] <- "Camarines Sur"
-PRISM[, 18][PRISM[, 18] == "Cam. Sur"] <- "Camarines Sur"
-PRISM[, 18][PRISM[, 18] == "Occ.Mindoro"] <- "Occidental Mindoro"
-PRISM[, 18][PRISM[, 18] == "Occ.mindoro"] <- "Occidental Mindoro"
-PRISM[, 18][PRISM[, 18] == "occidental mindoro"] <- "Occidental Mindoro"
+#### Correct region numbers
+PRISM <- within(PRISM, Region[Province == "Bohol"] <- "VII") # Fixes "NA" and "12" mis-entries
 
-PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"
-PRISM[, 17][PRISM[, 17] == "Sta.Cruz"] <- "Santa Cruz"
-PRISM[, 17][PRISM[, 17] == "Sta. Cruz"] <- "Santa Cruz"
-PRISM[, 17][PRISM[, 17] == "RIZAL"] <- "Rizal"
-PRISM[, 17][PRISM[, 17] == "Tabuk city"] <- "Tabuk City"
-PRISM[, 17][PRISM[, 17] == "San miguel"] <- "San Miguel"
-PRISM[, 18][PRISM[, 18] == "Rizal"] <- "Kalinga"
-PRISM[, 17][PRISM[, 17] == "Tabuk"] <- "Tabuk City"
-PRISM[, 17][PRISM[, 17] == "Tabui"] <- "Tabuk City"
-PRISM[, 17][PRISM[, 17] == "sablayan"] <- "Sablayan"
+# Santa Cruz, region IV-B has one visit incorrectly recorded as visit 2, when it's the first
+tmp <- subset(PRISM, PRISM$Municipality == "Santa Cruz")
+tmp[, 22][tmp[, 22] == "2nd"] <- "1st"
+PRISM <- PRISM[PRISM[, 17] != "Santa Cruz", ] 
+PRISM <- rbind(PRISM, tmp)
 
-## Remove all Kalinga training events
-PRISM <- sqldf("SELECT * FROM PRISM WHERE Province NOT IN ('Kalinga', 'Gkm', 'Laguna')")
+# Some visits are incorrectly recorded, there are no third or fourth visits
+PRISM[, 22][PRISM[, 22] == "4th"] <- "1st"
+PRISM[, 22][PRISM[, 22] == "3rd"] <- "1st"
+
+#### Merge the site ID columns
+missing <- is.na(PRISM[, 12]) # create logical index for NAs in PRISM[, 12]
+PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
+PRISM <- PRISM[, -13] # drop column 13 now
 
 # Visit number one or two?
 visit <- PRISM[, grep(pattern = "visitNo_label", colnames(PRISM), perl = TRUE)]
-visit <- data.frame(PRISM[, 17:19], visit)
+visit <- data.frame(PRISM[, c(2, 12, 16:18)], visit)
 
 # Growth stage
 gs <- PRISM[, grep(pattern = "crop_stage", colnames(PRISM), perl = TRUE)]
@@ -92,41 +99,20 @@ panicle <- apply(PRISM[, grep(pattern = "panicle_hill", colnames(PRISM), perl = 
 leaves <- apply(PRISM[, grep(pattern = "leaves_tiller", colnames(PRISM), perl = TRUE)], 1, sum)
 
 # generate data frames of single diseases, from 10 observations, for graphing
-bak <- data.frame(PRISM[, 17:19], gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bakanae", colnames(PRISM), perl = TRUE)], 1, sum))
-names(bak) <- c("Municipality", "Province", "growth_stage", "tiller", "panicle", "leaves", "bakanae")
+bak <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bakanae", colnames(PRISM), perl = TRUE)], 1, sum))
+blb <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bacterialleafblight", colnames(PRISM), perl = TRUE)], 1, sum))
+bls <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum))
+bst <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)], 1, sum))
+fsm <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "falsesmut", colnames(PRISM), perl = TRUE)], 1, sum))
+dip <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "dirtypanicle", colnames(PRISM), perl = TRUE)], 1, sum))
+lba <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "leafblast", colnames(PRISM), perl = TRUE)], 1, sum))
+nba <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "neckblast", colnames(PRISM), perl = TRUE)], 1, sum))
+nbs <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "narrowbrownspot", (colnames(PRISM)), perl = TRUE)], 1, sum))
+lsc <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "leafscald", colnames(PRISM), perl = TRUE)], 1, sum))
+rsp <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "redstripe", colnames(PRISM), perl = TRUE)], 1, sum))
+shr <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "sheathrot", colnames(PRISM), perl = TRUE)], 1, sum))
+shb <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "sheathblight", colnames(PRISM), perl = TRUE)], 1, sum))
+str <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "stemrot", colnames(PRISM), perl = TRUE)], 1, sum))
 
-blb <- data.frame(PRISM[, 17:19], gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bacterialleafblight", colnames(PRISM), perl = TRUE)], 1, sum))
-names(blb) <- c("Municipality", "Province", "Region", "growth stage", "tiller", "panicle", "leaves", "injury")
-
-bls <- apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum)
-bst <- apply(PRISM[, grep(pattern = "(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)], 1, sum)
-fsm <- apply(PRISM[, grep(pattern = "falsesmut", colnames(PRISM), perl = TRUE)], 1, sum)
-dip <- apply(PRISM[, grep(pattern = "dirtypanicle", colnames(PRISM), perl = TRUE)], 1, sum)
-lba <- apply(PRISM[, grep(pattern = "leafblast", colnames(PRISM), perl = TRUE)], 1, sum)
-nba <- apply(PRISM[, grep(pattern = "neckblast", colnames(PRISM), perl = TRUE)], 1, sum)
-nbs <- apply(PRISM[, grep(pattern = "narrowbrownspot", (colnames(PRISM)), perl = TRUE)], 1, sum)
-lsc <- apply(PRISM[, grep(pattern = "leafscald", colnames(PRISM), perl = TRUE)], 1, sum)
-rsp <- apply(PRISM[, grep(pattern = "redstripe", colnames(PRISM), perl = TRUE)], 1, sum)
-shr <- apply(PRISM[, grep(pattern = "sheathrot", colnames(PRISM), perl = TRUE)], 1, sum)
-shb <- apply(PRISM[, grep(pattern = "sheathblight", colnames(PRISM), perl = TRUE)], 1, sum)
-str <- apply(PRISM[, grep(pattern = "stemrot", colnames(PRISM), perl = TRUE)], 1, sum)
-
-# how many observations per Municipality are there submitted so far?
-ggplot(visit, aes(x = factor(Municipality))) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "bin", position = "dodge") +
-  scale_y_continuous(name = "Number of visits") +
-  scale_x_discrete(name = "Municipality") +
-  scale_fill_discrete(name = "Region") +
-  scale_colour_discrete(name = "Region") +
-  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  facet_grid(. ~ visit) +
-  ggtitle("Survey Visit Number")
-
-# bar plot of bacterial leaf blight
-ggplot(blb, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
-  scale_y_continuous(name = "Bacterial Leaf\nBlight Incidence") +
-  scale_x_discrete(name = "Municipality") +
-  scale_fill_discrete(name = "Region") +
-  scale_colour_discrete(name = "Region")
+names(bak) <- names(blb) <- names(bls) <- names(bst) <- names(fsm) <- names(dip) <- names(lba) <- names(nba) <- names(nbs) <- names(lsc) <- names(rsp) <- names(shr) <- names(shb) <- names(str) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
 
