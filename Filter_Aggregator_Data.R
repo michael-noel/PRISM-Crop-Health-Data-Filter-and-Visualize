@@ -79,10 +79,10 @@ PRISM[, 19][PRISM[, 19] == "8"] <- "VII"
 PRISM[, 19][PRISM[, 19] == "9"] <- "VIII"
 PRISM[, 19][PRISM[, 19] == "16"] <- "CAR"
 
-#### Correct region numbers
+#### Correct region numbers ####
 PRISM <- within(PRISM, Region[Province == "Bohol"] <- "VII") # Fixes "NA" and "12" mis-entries
 
-# Santa Cruz, region IV-B has one visit incorrectly recorded as visit 2, when it's the first
+#### Santa Cruz, region IV-B has one visit incorrectly recorded as visit 2, when it's the first ####
 tmp <- subset(PRISM, PRISM$Municipality == "Santa Cruz")
 tmp[, 22][tmp[, 22] == "2nd"] <- "1st"
 PRISM <- PRISM[PRISM[, 17] != "Santa Cruz", ] 
@@ -92,30 +92,34 @@ PRISM <- rbind(PRISM, tmp)
 PRISM[, 22][PRISM[, 22] == "4th"] <- "1st"
 PRISM[, 22][PRISM[, 22] == "3rd"] <- "1st"
 
-#### Merge the site ID columns
+#### Merge the site ID columns ####
 missing <- is.na(PRISM[, 12]) # create logical index for NAs in PRISM[, 12]
 PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
 PRISM <- PRISM[, -13] # drop column 13 now
 
-# Visit number one or two?
+##### Visit number one or two? #####
 visit <- PRISM[, grep(pattern = "visitNo_label", colnames(PRISM), perl = TRUE)]
 visit <- data.frame(PRISM[, c(2, 12, 16:18)], visit)
 
-# Growth stage
+#### Growth stage ####
 gs <- PRISM[, grep(pattern = "crop_stage", colnames(PRISM), perl = TRUE)]
 
-# Tiller, panicl and leaf counts
+#### Tiller, panicl and leaf counts ####
 tiller <- apply(PRISM[, grep(pattern = "tiller_hill", colnames(PRISM), perl = TRUE)], 1, sum)
 panicle <- apply(PRISM[, grep(pattern = "panicle_hill", colnames(PRISM), perl = TRUE)], 1, sum)
 leaves <- apply(PRISM[, grep(pattern = "leaves_tiller", colnames(PRISM), perl = TRUE)], 1, sum)
 
-# generate data frames of single non-systemic diseases, from 10 observations, for graphing
+#### generate data frames of non-systemic diseases, from 10 observations, for graphing ####
 bak <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bakanae", colnames(PRISM), perl = TRUE)], 1, sum))
 blb <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bacterialleafblight", colnames(PRISM), perl = TRUE)], 1, sum))
 bls <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum))
 bst <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)], 1, sum))
 fsm <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "falsesmut", colnames(PRISM), perl = TRUE)], 1, sum))
+fsm <- na.omit(subset(fsm, fsm$visit == "2nd")) # no false smut before heading
+
 dip <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "dirtypanicle", colnames(PRISM), perl = TRUE)], 1, sum))
+dip <- na.omit(subset(dip, fsm$visit == "2nd")) # no dirty panicle before heading
+
 lba <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "leafblast", colnames(PRISM), perl = TRUE)], 1, sum))
 nba <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "neckblast", colnames(PRISM), perl = TRUE)], 1, sum))
 nbs <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "narrowbrownspot", (colnames(PRISM)), perl = TRUE)], 1, sum))
@@ -127,11 +131,13 @@ str <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, appl
 
 names(bak) <- names(blb) <- names(bls) <- names(bst) <- names(fsm) <- names(dip) <- names(lba) <- names(nba) <- names(nbs) <- names(lsc) <- names(rsp) <- names(shr) <- names(shb) <- names(str) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
 
-# generate data frames of single systemic diseases, from 10 observations, for graphing
+#### generate data frames of systemic diseases, snail and bug/hopper burn ####
+gas <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, leaves, apply(PRISM[, grep(pattern = "gas", colnames(PRISM), perl = TRUE)], 1, sum))
+gas <- na.omit(subset(gas, gas$visit == "1st")) # should not be any snail damage assessments at ripening
+names(gas) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "leaves", "injury")
+
 bbn <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bugburn", colnames(PRISM), perl = TRUE)], 1, sum))
 hbn <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "hopperburn", colnames(PRISM), perl = TRUE)], 1, sum))
-gas <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "gas", colnames(PRISM), perl = TRUE)], 1, sum))
-gas <- subset(gas, gas$visit == "1st")
 
 tun <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "tugnro", colnames(PRISM), perl = TRUE)], 1, sum))
 grs <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "grassy", colnames(PRISM), perl = TRUE)], 1, sum))
@@ -139,5 +145,8 @@ rgd <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, appl
 olf <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "orangeleaf", colnames(PRISM), perl = TRUE)], 1, sum))
 yld <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "yellowdwarf", colnames(PRISM), perl = TRUE)], 1, sum))
 
-names(bbn) <- names(hbn) <- names(gas) <- names(tun) <- names(grs) <- names(rgd) <- names(olf) <- names(yld) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
+names(bbn) <- names(hbn) <- names(tun) <- names(grs) <- names(rgd) <- names(olf) <- names(yld) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
+
+#### generate data frames of weed data ####
+
 #eos 

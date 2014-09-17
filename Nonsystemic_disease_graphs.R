@@ -52,7 +52,6 @@ ggplot(fsm, aes(x = factor(Municipality), y = injury/panicle)) +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  facet_grid(. ~ visit) +
   ggtitle("False Smut Incidence")
 
 # bar plot of dirty panicle
@@ -63,7 +62,6 @@ ggplot(dip, aes(x = factor(Municipality), y = injury/panicle)) +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  facet_grid(. ~ visit) +
   ggtitle("Dirty Panicle Incidence")
 
 # bar plot of leaf blast
@@ -155,4 +153,3 @@ ggplot(str, aes(x = factor(Municipality), y = injury/tiller)) +
   ggtitle("Stem Rot Incidence")
 
 # eos 
-
