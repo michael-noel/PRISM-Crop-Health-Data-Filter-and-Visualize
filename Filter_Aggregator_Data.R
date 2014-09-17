@@ -1,4 +1,15 @@
-#### load packages for maps ####
+##############################################################################
+# title         : Filter_Aggregator_Data.R;
+# purpose       : Filter PRISM data as pulled from ODK Aggregator;
+# producer      : prepared by A. Sparks;
+# last update   : in Los Baños, Philippines, Sep. 2014;
+# inputs        : Raw PRISM data;
+# outputs       : Filtered PRISM data;
+# remarks 1     : ;
+# Licence:      : GPL2;
+##############################################################################
+
+#### load packages ####
 library(rgdal) # to load shape files
 library(ggplot2) # for the map
 library(raster) # for getData
@@ -10,9 +21,9 @@ library(sqldf)
 PHL <- getData("GADM", country = "PHL", level = 2)
 
 # CAR     August 18-22, 2014 (Joey)
-# Reg3    c/o PhilRice
+# Reg3    Auguust 11-15 (c/o PhilRice)
 # Reg4B   August 11-15, 2014 (Nancy)
-# Reg5    c/o PhilRice
+# Reg5    July 7-11 (c/o PhilRice)
 # Reg6    May 26-30, 2014 (Joey and Hannah)
 # Reg7    August 4-8, 2014 (Joey) 
 # Reg8    August 11-15. 2014 (Joey)
@@ -98,7 +109,7 @@ tiller <- apply(PRISM[, grep(pattern = "tiller_hill", colnames(PRISM), perl = TR
 panicle <- apply(PRISM[, grep(pattern = "panicle_hill", colnames(PRISM), perl = TRUE)], 1, sum)
 leaves <- apply(PRISM[, grep(pattern = "leaves_tiller", colnames(PRISM), perl = TRUE)], 1, sum)
 
-# generate data frames of single diseases, from 10 observations, for graphing
+# generate data frames of single non-systemic diseases, from 10 observations, for graphing
 bak <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bakanae", colnames(PRISM), perl = TRUE)], 1, sum))
 blb <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bacterialleafblight", colnames(PRISM), perl = TRUE)], 1, sum))
 bls <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum))
@@ -116,3 +127,17 @@ str <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, appl
 
 names(bak) <- names(blb) <- names(bls) <- names(bst) <- names(fsm) <- names(dip) <- names(lba) <- names(nba) <- names(nbs) <- names(lsc) <- names(rsp) <- names(shr) <- names(shb) <- names(str) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
 
+# generate data frames of single systemic diseases, from 10 observations, for graphing
+bbn <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bugburn", colnames(PRISM), perl = TRUE)], 1, sum))
+hbn <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "hopperburn", colnames(PRISM), perl = TRUE)], 1, sum))
+gas <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "gas", colnames(PRISM), perl = TRUE)], 1, sum))
+gas <- subset(gas, gas$visit == "1st")
+
+tun <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "tugnro", colnames(PRISM), perl = TRUE)], 1, sum))
+grs <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "grassy", colnames(PRISM), perl = TRUE)], 1, sum))
+rgd <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "ragged", colnames(PRISM), perl = TRUE)], 1, sum))
+olf <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "orangeleaf", colnames(PRISM), perl = TRUE)], 1, sum))
+yld <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "yellowdwarf", colnames(PRISM), perl = TRUE)], 1, sum))
+
+names(bbn) <- names(hbn) <- names(gas) <- names(tun) <- names(grs) <- names(rgd) <- names(olf) <- names(yld) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
+#eos 

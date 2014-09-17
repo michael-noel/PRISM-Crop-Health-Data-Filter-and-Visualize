@@ -1,3 +1,14 @@
+##############################################################################
+# title         : Nonsystemic_disease_graphs.R;
+# purpose       : generate graphs of non-systemic diseases gathered as part of PRISM;
+# producer      : prepared by A. Sparks;
+# last update   : in Los Baños, Philippines, Sep. 2014;
+# inputs        : Filtered PRISM data;
+# outputs       : graphs of disease data;
+# remarks 1     : ;
+# Licence:      : GPL2;
+##############################################################################
+
 source("Filter_Aggregator_Data.R")
 
 # bar plot of bacterial leaf blight
@@ -142,3 +153,6 @@ ggplot(str, aes(x = factor(Municipality), y = injury/tiller)) +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   facet_grid(. ~ visit) +
   ggtitle("Stem Rot Incidence")
+
+# eos 
+
