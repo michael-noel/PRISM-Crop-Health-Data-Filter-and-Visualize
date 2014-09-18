@@ -93,6 +93,9 @@ PRISM <- rbind(PRISM, tmp)
 PRISM[, 22][PRISM[, 22] == "4th"] <- "1st"
 PRISM[, 22][PRISM[, 22] == "3rd"] <- "1st"
 
+PRISM[, 22][PRISM[, 22] == "1st"] <- "Booting"
+PRISM[, 22][PRISM[, 22] == "2nd"] <- "Ripening"
+
 #### Merge the site ID columns ####
 missing <- is.na(PRISM[, 12]) # create logical index for NAs in PRISM[, 12]
 PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
@@ -185,11 +188,11 @@ small <- data.frame(PRISM[, 16:18], visit$visit, gs, apply(PRISM[, grep(pattern 
 names(weedabove) <- names(weedbelow) <- names(broadleaf) <- names(grasses) <- names(sedges) <- names(small) <- c("Municipality", "Province", "Region", "visit", "gs", "rating")
 
 # summarize the above dataframes
-weedabove <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", data = weedabove)
-weedbelow <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", data = weedbelow)
-broadleaf <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", data = broadleaf)
-grasses <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", data = grasses)
-sedges <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", data = sedges)
-small <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", data = small)
+weedabove <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = weedabove)
+weedbelow <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = weedbelow)
+broadleaf <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = broadleaf)
+grasses <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = grasses)
+sedges <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = sedges)
+small <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = small)
 
 #eos 

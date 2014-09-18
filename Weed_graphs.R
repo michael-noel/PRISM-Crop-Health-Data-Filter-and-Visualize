@@ -12,7 +12,7 @@
 source("Filter_Aggregator_Data.R")
 
 # how many observations per Municipality are there submitted so far?
-ggplot(weedabove, aes(x = factor(Municipality), y = rating.mean)) +
+ggplot(weedabove, aes(x = factor(Municipality), y = rating)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Weed above canopy rating") +
   scale_x_discrete(name = "Municipality") +
@@ -20,9 +20,10 @@ ggplot(weedabove, aes(x = factor(Municipality), y = rating.mean)) +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   facet_grid(. ~ visit) +
-  ggtitle("Survey Visit Number")
+  ggtitle("Weed Above Canopy")
+ggsave("Graphs/Weed_above.png", width = 8, units = "in")
 
-ggplot(weedbelow, aes(x = factor(Municipality), y = rating.mean)) +
+ggplot(weedbelow, aes(x = factor(Municipality), y = rating)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Weed below canopy rating") +
   scale_x_discrete(name = "Municipality") +
@@ -30,6 +31,40 @@ ggplot(weedbelow, aes(x = factor(Municipality), y = rating.mean)) +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   facet_grid(. ~ visit) +
-  ggtitle("Survey Visit Number")
+  ggtitle("Weed Below Canopy")
+ggsave("Graphs/Weed_below.png", width = 8, units = "in")
+
+ggplot(grasses, aes(x = factor(Municipality), y = rating)) +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
+  scale_y_continuous(name = "Grassy weed rating") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  facet_grid(. ~ visit) +
+  ggtitle("Grassy Weeds")
+ggsave("Graphs/Grasses.png", width = 8, units = "in")
+
+ggplot(grasses, aes(x = factor(Municipality), y = rating)) +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
+  scale_y_continuous(name = "Broadleaf weed rating") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  facet_grid(. ~ visit) +
+  ggtitle("Broadleaf Weeds")
+ggsave("Graphs/Broadleaves.png", width = 8, units = "in")
+
+ggplot(sedges, aes(x = factor(Municipality), y = rating)) +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
+  scale_y_continuous(name = "Sedge weed rating") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  facet_grid(. ~ visit) +
+  ggtitle("Sedge Weeds")
+ggsave("Graphs/Sedges.png", width = 8, units = "in")
 
 #eos
