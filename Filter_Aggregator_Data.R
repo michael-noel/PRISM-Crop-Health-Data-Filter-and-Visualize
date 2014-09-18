@@ -41,7 +41,8 @@ names(PRISM)[names(PRISM) == "group_contact.town_name"] <- "Municipality"
 names(PRISM)[names(PRISM) == "group_contact.province_name"] <- "Province"
 names(PRISM)[names(PRISM) == "group_contact.region_name"] <- "Region"
 
-PRISM <- subset(PRISM, start > "2014-07-31") # No observations were taken before this date, safe to remove all these data
+PRISM <- subset(PRISM, start >= "2014-07-31") # No observations were taken before this date, safe to remove all these data
+PRISM <- subset(PRISM, start != "2014-09-18" & start != "2014-09-17" & start != "2014-09-21") # IRRI Training Event
 
 #### Remove more training events
 PRISM <- sqldf("SELECT * FROM PRISM WHERE Province NOT IN ('Kalinga', 'J', 'A', 'Rizal') AND datetime NOT IN ('2014-08-07', '2014-08-18', '2014-08-19', '2014-08-20', '2014-08-21', '2014-08-22')")
@@ -60,7 +61,7 @@ PRISM[, 18][PRISM[, 18] == "Occ.Mindoro"] <- "Occidental Mindoro"
 PRISM[, 18][PRISM[, 18] == "Occ.mindoro"] <- "Occidental Mindoro"
 PRISM[, 18][PRISM[, 18] == "occidental mindoro"] <- "Occidental Mindoro"
 
-#### Rename the Munincipalities to proper names ####
+#### Rename the Municipalities to proper names ####
 PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"
 PRISM[, 17][PRISM[, 17] == "Sta.Cruz"] <- "Santa Cruz"
 PRISM[, 17][PRISM[, 17] == "Sta. Cruz"] <- "Santa Cruz"
@@ -84,7 +85,7 @@ PRISM[, 19][PRISM[, 19] == "16"] <- "CAR"
 PRISM <- within(PRISM, Region[Province == "Bohol"] <- "VII") # Fixes "NA" and "12" mis-entries
 
 #### Santa Cruz, region IV-B has one visit incorrectly recorded as visit 2, when it's the first ####
-tmp <- subset(PRISM, PRISM$Municipality == "Santa Cruz")
+tmp <- subset(PRISM, PRISM$Municipality == "Santa Cruz" & start == "2014-09-02")
 tmp[, 22][tmp[, 22] == "2nd"] <- "1st"
 PRISM <- PRISM[PRISM[, 17] != "Santa Cruz", ] 
 PRISM <- rbind(PRISM, tmp)
@@ -119,15 +120,12 @@ blb <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, appl
 bls <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum))
 bst <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)], 1, sum))
 fsm <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "falsesmut", colnames(PRISM), perl = TRUE)], 1, sum))
-fsm <- na.omit(subset(fsm, fsm$visit == "2nd")) # no false smut before heading
-
+fsm <- na.omit(subset(fsm, fsm$visit.visit == "Ripening")) # no false smut before heading
 dip <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "dirtypanicle", colnames(PRISM), perl = TRUE)], 1, sum))
-dip <- na.omit(subset(dip, fsm$visit == "2nd")) # no dirty panicle before heading
-
+dip <- na.omit(subset(dip, fsm$visit.visit == "Ripening")) # no dirty panicle before heading
 lba <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "leafblast", colnames(PRISM), perl = TRUE)], 1, sum))
 nba <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "neckblast", colnames(PRISM), perl = TRUE)], 1, sum))
-nba <- na.omit(subset(nba, nba$visit == "2nd")) # no neck blast
-
+nba <- na.omit(subset(nba, nba$visit.visit == "Ripening")) # no neck blast until second visit
 nbs <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "narrowbrownspot", (colnames(PRISM)), perl = TRUE)], 1, sum))
 lsc <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "leafscald", colnames(PRISM), perl = TRUE)], 1, sum))
 rsp <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "redstripe", colnames(PRISM), perl = TRUE)], 1, sum))
@@ -152,11 +150,12 @@ rsp <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = r
 shb <- summaryBy(injury+tiller~Municipality+Region+visit, fun = "mean", data = shb, keep.names = TRUE)
 str <- summaryBy(injury+tiller~Municipality+Region+visit, fun = "mean", data = str, keep.names = TRUE)
 
-#### generate data frames of systemic diseases, snail and bug/hopper burn ####
-gas <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, leaves, apply(PRISM[, grep(pattern = "gas", colnames(PRISM), perl = TRUE)], 1, sum))
-gas <- na.omit(subset(gas, gas$visit == "1st")) # should not be any snail damage assessments at ripening
-names(gas) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "leaves", "injury")
+#### generate data frames of snail and rat damage ####
+gas <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, leaves, apply(PRISM[, grep(pattern = "area_gas", colnames(PRISM), perl = TRUE)], 1, sum))
+rat <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, leaves, apply(PRISM[, grep(pattern = "pest_rat", colnames(PRISM), perl = TRUE)], 1, sum))
+names(gas) <- names(rat) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "leaves", "injury")
 
+#### generate data frames of systemic diseases, snail and bug/hopper burn ####
 bbn <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bugburn", colnames(PRISM), perl = TRUE)], 1, sum))
 hbn <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "hopperburn", colnames(PRISM), perl = TRUE)], 1, sum))
 
@@ -170,6 +169,7 @@ names(bbn) <- names(hbn) <- names(tun) <- names(grs) <- names(rgd) <- names(olf)
 
 # summarize the above dataframes
 gas <- summaryBy(injury~Municipality+Province+Region, fun = "mean", keep.names = TRUE, data = gas)
+rat <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = rat)
 bbn <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = bbn)
 hbn <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = hbn)
 tun <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = tun)
@@ -194,5 +194,19 @@ broadleaf <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", 
 grasses <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = grasses)
 sedges <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = sedges)
 small <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = small)
+
+#### Pest injuries ####
+lfd <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "leaffolder", colnames(PRISM), perl = TRUE)], 1, sum))
+lfm <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "leafminer", colnames(PRISM), perl = TRUE)], 1, sum))
+thp <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "thrip", colnames(PRISM), perl = TRUE)], 1, sum))
+whm <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "whorl", colnames(PRISM), perl = TRUE)], 1, sum))
+
+names(lfd) <- names(lfm) <- names(thp) <- names(whm) <- c("Municipality", "Province", "Region", "visit", "gs", "tiller", "panicle", "leaves", "injury")
+
+# summarize the above dataframes
+lfd <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = lfd)
+lfm <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = lfm)
+thp <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = thp)
+whm <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = whm)
 
 #eos 

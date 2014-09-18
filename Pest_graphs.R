@@ -1,6 +1,6 @@
 ##############################################################################
-# title         : Weed_graphs.R;
-# purpose       : generate graphs of weed data gathered as part of PRISM;
+# title         : Pest_graphs.R;
+# purpose       : generate graphs of PRISM data;
 # producer      : prepared by A. Sparks;
 # last update   : in Los Baños, Philippines, Sep. 2014;
 # inputs        : Filtered PRISM data;
@@ -11,64 +11,52 @@
 
 source("Filter_Aggregator_Data.R")
 
-# Weed above canopy
-ggplot(weedabove, aes(x = factor(Municipality), y = rating)) +
+# Leaf folder
+ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Weed above canopy rating") +
+  scale_y_continuous(name = "Leaf Folder Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  facet_grid(. ~ visit) +
-  ggtitle("Weed Above Canopy")
-ggsave("Graphs/Weed_above.png", width = 8, units = "in")
+  ggtitle("Leaf Folder Damage") +
+  facet_grid(. ~ visit)
+ggsave("Graphs/Leaf_folder.png", width = 8, units = "in")
 
-# Weed below canopy
-ggplot(weedbelow, aes(x = factor(Municipality), y = rating)) +
+# bar plot of leaf miner
+ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Weed below canopy rating") +
+  scale_y_continuous(name = "Leaf Miner Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  facet_grid(. ~ visit) +
-  ggtitle("Weed Below Canopy")
-ggsave("Graphs/Weed_below.png", width = 8, units = "in")
+  ggtitle("Leaf Miner Damage") +
+  facet_grid(. ~ visit)
+ggsave("Graphs/Leaf_miner.png", width = 8, units = "in")
 
-# Grasses
-ggplot(grasses, aes(x = factor(Municipality), y = rating)) +
+# bar plot of thrip
+ggplot(thp, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Grassy weed rating") +
+  scale_y_continuous(name = "Thrip Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  facet_grid(. ~ visit) +
-  ggtitle("Grassy Weeds")
-ggsave("Graphs/Grasses.png", width = 8, units = "in")
+  ggtitle("Thrip Damage") +
+  facet_grid(. ~ visit)
+ggsave("Graphs/Thrip.png", width = 8, units = "in")
 
-# Broadleaf weeds
-ggplot(broadleaf, aes(x = factor(Municipality), y = rating)) +
+# bar plot of whorl maggot
+ggplot(whm, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Broadleaf weed rating") +
+  scale_y_continuous(name = "Whorl Maggot Injury Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  facet_grid(. ~ visit) +
-  ggtitle("Broadleaf Weeds")
-ggsave("Graphs/Broadleaves.png", width = 8, units = "in")
+  ggtitle("Whorl Maggot Damage") +
+  facet_grid(. ~ visit)
+ggsave("Graphs/Whorl_maggot.png", width = 8, units = "in")
 
-# Sedges
-ggplot(sedges, aes(x = factor(Municipality), y = rating)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Sedge weed rating") +
-  scale_x_discrete(name = "Municipality") +
-  scale_fill_discrete(name = "Region") +
-  scale_colour_discrete(name = "Region") +
-  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  facet_grid(. ~ visit) +
-  ggtitle("Sedge Weeds")
-ggsave("Graphs/Sedges.png", width = 8, units = "in")
-
-#eos
+# eos
