@@ -1,6 +1,6 @@
 ##############################################################################
-# title         : Weed_graphs.R;
-# purpose       : generate graphs of weed data gathered as part of PRISM;
+# title         : Other_graphs.R;
+# purpose       : generate graphs of PRISM data;
 # producer      : prepared by A. Sparks;
 # last update   : in Los Baños, Philippines, Sep. 2014;
 # inputs        : Filtered PRISM data;
@@ -8,8 +8,6 @@
 # remarks 1     : ;
 # Licence:      : GPL2;
 ##############################################################################
-
-source("Filter_Aggregator_Data.R")
 
 # how many observations per Municipality are there submitted so far?
 ggplot(visit, aes(x = factor(Municipality))) +
@@ -22,4 +20,4 @@ ggplot(visit, aes(x = factor(Municipality))) +
   facet_grid(. ~ visit) +
   ggtitle("Survey Visit Number")
 
-#eos
+# eos

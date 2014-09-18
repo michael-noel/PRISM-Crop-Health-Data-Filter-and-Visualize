@@ -148,5 +148,11 @@ yld <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, appl
 names(bbn) <- names(hbn) <- names(tun) <- names(grs) <- names(rgd) <- names(olf) <- names(yld) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
 
 #### generate data frames of weed data ####
+weedabove <- data.frame(PRISM[, 16:18], visit$visit, gs, apply(PRISM[, grep(pattern = "weedabove_area", colnames(PRISM), perl = TRUE)], 1, sum))
+weedbelow <- data.frame(PRISM[, 16:18], visit$visit, gs, apply(PRISM[, grep(pattern = "weedbelow_area", colnames(PRISM), perl = TRUE)], 1, sum))
+broadleaf <- data.frame(PRISM[, 16:18], visit$visit, gs, apply(PRISM[, grep(pattern = "weed_broadleaved", colnames(PRISM), perl = TRUE)], 1, sum))
+grasses <- data.frame(PRISM[, 16:18], visit$visit, gs, apply(PRISM[, grep(pattern = "weed_grass", colnames(PRISM), perl = TRUE)], 1, sum))
+sedges <- data.frame(PRISM[, 16:18], visit$visit, gs, apply(PRISM[, grep(pattern = "weed_sedge", colnames(PRISM), perl = TRUE)], 1, sum))
+small <- data.frame(PRISM[, 16:18], visit$visit, gs, apply(PRISM[, grep(pattern = "weed_small", colnames(PRISM), perl = TRUE)], 1, sum))
 
 #eos 
