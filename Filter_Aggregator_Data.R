@@ -16,9 +16,10 @@ library(raster) # for getData
 library(reshape)
 library(doBy)
 library(sqldf)
+library(maptools)
 #### end load packages ####
 
-PHL <- getData("GADM", country = "PHL", level = 2)
+PHL <- getData("GADM", country = "PHL", level = 3)
 
 # CAR     August 18-22, 2014 (Joey)
 # Reg3    August 11-15 (c/o PhilRice)
@@ -115,7 +116,7 @@ panicle <- apply(PRISM[, grep(pattern = "panicle_hill", colnames(PRISM), perl = 
 leaves <- apply(PRISM[, grep(pattern = "leaves_tiller", colnames(PRISM), perl = TRUE)], 1, sum)
 
 #### generate data frames of non-systemic diseases, from 10 observations, for graphing ####
-bak <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bakanae", colnames(PRISM), perl = TRUE)], 1, sum))
+bak <- data.frame(PRISM[, 15:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bakanae", colnames(PRISM), perl = TRUE)], 1, sum))
 blb <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bacterialleafblight", colnames(PRISM), perl = TRUE)], 1, sum))
 bls <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum))
 bst <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)], 1, sum))
@@ -133,10 +134,10 @@ shr <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, appl
 shb <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "sheathblight", colnames(PRISM), perl = TRUE)], 1, sum))
 str <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "stemrot", colnames(PRISM), perl = TRUE)], 1, sum))
 
-names(bak) <- names(blb) <- names(bls) <- names(bst) <- names(fsm) <- names(dip) <- names(lba) <- names(nba) <- names(nbs) <- names(lsc) <- names(rsp) <- names(shr) <- names(shb) <- names(str) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
-
+names(bak) <- names(blb) <- names(bls) <- names(bst) <- names(fsm) <- names(dip) <- names(lba) <- names(nba) <- names(nbs) <- names(lsc) <- names(rsp) <- names(shr) <- names(shb) <- names(str) <- c("Barangay", "Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
+names(bak) <- c("Barangay", "Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
 # summarize the above dataframes
-bak <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = bak, keep.names = TRUE)
+bak <- summaryBy(injury+leaves~Barangay+Municipality+Region+visit, fun = "mean", data = bak, keep.names = TRUE)
 blb <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = blb, keep.names = TRUE)
 bls <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = bls, keep.names = TRUE)
 bst <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = bst, keep.names = TRUE)
