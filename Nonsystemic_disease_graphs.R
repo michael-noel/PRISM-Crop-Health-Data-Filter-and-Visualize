@@ -13,7 +13,7 @@ source("Filter_Aggregator_Data.R")
 
 # bar plot of bacterial leaf blight
 ggplot(blb, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -24,7 +24,7 @@ ggplot(blb, aes(x = factor(Municipality), y = injury/leaves)) +
 
 # bar plot of bacterial leaf streak
 ggplot(bls, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -35,7 +35,7 @@ ggplot(bls, aes(x = factor(Municipality), y = injury/leaves)) +
 
 # bar plot of brown spot
 ggplot(bst, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -46,7 +46,7 @@ ggplot(bst, aes(x = factor(Municipality), y = injury/leaves)) +
 
 # bar plot of false smut
 ggplot(fsm, aes(x = factor(Municipality), y = injury/panicle)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Panicle Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -56,7 +56,7 @@ ggplot(fsm, aes(x = factor(Municipality), y = injury/panicle)) +
 
 # bar plot of dirty panicle
 ggplot(dip, aes(x = factor(Municipality), y = injury/panicle)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Panicle Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -66,7 +66,7 @@ ggplot(dip, aes(x = factor(Municipality), y = injury/panicle)) +
 
 # bar plot of leaf blast
 ggplot(lba, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -77,18 +77,17 @@ ggplot(lba, aes(x = factor(Municipality), y = injury/leaves)) +
 
 # bar plot of neck blast
 ggplot(nba, aes(x = factor(Municipality), y = injury/panicle)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Panicle Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  facet_grid(. ~ visit) +
   ggtitle("Neck Blast Incidence")
 
 # bar plot of narrow brown spot
 ggplot(nbs, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -99,7 +98,7 @@ ggplot(nbs, aes(x = factor(Municipality), y = injury/leaves)) +
 
 # bar plot of leaf scald
 ggplot(lsc, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -110,7 +109,7 @@ ggplot(lsc, aes(x = factor(Municipality), y = injury/leaves)) +
 
 # bar plot of red stripe
 ggplot(rsp, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -121,7 +120,7 @@ ggplot(rsp, aes(x = factor(Municipality), y = injury/leaves)) +
 
 # bar plot of sheath rot
 ggplot(shr, aes(x = factor(Municipality), y = injury/tiller)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -132,7 +131,7 @@ ggplot(shr, aes(x = factor(Municipality), y = injury/tiller)) +
 
 # bar plot of sheath blight
 ggplot(shb, aes(x = factor(Municipality), y = injury/tiller)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -143,7 +142,7 @@ ggplot(shb, aes(x = factor(Municipality), y = injury/tiller)) +
 
 # bar plot of stem rot
 ggplot(str, aes(x = factor(Municipality), y = injury/tiller)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge") +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
   scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +

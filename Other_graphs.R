@@ -9,6 +9,8 @@
 # Licence:      : GPL2;
 ##############################################################################
 
+source("Filter_Aggregator_Data.R")
+
 # how many observations per Municipality are there submitted so far?
 ggplot(visit, aes(x = factor(Municipality))) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "bin", position = "dodge") +
