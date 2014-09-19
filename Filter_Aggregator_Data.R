@@ -36,6 +36,7 @@ PRISM[, 4] <- as.Date(PRISM[, 4])
 PRISM[, 16] <- as.character(PRISM[, 16])
 PRISM[, 17] <- as.character(PRISM[, 17])
 PRISM[, 18] <- as.character(PRISM[, 18])
+PRISM[, 22] <- as.character(PRISM[, 22])
 
 names(PRISM)[names(PRISM) == "group_contact.village_name"] <- "Barangay"
 names(PRISM)[names(PRISM) == "group_contact.town_name"] <- "Municipality"
@@ -46,8 +47,9 @@ PRISM <- subset(PRISM, start >= "2014-07-31") # No observations were taken befor
 PRISM <- subset(PRISM, start != "2014-09-18" & start != "2014-09-17" & start != "2014-09-21") # IRRI Training Event
 
 #### Remove more training events
-PRISM <- subset(PRISM, Province != "Kalinga" | Province != "J" | Province != "A" | Province != "Rizal" & datetime != "2014-08-07" & datetime != "2014-08-18" & datetime != "2014-08-19" & datetime != "2014-08-21" & datetime != "2014-08-22")
-PRISM <- subset(PRISM, Province != "Bohol" & datetime != "2014-08-06" | datetime != "2014-08-07" | datetime != "2014-08-08")
+PRISM <- sqldf("Select * from PRISM WHERE Province NOT IN ('Kalinga', 'Rizal') AND datetime NOT IN ('2014-08-07', '2014-08-18', '2014-08-19', '2014-08-20', '2014-08-21', '2014-08-22')")
+PRISM <- sqldf("Select * from PRISM WHERE Province NOT IN ('Bohol') AND datetime NOT IN ('2014-08-06', '2014-08-07', '2014-08-08')")
+PRISM <- subset(PRISM, Province != "A" & Province != "J" & Province != "Ubay Training")
 
 #### Rename the provinces to proper names ####
 PRISM[, 18][PRISM[, 18] == "Camarines sur"] <- "Camarines Sur"
@@ -110,7 +112,7 @@ visit <- data.frame(PRISM[, c(2, 12, 16:18)], visit)
 #### Growth stage ####
 gs <- PRISM[, grep(pattern = "crop_stage", colnames(PRISM), perl = TRUE)]
 
-#### Tiller, panicl and leaf counts ####
+#### Tiller, panicld and leaf counts ####
 tiller <- apply(PRISM[, grep(pattern = "tiller_hill", colnames(PRISM), perl = TRUE)], 1, sum)
 panicle <- apply(PRISM[, grep(pattern = "panicle_hill", colnames(PRISM), perl = TRUE)], 1, sum)
 leaves <- apply(PRISM[, grep(pattern = "leaves_tiller", colnames(PRISM), perl = TRUE)], 1, sum)
@@ -211,3 +213,4 @@ thp <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean",
 whm <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = whm)
 
 #eos 
+
