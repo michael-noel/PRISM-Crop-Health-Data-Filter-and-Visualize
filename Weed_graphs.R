@@ -38,7 +38,7 @@ ggsave("Graphs/Weed_below.png", width = 8, units = "in")
 # Grasses
 ggplot(grasses, aes(x = factor(Municipality), y = rating)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Grassy weed rating") +
+  scale_y_continuous(name = "Grassy weed ranking") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -50,7 +50,7 @@ ggsave("Graphs/Grasses.png", width = 8, units = "in")
 # Broadleaf weeds
 ggplot(broadleaf, aes(x = factor(Municipality), y = rating)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Broadleaf weed rating") +
+  scale_y_continuous(name = "Broadleaf weed ranking") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -62,7 +62,7 @@ ggsave("Graphs/Broadleaves.png", width = 8, units = "in")
 # Sedges
 ggplot(sedges, aes(x = factor(Municipality), y = rating)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Sedge weed rating") +
+  scale_y_continuous(name = "Sedge weed ranking") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +

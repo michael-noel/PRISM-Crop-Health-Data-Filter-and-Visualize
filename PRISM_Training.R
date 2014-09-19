@@ -111,7 +111,7 @@ names(rat) <- c("Municipality", "Province", "Region", "growth stage", "tiller", 
 bbn <- data.frame(PRISM[, 16:18], gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bugburn", colnames(PRISM), perl = TRUE)], 1, sum))
 hbn <- data.frame(PRISM[, 16:18], gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "hopperburn", colnames(PRISM), perl = TRUE)], 1, sum))
 
-tun <- data.frame(PRISM[, 16:18], gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "tugnro", colnames(PRISM), perl = TRUE)], 1, sum))
+tun <- data.frame(PRISM[, 16:18], gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "tungro", colnames(PRISM), perl = TRUE)], 1, sum))
 grs <- data.frame(PRISM[, 16:18], gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "grassy", colnames(PRISM), perl = TRUE)], 1, sum))
 rgd <- data.frame(PRISM[, 16:18], gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "ragged", colnames(PRISM), perl = TRUE)], 1, sum))
 olf <- data.frame(PRISM[, 16:18], gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "orangeleaf", colnames(PRISM), perl = TRUE)], 1, sum))

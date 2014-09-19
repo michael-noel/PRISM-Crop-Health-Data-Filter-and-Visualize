@@ -14,7 +14,7 @@ source("Filter_Aggregator_Data.R")
 # bar plot of bug burn
 ggplot(bbn, aes(x = factor(Municipality), y = injury)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Average Leaf Incidence") +
+  scale_y_continuous(name = "Average Severity") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -26,7 +26,7 @@ ggsave("Graphs/Bug_burn.png", width = 8, units = "in")
 # bar plot of hopper burn
 ggplot(hbn, aes(x = factor(Municipality), y = injury)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Average Leaf Incidence") +
+  scale_y_continuous(name = "Average Severity") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
