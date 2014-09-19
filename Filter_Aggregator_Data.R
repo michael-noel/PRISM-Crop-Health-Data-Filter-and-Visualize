@@ -108,6 +108,12 @@ missing <- is.na(PRISM[, 12]) # create logical index for NAs in PRISM[, 12]
 PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
 PRISM <- PRISM[, -13] # drop column 13 now
 
+#### Bohol has three munincipalities that combine into one
+bohol <- subset(PRISM, Province == "Bohol")
+bohol[, 16] <- bohol[, 17]
+PRISM <- PRISM[PRISM[, 17] != "Bohol", ] 
+PRISM <- rbind(PRISM, bohol)
+
 ##### Visit number one or two? #####
 visit <- PRISM[, grep(pattern = "visitNo_label", colnames(PRISM), perl = TRUE)]
 visit <- data.frame(PRISM[, c(2, 12, 16:18)], visit)
