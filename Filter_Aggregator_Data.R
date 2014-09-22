@@ -66,6 +66,7 @@ PRISM[, 18][PRISM[, 18] == "Cs"] <- "Camarines Sur"
 PRISM[, 18][PRISM[, 18] == "Occ.Mindoro"] <- "Occidental Mindoro"
 PRISM[, 18][PRISM[, 18] == "Occ.mindoro"] <- "Occidental Mindoro"
 PRISM[, 18][PRISM[, 18] == "occidental mindoro"] <- "Occidental Mindoro"
+PRISM[, 18][PRISM[, 18] == "Occ.mdo"] <- "Occidental Mindoro"
 
 #### Rename the Municipalities to proper names ####
 PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"

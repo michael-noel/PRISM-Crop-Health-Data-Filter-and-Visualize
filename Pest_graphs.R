@@ -14,7 +14,7 @@ source("Filter_Aggregator_Data.R")
 # Leaf folder
 ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Leaf Folder Incidence") +
+  scale_y_continuous(name = "Leaf Folder Injury Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -26,7 +26,7 @@ ggsave("Graphs/Leaf_folder.png", width = 8, units = "in")
 # bar plot of leaf miner
 ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Leaf Miner Incidence") +
+  scale_y_continuous(name = "Leaf Miner Injury Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -38,7 +38,7 @@ ggsave("Graphs/Leaf_miner.png", width = 8, units = "in")
 # bar plot of thrip
 ggplot(thp, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Thrip Incidence") +
+  scale_y_continuous(name = "Thrip Injury Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +

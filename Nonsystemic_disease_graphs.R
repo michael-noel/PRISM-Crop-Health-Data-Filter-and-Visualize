@@ -121,7 +121,7 @@ ggplot(rsp, aes(x = factor(Municipality), y = injury/leaves)) +
 # bar plot of sheath rot
 ggplot(shr, aes(x = factor(Municipality), y = injury/tiller)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Average Leaf Incidence") +
+  scale_y_continuous(name = "Average Tiller Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -132,7 +132,7 @@ ggplot(shr, aes(x = factor(Municipality), y = injury/tiller)) +
 # bar plot of sheath blight
 ggplot(shb, aes(x = factor(Municipality), y = injury/tiller)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Average Leaf Incidence") +
+  scale_y_continuous(name = "Average Tiller Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -143,7 +143,7 @@ ggplot(shb, aes(x = factor(Municipality), y = injury/tiller)) +
 # bar plot of stem rot
 ggplot(str, aes(x = factor(Municipality), y = injury/tiller)) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Average Leaf Incidence") +
+  scale_y_continuous(name = "Average Tiller Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
