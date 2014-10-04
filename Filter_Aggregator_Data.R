@@ -2,7 +2,7 @@
 # title         : Filter_Aggregator_Data.R;
 # purpose       : Filter PRISM data as pulled from ODK Aggregator;
 # producer      : prepared by A. Sparks;
-# last update   : in Los Baños, Philippines, Sep. 2014;
+# last update   : on a beach in Tanzania, Oct 2014;
 # inputs        : Raw PRISM data;
 # outputs       : Filtered PRISM data;
 # remarks 1     : ;
@@ -46,6 +46,7 @@ names(PRISM)[names(PRISM) == "group_contact.region_name"] <- "Region"
 PRISM <- subset(PRISM, start >= "2014-07-31") # No observations were taken before this date, safe to remove all these data
 PRISM <- subset(PRISM, start != "2014-09-18" & start != "2014-09-17" & start != "2014-09-21") # IRRI Training Event
 PRISM <- subset(PRISM, Province != "J")
+PRISM <- subset(PRISM, Province != "X")
 
 #### Remove more training events
 # CAR Training Event
@@ -67,6 +68,10 @@ PRISM[, 18][PRISM[, 18] == "Occ.Mindoro"] <- "Occidental Mindoro"
 PRISM[, 18][PRISM[, 18] == "Occ.mindoro"] <- "Occidental Mindoro"
 PRISM[, 18][PRISM[, 18] == "occidental mindoro"] <- "Occidental Mindoro"
 PRISM[, 18][PRISM[, 18] == "Occ.mdo"] <- "Occidental Mindoro"
+PRISM[, 18][PRISM[, 18] == "Occ. Mindoro"] <- "Occidental Mindoro"
+PRISM[, 18][PRISM[, 18] == "Occ. Mindorp"] <- "Occidental Mindoro"
+PRISM[, 18][PRISM[, 15] == "Burabod"] <- "Sorsogon" # Someone doesn't know the difference between a town and a province
+PRISM[, 18][PRISM[, 16] == "Miluya"] <- "Sorsogon" # Someone doesn't know the difference between a barangay and a province
 
 #### Rename the Municipalities to proper names ####
 PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"
@@ -78,6 +83,9 @@ PRISM[, 17][PRISM[, 17] == "San miguel"] <- "San Miguel"
 PRISM[, 17][PRISM[, 17] == "Tabuk"] <- "Tabuk City"
 PRISM[, 17][PRISM[, 17] == "Tabui"] <- "Tabuk City"
 PRISM[, 17][PRISM[, 17] == "sablayan"] <- "Sablayan"
+PRISM[, 17][PRISM[, 17] == "Sta.cruz"] <- "Santa Cruz"
+PRISM[, 17][PRISM[, 15] == "Burabod"] <- "Castilla" # Someone doesn't know the difference between a town and a province
+PRISM[, 17][PRISM[, 16] == "Miluya"] <- "Castilla" # Someone doesn't know the difference between a baragnay and a Town
 
 #### Rename the regions to proper names ####
 PRISM[, 19][PRISM[, 19] == "3"] <- "III"
