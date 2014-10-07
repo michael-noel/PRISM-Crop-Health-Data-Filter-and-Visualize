@@ -158,21 +158,6 @@ str <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, appl
 
 names(bak) <- names(blb) <- names(bls) <- names(bst) <- names(fsm) <- names(dip) <- names(lba) <- names(nba) <- names(nbs) <- names(lsc) <- names(rsp) <- names(shr) <- names(shb) <- names(str) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
 
-# summarize the above dataframes
-bak <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = bak, keep.names = TRUE)
-blb <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = blb, keep.names = TRUE)
-bls <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = bls, keep.names = TRUE)
-bst <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = bst, keep.names = TRUE)
-fsm <- summaryBy(injury+panicle~Municipality+Region+visit, fun = "mean", data = fsm, keep.names = TRUE)
-dip <- summaryBy(injury+panicle~Municipality+Region+visit, fun = "mean", data = dip, keep.names = TRUE)
-lba <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = lba, keep.names = TRUE)
-nba <- summaryBy(injury+panicle~Municipality+Region+visit, fun = "mean", data = nba, keep.names = TRUE)
-nbs <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = nbs, keep.names = TRUE)
-lsc <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = lsc, keep.names = TRUE)
-rsp <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = rsp, keep.names = TRUE)
-shb <- summaryBy(injury+tiller~Municipality+Region+visit, fun = "mean", data = shb, keep.names = TRUE)
-str <- summaryBy(injury+tiller~Municipality+Region+visit, fun = "mean", data = str, keep.names = TRUE)
-
 #### generate data frames of snail and rat damage ####
 gas <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, leaves, apply(PRISM[, grep(pattern = "area_gas", colnames(PRISM), perl = TRUE)], 1, sum))
 rat <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, leaves, apply(PRISM[, grep(pattern = "pest_rat", colnames(PRISM), perl = TRUE)], 1, sum))
@@ -190,16 +175,16 @@ yld <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, appl
 
 names(bbn) <- names(hbn) <- names(tun) <- names(grs) <- names(rgd) <- names(olf) <- names(yld) <- c("Municipality", "Province", "Region", "visit", "gs", "tiller", "panicle", "leaves", "injury")
 
-# summarize the above dataframes
-gas <- summaryBy(injury~Municipality+Province+Region, fun = "mean", keep.names = TRUE, data = gas)
-rat <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = rat)
-bbn <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = bbn)
-hbn <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = hbn)
-tun <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = tun)
-grs <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = grs)
-rgd <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = rgd)
-olf <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = olf)
-yld <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = yld)
+# # summarize the above dataframes
+# gas <- summaryBy(injury~Municipality+Province+Region, fun = "mean", keep.names = TRUE, data = gas)
+# rat <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = rat)
+# bbn <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = bbn)
+# hbn <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = hbn)
+# tun <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = tun)
+# grs <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = grs)
+# rgd <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = rgd)
+# olf <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = olf)
+# yld <- summaryBy(injury~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = yld)
 
 #### generate data frames of weed data ####
 weedabove <- data.frame(PRISM[, 16:18], visit$visit, gs, apply(PRISM[, grep(pattern = "weedabove_area", colnames(PRISM), perl = TRUE)], 1, mean))
@@ -210,13 +195,13 @@ sedges <- data.frame(PRISM[, 16:18], visit$visit, gs, apply(PRISM[, grep(pattern
 small <- data.frame(PRISM[, 16:18], visit$visit, gs, apply(PRISM[, grep(pattern = "weed_small", colnames(PRISM), perl = TRUE)], 1, mean))
 names(weedabove) <- names(weedbelow) <- names(broadleaf) <- names(grasses) <- names(sedges) <- names(small) <- c("Municipality", "Province", "Region", "visit", "gs", "rating")
 
-# summarize the above dataframes
-weedabove <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = weedabove)
-weedbelow <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = weedbelow)
-broadleaf <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = broadleaf)
-grasses <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = grasses)
-sedges <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = sedges)
-small <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = small)
+# # summarize the above dataframes
+# weedabove <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = weedabove)
+# weedbelow <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = weedbelow)
+# broadleaf <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = broadleaf)
+# grasses <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = grasses)
+# sedges <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = sedges)
+# small <- summaryBy(rating~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = small)
 
 #### Pest injuries ####
 lfd <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "leaffolder", colnames(PRISM), perl = TRUE)], 1, sum))
@@ -226,10 +211,10 @@ whm <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, appl
 
 names(lfd) <- names(lfm) <- names(thp) <- names(whm) <- c("Municipality", "Province", "Region", "visit", "gs", "tiller", "panicle", "leaves", "injury")
 
-# summarize the above dataframes
-lfd <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = lfd)
-lfm <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = lfm)
-thp <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = thp)
-whm <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = whm)
+# # summarize the above dataframes
+# lfd <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = lfd)
+# lfm <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = lfm)
+# thp <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = thp)
+# whm <- summaryBy(injury+leaves~Municipality+Province+Region+visit, fun = "mean", keep.names = TRUE, data = whm)
 
 #eos 
