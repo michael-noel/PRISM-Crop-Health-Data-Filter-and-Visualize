@@ -13,50 +13,50 @@ source("Filter_Aggregator_Data.R")
 
 # Leaf folder
 ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Leaf Folder Injury Incidence") +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Average Tiller Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  ggtitle("Leaf Folder Damage") +
-  facet_grid(. ~ visit)
-ggsave("Graphs/Leaf_folder.png", width = 8, units = "in")
+  facet_grid(. ~ visit) +
+  ggtitle("Leaf Folder Damage")
+gsave("Graphs/Leaf_folder.png", width = 8, units = "in")
 
 # bar plot of leaf miner
 ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Leaf Miner Injury Incidence") +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Average Tiller Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  ggtitle("Leaf Miner Damage") +
-  facet_grid(. ~ visit)
+  facet_grid(. ~ visit) +
+  ggtitle("Leaf Miner Damage")
 ggsave("Graphs/Leaf_miner.png", width = 8, units = "in")
 
 # bar plot of thrip
 ggplot(thp, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Thrip Injury Incidence") +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Average Tiller Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  ggtitle("Thrip Damage") +
-  facet_grid(. ~ visit)
+  facet_grid(. ~ visit) +
+  ggtitle("Thrip Damage")
 ggsave("Graphs/Thrip.png", width = 8, units = "in")
 
 # bar plot of whorl maggot
 ggplot(whm, aes(x = factor(Municipality), y = injury/leaves)) +
-  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "identity", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Whorl Maggot Injury Incidence") +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Average Tiller Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  ggtitle("Whorl Maggot Damage") +
-  facet_grid(. ~ visit)
+  facet_grid(. ~ visit) +
+  ggtitle("Whorl Maggot Damage")
 ggsave("Graphs/Whorl_maggot.png", width = 8, units = "in")
 
 # eos
