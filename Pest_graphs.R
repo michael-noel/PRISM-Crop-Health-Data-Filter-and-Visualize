@@ -14,7 +14,7 @@ source("Filter_Aggregator_Data.R")
 # Leaf folder
 ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -26,7 +26,7 @@ gsave("Graphs/Leaf_folder.png", width = 8, units = "in")
 # bar plot of leaf miner
 ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -38,7 +38,7 @@ ggsave("Graphs/Leaf_miner.png", width = 8, units = "in")
 # bar plot of thrip
 ggplot(thp, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -50,7 +50,7 @@ ggsave("Graphs/Thrip.png", width = 8, units = "in")
 # bar plot of whorl maggot
 ggplot(whm, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
