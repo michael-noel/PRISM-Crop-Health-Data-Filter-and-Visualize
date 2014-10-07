@@ -157,7 +157,7 @@ str <- data.frame(PRISM[, 16:18], visit$visit, gs, tiller, panicle, leaves, appl
 names(bak) <- names(blb) <- names(bls) <- names(bst) <- names(fsm) <- names(dip) <- names(lba) <- names(nba) <- names(nbs) <- names(lsc) <- names(rsp) <- names(shr) <- names(shb) <- names(str) <- c("Municipality", "Province", "Region", "visit", "growth stage", "tiller", "panicle", "leaves", "injury")
 
 # summarize the above dataframes
-bak <- summaryBy(injury+leaves~Barangay+Municipality+Region+visit, fun = "mean", data = bak, keep.names = TRUE)
+bak <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = bak, keep.names = TRUE)
 blb <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = blb, keep.names = TRUE)
 bls <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = bls, keep.names = TRUE)
 bst <- summaryBy(injury+leaves~Municipality+Region+visit, fun = "mean", data = bst, keep.names = TRUE)
