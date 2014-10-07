@@ -11,7 +11,7 @@
 
 source("Filter_Aggregator_Data.R")
 
-# bar plot of bug burn
+# bug burn
 ggplot(bbn, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Area Affected Rating") +
@@ -23,7 +23,7 @@ ggplot(bbn, aes(x = factor(Municipality), y = injury)) +
   ggtitle("Bug Burn Severity")
 ggsave("Graphs/Bug_burn.png", width = 8, units = "in")
 
-# bar plot of hopper burn
+# hopper burn
 ggplot(hbn, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Area Affected Rating") +
@@ -35,7 +35,7 @@ ggplot(hbn, aes(x = factor(Municipality), y = injury)) +
   ggtitle("Hopper Burn Severity")
 ggsave("Graphs/Hopper_burn.png", width = 8, units = "in")
 
-# bar plot of tungro damage
+# tungro damage
 ggplot(tun, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Area Affected Rating") +
@@ -47,7 +47,7 @@ ggplot(tun, aes(x = factor(Municipality), y = injury)) +
   ggtitle("Tungro Area")
 ggsave("Graphs/Tungro.png", width = 8, units = "in")
 
-# bar plot of grassy stunt damage
+# grassy stunt damage
 ggplot(grs, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Tiller Incidence") +
@@ -59,7 +59,7 @@ ggplot(grs, aes(x = factor(Municipality), y = injury)) +
   ggtitle("Grassy Stunt Area")
 ggsave("Graphs/Grassy_stunt.png", width = 8, units = "in")
 
-# bar plot of grassy stunt damage
+# grassy stunt damage
 ggplot(rgd, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Tiller Incidence") +
@@ -71,7 +71,7 @@ ggplot(rgd, aes(x = factor(Municipality), y = injury)) +
   ggtitle("Rice Ragged Stunt Area")
 ggsave("Graphs/Rice_ragged_stunt.png", width = 8, units = "in")
 
-# bar plot of grassy stunt damage
+# grassy stunt damage
 ggplot(olf, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Tiller Incidence") +

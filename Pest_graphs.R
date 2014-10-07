@@ -23,7 +23,7 @@ ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
   ggtitle("Leaf Folder Damage")
 gsave("Graphs/Leaf_folder.png", width = 8, units = "in")
 
-# bar plot of leaf miner
+# leaf miner
 ggplot(lfm, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Leaf Incidence") +
@@ -35,7 +35,7 @@ ggplot(lfm, aes(x = factor(Municipality), y = injury/leaves)) +
   ggtitle("Leaf Miner Damage")
 ggsave("Graphs/Leaf_miner.png", width = 8, units = "in")
 
-# bar plot of thrip
+#thrip
 ggplot(thp, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Leaf Incidence") +
@@ -47,7 +47,7 @@ ggplot(thp, aes(x = factor(Municipality), y = injury/leaves)) +
   ggtitle("Thrip Damage")
 ggsave("Graphs/Thrip.png", width = 8, units = "in")
 
-# bar plot of whorl maggot
+#whorl maggot
 ggplot(whm, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Leaf Incidence") +

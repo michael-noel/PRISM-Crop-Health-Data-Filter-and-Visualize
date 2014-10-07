@@ -35,7 +35,7 @@ ggplot(rat, aes(x = factor(Municipality), y = injury)) +
   facet_grid(. ~ visit)
 ggsave("Graphs/Rat.png", width = 8, units = "in")
 
-# bar plot of golden apple snail damage
+#  golden apple snail damage
 ggplot(gas, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Missing Hills Due to Snail") +
