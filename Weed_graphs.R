@@ -13,7 +13,7 @@ source("Filter_Aggregator_Data.R")
 
 # Weed above canopy
 ggplot(weedabove, aes(x = factor(Municipality), y = rating)) +
-  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Weed Above Canopy Rating") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
@@ -70,5 +70,17 @@ ggplot(sedges, aes(x = factor(Municipality), y = rating)) +
   facet_grid(. ~ visit) +
   ggtitle("Sedge Weeds")
 ggsave("Graphs/Sedges.png", width = 8, units = "in")
+
+# Small seedlings
+ggplot(small, aes(x = factor(Municipality), y = rating)) +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Sedge Weed Ranking") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  facet_grid(. ~ visit) +
+  ggtitle("Small Weeds")
+ggsave("Graphs/Small_weeds.png", width = 8, units = "in")
 
 #eos

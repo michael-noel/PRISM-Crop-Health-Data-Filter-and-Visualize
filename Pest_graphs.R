@@ -24,7 +24,7 @@ ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
 gsave("Graphs/Leaf_folder.png", width = 8, units = "in")
 
 # bar plot of leaf miner
-ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
+ggplot(lfm, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +

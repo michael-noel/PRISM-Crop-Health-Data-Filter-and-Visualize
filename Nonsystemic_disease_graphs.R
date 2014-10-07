@@ -67,6 +67,7 @@ ggplot(dip, aes(x = factor(Municipality), y = injury/panicle)) +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+ggtitle("Dirty Panicle Incidence")
 ggsave("Graphs/DP.png", width = 8, units = "in")
 
 # bar plot of leaf blast
