@@ -72,6 +72,7 @@ PRISM[, 18][PRISM[, 18] == "Occ. Mindoro"] <- "Occidental Mindoro"
 PRISM[, 18][PRISM[, 18] == "Occ. Mindorp"] <- "Occidental Mindoro"
 PRISM[, 18][PRISM[, 15] == "Burabod"] <- "Sorsogon" # Someone doesn't know the difference between a town and a province
 PRISM[, 18][PRISM[, 16] == "Miluya"] <- "Sorsogon" # Someone doesn't know the difference between a barangay and a province
+PRISM[, 18][PRISM[, 18] == "bohol"] <- "Bohol"
 
 #### Rename the Municipalities to proper names ####
 PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"
@@ -84,6 +85,7 @@ PRISM[, 17][PRISM[, 17] == "Tabuk"] <- "Tabuk City"
 PRISM[, 17][PRISM[, 17] == "Tabui"] <- "Tabuk City"
 PRISM[, 17][PRISM[, 17] == "sablayan"] <- "Sablayan"
 PRISM[, 17][PRISM[, 17] == "Sta.cruz"] <- "Santa Cruz"
+PRISM[, 17][PRISM[, 17] == "Palangui"] <- "Polangui"
 PRISM[, 17][PRISM[, 15] == "Burabod"] <- "Castilla" # Someone doesn't know the difference between a town and a province
 PRISM[, 17][PRISM[, 16] == "Miluya"] <- "Castilla" # Someone doesn't know the difference between a baragnay and a Town
 
