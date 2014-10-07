@@ -14,7 +14,7 @@ source("Filter_Aggregator_Data.R")
 # bar plot of bug burn
 ggplot(bbn, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Average Area Affected Rating") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -26,7 +26,7 @@ ggsave("Graphs/Bug_burn.png", width = 8, units = "in")
 # bar plot of hopper burn
 ggplot(hbn, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Average Area Affected Rating") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -38,7 +38,7 @@ ggsave("Graphs/Hopper_burn.png", width = 8, units = "in")
 # bar plot of tungro damage
 ggplot(tun, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Average Area Affected Rating") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
