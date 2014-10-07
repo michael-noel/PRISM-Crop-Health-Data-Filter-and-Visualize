@@ -2,7 +2,7 @@
 # title         : Other_graphs.R;
 # purpose       : generate graphs of PRISM data;
 # producer      : prepared by A. Sparks;
-# last update   : in Los Baños, Philippines, Sep. 2014;
+# last update   : in Los Baños, Philippines, Oct. 2014;
 # inputs        : Filtered PRISM data;
 # outputs       : graphs of PRISM data;
 # remarks 1     : ;

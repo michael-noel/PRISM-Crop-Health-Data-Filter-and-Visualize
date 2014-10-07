@@ -2,7 +2,7 @@
 # title         : Nonsystemic_disease_graphs.R;
 # purpose       : generate graphs of non-systemic diseases gathered as part of PRISM;
 # producer      : prepared by A. Sparks;
-# last update   : in Los Baños, Philippines, Sep. 2014;
+# last update   : in Los Baños, Philippines, Oct. 2014;
 # inputs        : Filtered PRISM data;
 # outputs       : graphs of disease data;
 # remarks 1     : ;

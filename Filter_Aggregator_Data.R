@@ -2,7 +2,7 @@
 # title         : Filter_Aggregator_Data.R;
 # purpose       : Filter PRISM data as pulled from ODK Aggregator;
 # producer      : prepared by A. Sparks;
-# last update   : on a beach in Tanzania, Oct 2014;
+# last update   : in Los Baños, Laguna, PHL, Oct 2014;
 # inputs        : Raw PRISM data;
 # outputs       : Filtered PRISM data;
 # remarks 1     : ;
