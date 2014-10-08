@@ -101,8 +101,8 @@ locID[, 4][locID[, 4] == "Appas"] <- "Tabuk City"
 locID[, 5][locID[, 5] == "Apas"] <- "Appas"
 locID[, 5][locID[, 4] == "Tabuk City"] <- "Appas"
 
-
 #### Summmarize the data ####
-locID.summary <- sqldf("select * from locID group by locID, Region, Province, Municpality")
+locID.summary <- sqldf("select * from locID group by locID, Region, Province, Municpality, Barangay")
+locID.summary <- locID.summary[-2, ] # drop a duplicate 3001 since it appears to be at PhilRice, NE
 
 #eos
