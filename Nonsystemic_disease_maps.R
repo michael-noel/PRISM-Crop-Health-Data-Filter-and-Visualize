@@ -8,30 +8,22 @@
 # remarks 1     : ;
 # Licence:      : GPL2;
 ##############################################################################
+library("rgdal")
+library("reshape2")
 
 source("Filter_Aggregator_Data.R")
 
-PHL <- getData("GADM", country = "PHL", level = 3)
+locID.map <- readOGR(dsn = "Data/", layer = "locID")
+locID.ID <- sapply(slot(locID.map, "polygons"), function(x) slot(x, "ID"))
 
-PHL.extent <- extent(PHL)
-bak.raster <- raster(as.numeric(bak[, 12]))
-bak.raster <- rasterize(bak, PHL, field = "injury", fun = "median")
-bak.map <- rasterToPolygons()
+bak.map <- dcast(bak, locID ~ visit, value.var = "injury") # conver to wide using visit column
+bak.map <- merge(bak.map, locID.map, by = "locID", all.y = TRUE) # right outer join to give us ALL the locIDs from locID.map so we can merge with the shapefile to map
+bak.map <- bak.map[, -c(4:9)] # drop the extra columns
+
+o <- match(bak.map$locID, locID.map$locID)
+p <- bak.map[o, ]
+row.names(p) <- locID.ID
+bak.map <- spCbind(locID.map, p)
+
 
 # eos
-
-
-s100 <- matrix(c(267573.9, 2633781, 213.29545, 262224.4, 2633781, 69.78261, 263742.7, 2633781, 51.21951, 259328.4, 2633781, 301.98413, 264109.8, 2633781, 141.72414, 255094.8, 2633781, 88.90244),  ncol=3,  byrow=TRUE)
-colnames(s100) <- c('X', 'Y', 'Z')
-
-library(raster)
-# set up an 'empty' raster, here via an extent object derived from your data
-e <- extent(s100[,1:2])
-e <- e + 1000 # add this as all y's are the same
-
-r <- raster(e, ncol=10, nrow=2)
-# or r <- raster(xmn=, xmx=,  ...
-
-# you need to provide a function 'fun' for when there are multiple points per cell
-x <- rasterize(s100[, 1:2], r, s100[,3], fun=mean)
-plot(x)

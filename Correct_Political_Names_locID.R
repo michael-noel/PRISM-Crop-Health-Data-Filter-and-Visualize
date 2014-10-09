@@ -14,10 +14,14 @@ library("sqldf")
 
 locID <- read.csv("~/Google Drive/tmp/Merge of Copy of _4_Monitoring and Copy of _1_Metadata.csv")
 names(locID) <- c("locID", "Region", "Province", "Municpality", "Barangay")
+
 locID <- subset(locID, Region != "")
+locID <- subset(locID, locID != 3001 | Province != "Nueva Ecija")
+
 locID[, 2] <- as.character(locID[, 2])
 locID[, 3] <- as.character(locID[, 3])
 locID[, 4] <- as.character(locID[, 4])
+locID[, 5] <- as.character(locID[, 5])
 
 #### Rename the regions to proper names ####
 locID[, 2][locID[, 2] == "UCar"] <- "CAR"
@@ -100,9 +104,29 @@ locID[, 4][locID[, 4] == "Appas"] <- "Tabuk City"
 # Correct wrong or misspelled barangays
 locID[, 5][locID[, 5] == "Apas"] <- "Appas"
 locID[, 5][locID[, 4] == "Tabuk City"] <- "Appas"
+locID[, 5][locID[, 5] == "Sto. Nino"] <- "Santo Nino"
+locID[, 5][locID[, 5] == "Sto Nino"] <- "Santo Nino"
+locID[, 5][locID[, 5] == "Sto Nio"] <- "Santo Nino"
+locID[, 5][locID[, 5] == "Sto. Nio"] <- "Santo Nino"
+locID[, 5][locID[, 5] == "San francisco"] <- "San Francisco"
+locID[, 5][locID[, 5] == "Babalag east"] <- "Babalag East"
+locID[, 5][locID[, 5] == "Babalag west"] <- "Babalag West"
+locID[, 5][locID[, 5] == "San quintin"] <- "San Quentin"
+locID[, 5][locID[, 5] == "Sitio Tigbi, Binongtoan"] <- "Binongtoan"
+locID[, 5][locID[, 5] == "Sitio Bigaa, San Antonio Farm"] <- "San Antonio"
+locID[, 5][locID[, 5] == "San Antonio Farm"] <- "San Antonio"
+locID[, 5][locID[, 5] == "Mataoroc zone5"] <- "Mataoroc"
+locID[, 5][locID[, 5] == "Sta. Rosa"] <- "Santa Rosa"
+locID[, 5][locID[, 5] == "Sta. Monica"] <- "Santa Monica"
+locID[, 5][locID[, 5] == "Gen. Emilio Aguinaldo"] <- "General Emilio Aguinaldo"
+locID[, 5][locID[, 5] == "Liwan east"] <- "Liwan East"
+locID[, 5][locID[, 5] == "Del carmen"] <- "Del Carmen"
+locID[, 5][locID[, 5] == "Sa Jose"] <- "San Jose"
+locID[, 5][locID[, 5] == "Santo Nino"] <- "Santo Niño"
+locID[, 5][locID[, 5] == "Sini-baan"] <- "Siniba-an"
 
 #### Summmarize the data ####
-locID.summary <- sqldf("select * from locID group by locID, Region, Province, Municpality, Barangay")
+locID.summary <- sqldf("select * from locID group by locID")
 locID.summary <- locID.summary[-2, ] # drop a duplicate 3001 since it appears to be at PhilRice, NE
 
 #eos

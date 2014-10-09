@@ -28,6 +28,7 @@ library(maptools)
 # Reg8    August 11-15. 2014 (Joey)
 
 PRISM <- read.csv("~/Google Drive/tmp/PRISM_Crop_and_Injuries_V1_0_results.csv")
+
 PRISM[, 2] <- as.character(substr(PRISM[, 2], 1, 10))
 PRISM[, 3] <- as.character(substr(PRISM[, 3], 1, 10))
 PRISM[, 4] <- as.character(substr(PRISM[, 4], 1, 10))
@@ -36,17 +37,18 @@ PRISM[, 17] <- as.character(PRISM[, 17])
 PRISM[, 18] <- as.character(PRISM[, 18])
 PRISM[, 22] <- as.character(PRISM[, 22])
 
+#### Name the columns for easier work ####
 names(PRISM)[names(PRISM) == "group_contact.village_name"] <- "Barangay"
 names(PRISM)[names(PRISM) == "group_contact.town_name"] <- "Municipality"
 names(PRISM)[names(PRISM) == "group_contact.province_name"] <- "Province"
 names(PRISM)[names(PRISM) == "group_contact.region_name"] <- "Region"
 
+#### Remove more training events and other misc that are not real data ####
 PRISM <- subset(PRISM, start >= "2014-07-31") # No observations were taken before this date, safe to remove all these data
 PRISM <- subset(PRISM, start != "2014-09-18" & start != "2014-09-17" & start != "2014-09-21") # IRRI Training Event
 PRISM <- subset(PRISM, Province != "J")
 PRISM <- subset(PRISM, Province != "X")
 
-#### Remove more training events
 # CAR Training Event
 PRISM <- sqldf("Select * from PRISM WHERE Province NOT IN ('Kalinga', 'Rizal') OR datetime NOT IN ('2014-08-07', '2014-08-18', '2014-08-19', '2014-08-20', '2014-08-21', '2014-08-22')")
 
@@ -116,7 +118,7 @@ PRISM[, 22][PRISM[, 22] == "2nd"] <- "Ripening"
 missing <- is.na(PRISM[, 12]) # create logical index for NAs in PRISM[, 12]
 PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
 PRISM <- PRISM[, -13] # drop column 13 now
-PRISM[, 12] <- as.numeric(PRISM[, 12]) # convert numbers to numeric format to remove leading zeros and introduce NA for missing values
+PRISM[, 12] <- as.numeric(PRISM[, 12]) # convert numbers to numeric format to remove leading zeros and remove any NAs from the data
 names(PRISM[, 12]) <- "locID"
 
 #### Bohol has three munincipalities that combine into one
