@@ -12,9 +12,21 @@
 source("Filter_Aggregator_Data.R")
 
 # bacterial leaf blight
+ggplot(bak, aes(x = factor(Municipality), y = injury/tiller)) +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Tiller Incidence") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  facet_grid(. ~ visit) +
+  ggtitle("Bakanae Incidence")
+ggsave("Graphs/Bakanae.png", width = 8, units = "in")
+
+# bacterial leaf blight
 ggplot(blb, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -26,7 +38,7 @@ ggsave("Graphs/BLB.png", width = 8, units = "in")
 # bacterial leaf streak
 ggplot(bls, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -38,7 +50,7 @@ ggsave("Graphs/BLS.png", width = 8, units = "in")
 # brown spot
 ggplot(bst, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -51,7 +63,7 @@ ggsave("Graphs/BS.png", width = 8, units = "in")
 # false smut
 ggplot(fsm, aes(x = factor(Municipality), y = injury/panicle)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Panicle Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -62,7 +74,7 @@ ggsave("Graphs/FSM.png", width = 8, units = "in")
 # dirty panicle
 ggplot(dip, aes(x = factor(Municipality), y = injury/panicle)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Panicle Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -73,7 +85,7 @@ ggsave("Graphs/DP.png", width = 8, units = "in")
 # leaf blast
 ggplot(lba, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -85,7 +97,7 @@ ggsave("Graphs/Leaf_blast.png", width = 8, units = "in")
 # neck blast
 ggplot(nba, aes(x = factor(Municipality), y = injury/panicle)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Panicle Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -96,7 +108,7 @@ ggsave("Graphs/Neck_blast.png", width = 8, units = "in")
 # narrow brown spot
 ggplot(nbs, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -108,7 +120,7 @@ ggsave("Graphs/NBS.png", width = 8, units = "in")
 # leaf scald
 ggplot(lsc, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -120,7 +132,7 @@ ggsave("Graphs/LS.png", width = 8, units = "in")
 # red stripe
 ggplot(rsp, aes(x = factor(Municipality), y = injury/leaves)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Leaf Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -132,7 +144,7 @@ ggsave("Graphs/Red_Stripe.png", width = 8, units = "in")
 # sheath rot
 ggplot(shr, aes(x = Municipality, y = injury/tiller)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Tiller Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -144,7 +156,7 @@ ggsave("Graphs/Sheath_Rot.png", width = 8, units = "in")
 # sheath blight
 ggplot(shb, aes(x = factor(Municipality), y = injury/tiller)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Tiller Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -156,7 +168,7 @@ ggsave("Graphs/Sheath_Blight.png", width = 8, units = "in")
 # stem rot
 ggplot(str, aes(x = factor(Municipality), y = injury/tiller)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Tiller Incidence") +
+  scale_y_continuous(name = "Tiller Incidence") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -166,3 +178,4 @@ ggplot(str, aes(x = factor(Municipality), y = injury/tiller)) +
 ggsave("Graphs/Stem_Rot.png", width = 8, units = "in")
 
 # eos 
+

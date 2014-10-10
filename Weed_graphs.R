@@ -14,7 +14,7 @@ source("Filter_Aggregator_Data.R")
 # Weed above canopy
 ggplot(weedabove, aes(x = factor(Municipality), y = rating)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Weed Above Canopy Rating") +
+  scale_y_continuous(name = "Weed Above Canopy Rating") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
