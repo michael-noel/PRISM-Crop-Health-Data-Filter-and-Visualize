@@ -100,6 +100,7 @@ locID[, 4][locID[, 4] == "sablayan"] <- "Sablayan"
 locID[, 4][locID[, 4] == "Sta.cruz"] <- "Santa Cruz"
 locID[, 4][locID[, 4] == "Palangui"] <- "Polangui"
 locID[, 4][locID[, 4] == "Appas"] <- "Tabuk City"
+locID[, 4][locID[, 4] == "Pamplons"] <- "Pamplona"
 
 # Correct wrong or misspelled barangays
 locID[, 5][locID[, 5] == "Apas"] <- "Appas"
@@ -123,7 +124,24 @@ locID[, 5][locID[, 5] == "Liwan east"] <- "Liwan East"
 locID[, 5][locID[, 5] == "Del carmen"] <- "Del Carmen"
 locID[, 5][locID[, 5] == "Sa Jose"] <- "San Jose"
 locID[, 5][locID[, 5] == "Santo Nino"] <- "Santo Niño"
-locID[, 5][locID[, 5] == "Sini-baan"] <- "Siniba-an"
+locID[, 5][locID[, 5] == "Sini-baan"] <- "Siniba-An"
+locID[, 5][locID[, 5] == "Dutung A Matas"] <- "Dutung-A-Matas"
+locID[, 5][locID[, 5] == "Balsik"] <- "Balsic"
+locID[, 5][locID[, 5] == "Mandama"] <- "Judge Roman Cruz Sr."
+locID[, 5][locID[, 5] == "Del Carmen"] <- "Del Carmen-Del Rosario"
+locID[, 5][locID[, 5] == "San Juan San Lorenzo"] <- "San Juan-San Lorenzo"
+locID[, 5][locID[, 5] == "Irayang Sulong"] <- "Irayang Solong"
+locID[, 5][locID[, 5] == "Ibacod Manapao"] <- "Manapao"
+locID[, 5][locID[, 5] == "Licuan"] <- "Licu-An"
+locID[, 5][locID[, 5] == "Buena Suerte"] <- "La Suerte"
+locID[, 5][locID[, 5] == "Mudburon"] <- "Mudboron"
+locID[, 5][locID[, 5] == "Binongtoan"] <- "Binongto-An"
+locID[, 5][locID[, 5] == "San Quentin"] <- "San Quintin"
+locID[, 5][locID[, 5] == "Bulbol"] <- "San Felipe"
+locID[, 5][locID[, 5] == "Bulbul"] <- "Bulbol" # note this must follow previous line! This is for Rizal, Kalinga
+locID[, 5][locID[, 5] == "Bay-ang"] <- "Bay-Ang"
+locID[, 5][locID[, 5] == "Binongtoan"] <- "Binongto-An"
+
 
 #### Summmarize the data ####
 locID.summary <- sqldf("select * from locID group by locID")
