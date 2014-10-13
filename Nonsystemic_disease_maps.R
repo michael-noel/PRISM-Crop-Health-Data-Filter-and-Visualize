@@ -17,8 +17,8 @@ library(doBy)
 source("Filter_Aggregator_Data.R")
 
 locID.map <- readOGR(dsn = "Data/", layer = "locID")
-locID.map@data$id <- rownames(locID.map@data)
-locI.mapD@data <- join(locID.map@data, data, by = "locID")
+locID.map@data$id <- rownames(bak$injury/bak$tiller)
+locID.map@data <- join(locID.map@data, bak, by = "locID")
 map.fortify <- fortify(locID.map, region = "NAME_2")
 map.fortify <- join(map.fortify, locID@data, by = "id")
 
@@ -45,6 +45,3 @@ mapa@data   <- join(mapa@data, data, by="CD_GEOCODI")
 mapa.df     <- fortify(mapa)
 mapa.df     <- join(mapa.df,mapa@data, by="id")
 
-ggplot(mapa.df, aes(x=long, y=lat, group=group))+
-  geom_polygon(aes(fill=Population))+
-  coord_fixed()
