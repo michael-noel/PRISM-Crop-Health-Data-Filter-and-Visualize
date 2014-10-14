@@ -14,7 +14,7 @@ source("Filter_Aggregator_Data.R")
 # bug burn
 ggplot(bbn, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Area Affected Rating") +
+  scale_y_continuous(name = "Average Rating of Area Affected") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -26,7 +26,7 @@ ggsave("Graphs/Bug_burn.png", width = 8, units = "in")
 # hopper burn
 ggplot(hbn, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Area Affected Rating") +
+  scale_y_continuous(name = "Average Rating of Area Affected") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -38,7 +38,7 @@ ggsave("Graphs/Hopper_burn.png", width = 8, units = "in")
 # tungro damage
 ggplot(tun, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Area Affected Rating") +
+  scale_y_continuous(name = "Average Rating of Area Affected") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -50,7 +50,7 @@ ggsave("Graphs/Tungro.png", width = 8, units = "in")
 # grassy stunt damage
 ggplot(grs, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Area Affected" Rating) +
+  scale_y_continuous(name = "Average Rating of Area Affected") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -62,7 +62,7 @@ ggsave("Graphs/Grassy_stunt.png", width = 8, units = "in")
 # grassy stunt damage
 ggplot(rgd, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Area Affected Rating") +
+  scale_y_continuous(name = "Average Rating of Area Affected") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -74,7 +74,7 @@ ggsave("Graphs/Rice_ragged_stunt.png", width = 8, units = "in")
 # grassy stunt damage
 ggplot(olf, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Area Affected Rating") +
+  scale_y_continuous(name = "Average Rating of Area Affected") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -85,7 +85,7 @@ ggsave("Graphs/Orange_leaf.png", width = 8, units = "in")
 
 ggplot(ylo, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Area Affected Rating") +
+  scale_y_continuous(name = "Average Rating of Area Affected") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
