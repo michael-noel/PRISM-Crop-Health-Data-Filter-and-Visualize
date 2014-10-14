@@ -12,9 +12,9 @@
 source("Filter_Aggregator_Data.R")
 
 # Leaf folder
-ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
+ggplot(lfd, aes(x = factor(Municipality), y = (injury/leaves)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Leaf Incidence") +
+  scale_y_continuous(name = "Leaf Incidence (%)") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -24,9 +24,9 @@ ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
 ggsave("Graphs/Leaf_folder.png", width = 8, units = "in")
 
 # leaf miner
-ggplot(lfm, aes(x = factor(Municipality), y = injury/leaves)) +
+ggplot(lfm, aes(x = factor(Municipality), y = (injury/leaves)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Leaf Incidence") +
+  scale_y_continuous(name = "Leaf Incidence (%)") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -36,9 +36,9 @@ ggplot(lfm, aes(x = factor(Municipality), y = injury/leaves)) +
 ggsave("Graphs/Leaf_miner.png", width = 8, units = "in")
 
 #thrip
-ggplot(thp, aes(x = factor(Municipality), y = injury/leaves)) +
+ggplot(thp, aes(x = factor(Municipality), y = (injury/leaves)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Leaf Incidence") +
+  scale_y_continuous(name = "Leaf Incidence (%)") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -48,9 +48,9 @@ ggplot(thp, aes(x = factor(Municipality), y = injury/leaves)) +
 ggsave("Graphs/Thrip.png", width = 8, units = "in")
 
 #whorl maggot
-ggplot(whm, aes(x = factor(Municipality), y = injury/leaves)) +
+ggplot(whm, aes(x = factor(Municipality), y = (injury/leaves)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Leaf Incidence") +
+  scale_y_continuous(name = "Leaf Incidence (%)") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +

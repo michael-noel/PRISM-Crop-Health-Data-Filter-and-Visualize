@@ -17,14 +17,11 @@ library(doBy)
 source("Filter_Aggregator_Data.R")
 
 locID.map <- readOGR(dsn = "Data/", layer = "locID")
-locID.map@data$id <- rownames(bak$injury/bak$tiller)
-locID.map@data <- join(locID.map@data, bak, by = "locID")
 map.fortify <- fortify(locID.map, region = "NAME_2")
-map.fortify <- join(map.fortify, locID@data, by = "id")
 
 PHL <- getData("GADM", country = "PHL", level = 0)
 
-bak.map <- join(bak, locID.map)
+bak.map <- join(bak, locID.map, by = "locID")
 
 ggplot() +
   geom_map(data = bak, aes(map_id = locID, fill = value)) +
