@@ -50,7 +50,7 @@ ggsave("Graphs/Tungro.png", width = 8, units = "in")
 # grassy stunt damage
 ggplot(grs, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Tiller Incidence") +
+  scale_y_continuous(name = "Area Affected" Rating) +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -62,7 +62,7 @@ ggsave("Graphs/Grassy_stunt.png", width = 8, units = "in")
 # grassy stunt damage
 ggplot(rgd, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Tiller Incidence") +
+  scale_y_continuous(name = "Area Affected Rating") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -74,7 +74,7 @@ ggsave("Graphs/Rice_ragged_stunt.png", width = 8, units = "in")
 # grassy stunt damage
 ggplot(olf, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Tiller Incidence") +
+  scale_y_continuous(name = "Area Affected Rating") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
@@ -83,9 +83,9 @@ ggplot(olf, aes(x = factor(Municipality), y = injury)) +
   ggtitle("Orange Leaf Area Area")
 ggsave("Graphs/Orange_leaf.png", width = 8, units = "in")
 
-ggplot(yld, aes(x = factor(Municipality), y = injury)) +
+ggplot(ylo, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Tiller Incidence") +
+  scale_y_continuous(name = "Area Affected Rating") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +

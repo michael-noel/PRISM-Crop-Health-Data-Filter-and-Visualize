@@ -119,13 +119,13 @@ PRISM[, 22][PRISM[, 22] == "1st"] <- "Booting"
 PRISM[, 22][PRISM[, 22] == "2nd"] <- "Ripening"
 
 #### Merge the site ID columns ####
-missing <- is.na(PRISM[, 12],) # create logical index for NAs in PRISM[, 12],
-PRISM[, 12],[missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
+missing <- is.na(PRISM[, 12]) # create logical index for NAs in PRISM[, c(12, 16:18)]
+PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
 PRISM <- PRISM[, -13] # drop column 13 now
-PRISM[, 12], <- as.numeric(PRISM[, 12],) # convert numbers to numeric format to remove leading zeros and remove any NAs from the data
-names(PRISM[, 12],) <- "locID"
-PRISM[, 12],[PRISM[, 12], == 537] <- "5037" # There are errors in site ID numbers, these are the ones that can be corrected
-PRISM <- subset(PRISM, !is.na(PRISM[, 12],)) # remove any records missing a location ID
+PRISM[, 12] <- as.numeric(PRISM[, 12]) # convert numbers to numeric format to remove leading zeros and remove any NAs from the data
+names(PRISM[, 12]) <- "locID"
+PRISM[, 12][PRISM[, 12] == 537] <- "5037" # There are errors in site ID numbers, these are the ones that can be corrected
+PRISM <- subset(PRISM, !is.na(PRISM[, 12])) # remove any records missing a location ID
 
 #### Bohol has three munincipalities that combine into one
 bohol <- subset(PRISM, Province == "Bohol")
@@ -150,58 +150,58 @@ correct.injury_levels <- function(x){
 }
 
 #### generate data frames of non-systemic diseases, from 10 observations, for graphing ####
-bak <- data.frame(PRISM[, 12], visit$visit, tiller, apply(PRISM[, grep(pattern = "bakanae", colnames(PRISM), perl = TRUE)], 1, sum))
-blb <- data.frame(PRISM[, 12], visit$visit, leaves, apply(PRISM[, grep(pattern = "bacterialleafblight", colnames(PRISM), perl = TRUE)], 1, sum))
-bls <- data.frame(PRISM[, 12], visit$visit, leaves, apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum))
-bst <- data.frame(PRISM[, 12], visit$visit, leaves, apply(PRISM[, grep(pattern = "(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)], 1, sum))
-fsm <- data.frame(PRISM[, 12], visit$visit, panicle, apply(PRISM[, grep(pattern = "falsesmut", colnames(PRISM), perl = TRUE)], 1, sum))
+bak <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tiller, apply(PRISM[, grep(pattern = "bakanae", colnames(PRISM), perl = TRUE)], 1, sum))
+blb <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "bacterialleafblight", colnames(PRISM), perl = TRUE)], 1, sum))
+bls <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum))
+bst <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)], 1, sum))
+fsm <- data.frame(PRISM[, c(12, 16:18)], visit$visit, panicle, apply(PRISM[, grep(pattern = "falsesmut", colnames(PRISM), perl = TRUE)], 1, sum))
 fsm <- na.omit(subset(fsm, fsm$visit.visit == "Ripening")) # no false smut before heading
-dip <- data.frame(PRISM[, 12], visit$visit, panicle, apply(PRISM[, grep(pattern = "dirtypanicle", colnames(PRISM), perl = TRUE)], 1, sum))
+dip <- data.frame(PRISM[, c(12, 16:18)], visit$visit, panicle, apply(PRISM[, grep(pattern = "dirtypanicle", colnames(PRISM), perl = TRUE)], 1, sum))
 dip <- na.omit(subset(dip, fsm$visit.visit == "Ripening")) # no dirty panicle before heading
-lba <- data.frame(PRISM[, 12], visit$visit, leaves, apply(PRISM[, grep(pattern = "leafblast", colnames(PRISM), perl = TRUE)], 1, sum))
-nba <- data.frame(PRISM[, 12], visit$visit, panicle, leaves, apply(PRISM[, grep(pattern = "neckblast", colnames(PRISM), perl = TRUE)], 1, sum))
+lba <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "leafblast", colnames(PRISM), perl = TRUE)], 1, sum))
+nba <- data.frame(PRISM[, c(12, 16:18)], visit$visit, panicle, leaves, apply(PRISM[, grep(pattern = "neckblast", colnames(PRISM), perl = TRUE)], 1, sum))
 nba <- na.omit(subset(nba, nba$visit.visit == "Ripening")) # no neck blast until second visit
-nbs <- data.frame(PRISM[, 12], visit$visit, leaves, apply(PRISM[, grep(pattern = "narrowbrownspot", (colnames(PRISM)), perl = TRUE)], 1, sum))
-lsc <- data.frame(PRISM[, 12], visit$visit, leaves, apply(PRISM[, grep(pattern = "leafscald", colnames(PRISM), perl = TRUE)], 1, sum))
-rsp <- data.frame(PRISM[, 12], visit$visit, leaves, apply(PRISM[, grep(pattern = "redstripe", colnames(PRISM), perl = TRUE)], 1, sum))
-shr <- data.frame(PRISM[, 12], visit$visit, tiller, apply(PRISM[, grep(pattern = "sheathrot", colnames(PRISM), perl = TRUE)], 1, sum))
-shb <- data.frame(PRISM[, 12], visit$visit, tiller, apply(PRISM[, grep(pattern = "sheathblight", colnames(PRISM), perl = TRUE)], 1, sum))
-str <- data.frame(PRISM[, 12], visit$visit, tiller, apply(PRISM[, grep(pattern = "stemrot", colnames(PRISM), perl = TRUE)], 1, sum))
+nbs <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "narrowbrownspot", (colnames(PRISM)), perl = TRUE)], 1, sum))
+lsc <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "leafscald", colnames(PRISM), perl = TRUE)], 1, sum))
+rsp <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "redstripe", colnames(PRISM), perl = TRUE)], 1, sum))
+shr <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tiller, apply(PRISM[, grep(pattern = "sheathrot", colnames(PRISM), perl = TRUE)], 1, sum))
+shb <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tiller, apply(PRISM[, grep(pattern = "sheathblight", colnames(PRISM), perl = TRUE)], 1, sum))
+str <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tiller, apply(PRISM[, grep(pattern = "stemrot", colnames(PRISM), perl = TRUE)], 1, sum))
 
-names(bak)[c(1, 2, 4)] <- names(blb)[c(1, 2, 4)] <- names(bls)[c(1, 2, 4)] <- names(bst)[c(1, 2, 4)] <- names(fsm)[c(1, 2, 4)] <- names(dip)[c(1, 2, 4)] <- names(lba)[c(1, 2, 4)] <- names(nba)[c(1, 2, 4)]  <- names(nbs)[c(1, 2, 4)]  <- names(lsc)[c(1, 2, 4)] <- names(rsp)[c(1, 2, 4)] <- names(shr)[c(1, 2, 4)] <- names(shb)[c(1, 2, 4)] <- names(str)[c(1, 2, 4)] <- c("locID", "visit", "injury")
+names(bak)[c(1, 5, 7)] <- names(blb)[c(1, 5, 7)] <- names(bls)[c(1, 5, 7)] <- names(bst)[c(1, 5, 7)] <- names(fsm)[c(1, 5, 7)] <- names(dip)[c(1, 5, 7)] <- names(lba)[c(1, 5, 7)] <- names(nba)[c(1, 5, 7)]  <- names(nbs)[c(1, 5, 7)]  <- names(lsc)[c(1, 5, 7)] <- names(rsp)[c(1, 5, 7)] <- names(shr)[c(1, 5, 7)] <- names(shb)[c(1, 5, 7)] <- names(str)[c(1, 5, 7)] <- c("locID", "visit", "injury")
 
 #### generate data frames of snail and rat damage ####
-gas <- data.frame(PRISM[, 12], visit$visit, gs, tiller, leaves, apply(PRISM[, grep(pattern = "area_gas", colnames(PRISM), perl = TRUE)], 1, sum))
-rat <- data.frame(PRISM[, 12], visit$visit, gs, tiller, leaves, apply(PRISM[, grep(pattern = "pest_rat", colnames(PRISM), perl = TRUE)], 1, sum))
-names(gas) <- names(rat) <- c("locID", "Municipality", "Province", "Region", "visit", "growth stage", "tiller", "leaves", "injury")
+gas <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tiller, apply(PRISM[, grep(pattern = "area_gas", colnames(PRISM), perl = TRUE)], 1, sum))
+rat <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tiller, apply(PRISM[, grep(pattern = "pest_rat", colnames(PRISM), perl = TRUE)], 1, sum))
+names(gas) <- names(rat) <- c("locID", "Municipaility", "Province", "Region", "visit", "tiller", "injury")
 
 #### generate data frames of systemic diseases, snail and bug/hopper burn ####
-bbn <- data.frame(PRISM[, 12], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "bugburn", colnames(PRISM), perl = TRUE)], 1, sum))
-hbn <- data.frame(PRISM[, 12], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "hopperburn", colnames(PRISM), perl = TRUE)], 1, sum))
+bbn <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "bugburn", colnames(PRISM), perl = TRUE)], 1, sum))
+hbn <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "hopperburn", colnames(PRISM), perl = TRUE)], 1, sum))
 
-tun <- data.frame(PRISM[, 12], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "tungro", colnames(PRISM), perl = TRUE)], 1, sum))
-grs <- data.frame(PRISM[, 12], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "grassy", colnames(PRISM), perl = TRUE)], 1, sum))
-rgd <- data.frame(PRISM[, 12], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "ragged", colnames(PRISM), perl = TRUE)], 1, sum))
-olf <- data.frame(PRISM[, 12], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "orangeleaf", colnames(PRISM), perl = TRUE)], 1, sum))
-yld <- data.frame(PRISM[, 12], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "yellowdwarf", colnames(PRISM), perl = TRUE)], 1, sum))
+tun <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "tungro", colnames(PRISM), perl = TRUE)], 1, mean))
+grs <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "grassy", colnames(PRISM), perl = TRUE)], 1, mean))
+rgd <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "ragged", colnames(PRISM), perl = TRUE)], 1, mean))
+olf <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "orangeleaf", colnames(PRISM), perl = TRUE)], 1, mean))
+ylo <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "yellowdwarf", colnames(PRISM), perl = TRUE)], 1, mean))
 
-names(bbn) <- names(hbn) <- names(tun) <- names(grs) <- names(rgd) <- names(olf) <- names(yld) <- c("locID", "Municipality", "Province", "Region", "visit", "gs", "tiller", "panicle", "leaves", "injury")
+names(bbn) <- names(hbn) <- names(tun) <- names(grs) <- names(rgd) <- names(olf) <- names(yld) <- c("locID", "Municipality", "Province", "Region", "visit", "injury")
 
 #### generate data frames of weed data ####
-weedabove <- data.frame(PRISM[, 12], visit$visit, gs, apply(PRISM[, grep(pattern = "weedabove_area", colnames(PRISM), perl = TRUE)], 1, mean))
-weedbelow <- data.frame(PRISM[, 12], visit$visit, gs, apply(PRISM[, grep(pattern = "weedbelow_area", colnames(PRISM), perl = TRUE)], 1, mean))
-broadleaf <- data.frame(PRISM[, 12], visit$visit, gs, apply(PRISM[, grep(pattern = "weed_broadleaved", colnames(PRISM), perl = TRUE)], 1, mean))
-grasses <- data.frame(PRISM[, 12], visit$visit, gs, apply(PRISM[, grep(pattern = "weed_grass", colnames(PRISM), perl = TRUE)], 1, mean))
-sedges <- data.frame(PRISM[, 12], visit$visit, gs, apply(PRISM[, grep(pattern = "weed_sedge", colnames(PRISM), perl = TRUE)], 1, mean))
-small <- data.frame(PRISM[, 12], visit$visit, gs, apply(PRISM[, grep(pattern = "weed_small", colnames(PRISM), perl = TRUE)], 1, mean))
-names(weedabove) <- names(weedbelow) <- names(broadleaf) <- names(grasses) <- names(sedges) <- names(small) <- c("locID", "Municipality", "Province", "Region", "visit", "gs", "rating")
+weedabove <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weedabove_area", colnames(PRISM), perl = TRUE)], 1, mean))
+weedbelow <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weedbelow_area", colnames(PRISM), perl = TRUE)], 1, mean))
+broadleaf <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weed_broadleaved", colnames(PRISM), perl = TRUE)], 1, mean))
+grasses <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weed_grass", colnames(PRISM), perl = TRUE)], 1, mean))
+sedges <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weed_sedge", colnames(PRISM), perl = TRUE)], 1, mean))
+small <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weed_small", colnames(PRISM), perl = TRUE)], 1, mean))
+names(weedabove) <- names(weedbelow) <- names(broadleaf) <- names(grasses) <- names(sedges) <- names(small) <- c("locID", "Municipality", "Province", "Region", "visit", "rating")
 
 #### Pest injuries ####
-lfd <- data.frame(PRISM[, 12], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "leaffolder", colnames(PRISM), perl = TRUE)], 1, sum))
-lfm <- data.frame(PRISM[, 12], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "leafminer", colnames(PRISM), perl = TRUE)], 1, sum))
-thp <- data.frame(PRISM[, 12], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "thrip", colnames(PRISM), perl = TRUE)], 1, sum))
-whm <- data.frame(PRISM[, 12], visit$visit, gs, tiller, panicle, leaves, apply(PRISM[, grep(pattern = "whorl", colnames(PRISM), perl = TRUE)], 1, sum))
+lfd <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "leaffolder", colnames(PRISM), perl = TRUE)], 1, sum))
+lfm <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "leafminer", colnames(PRISM), perl = TRUE)], 1, sum))
+thp <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "thrip", colnames(PRISM), perl = TRUE)], 1, sum))
+whm <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "whorl", colnames(PRISM), perl = TRUE)], 1, sum))
 
-names(lfd) <- names(lfm) <- names(thp) <- names(whm) <- c("locID", "Municipality", "Province", "Region", "visit", "gs", "tiller", "panicle", "leaves", "injury")
+names(lfd) <- names(lfm) <- names(thp) <- names(whm) <- c("locID", "Municipality", "Province", "Region", "visit", "leaves", "injury")
 
 #eos 

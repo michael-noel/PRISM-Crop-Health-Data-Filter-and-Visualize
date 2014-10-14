@@ -20,6 +20,7 @@ locID.map <- readOGR(dsn = "Data/", layer = "locID")
 map.fortify <- fortify(locID.map, region = "NAME_2")
 
 PHL <- getData("GADM", country = "PHL", level = 0)
+PHL.fortify <- fortify(PHL)
 
 bak.map <- join(bak, locID.map, by = "locID")
 
