@@ -21,7 +21,7 @@ ggplot(lfd, aes(x = factor(Municipality), y = injury/leaves)) +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   facet_grid(. ~ visit) +
   ggtitle("Leaf Folder Damage")
-gsave("Graphs/Leaf_folder.png", width = 8, units = "in")
+ggsave("Graphs/Leaf_folder.png", width = 8, units = "in")
 
 # leaf miner
 ggplot(lfm, aes(x = factor(Municipality), y = injury/leaves)) +

@@ -123,6 +123,7 @@ PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRIS
 PRISM <- PRISM[, -13] # drop column 13 now
 PRISM[, 12] <- as.numeric(PRISM[, 12]) # convert numbers to numeric format to remove leading zeros and remove any NAs from the data
 names(PRISM[, 12]) <- "locID"
+PRISM <- subset(PRISM, !is.na(PRISM[, 12]))
 
 #### There are errors in site ID numbers, these are the ones that can be corrected ####
 PRISM[, 12][PRISM[, 12] == 537] <- "5037"
