@@ -27,7 +27,7 @@ blb.map <- join(blb.summary, map.fortify, by = "Municipality")
 
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#666666") +
-  geom_polygon(data = blb.map, aes(x = long, y = lat, fill = injury, colour = injury), alpha = 0.65) +
+  geom_polygon(data = blb.map, aes(x = long, y = lat, fill = injury, colour = injury, group = group)) +
   coord_map() +
   facet_grid(. ~ visit)
   
