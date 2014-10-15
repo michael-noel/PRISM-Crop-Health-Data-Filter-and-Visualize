@@ -57,8 +57,7 @@ map + geom_point(data = bst.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Bacterial_leaf_blight_map.png", width = 8, height = 8, units = "in")
 
 # BLS
-map + geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = bls.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+map + geom_point(data = bls.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
