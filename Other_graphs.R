@@ -21,7 +21,7 @@ ggplot(visit, aes(x = factor(Municipality))) +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   facet_grid(. ~ visit) +
   ggtitle("Survey Visits by Municipality")
-ggsave("Graphs/Visits.png", width = 8, units = "in")
+ggsave("Graphs/Visits.png", width = 8, height = 8, units = "in")
 
 # Rat damage
 ggplot(rat, aes(x = factor(Municipality), y = injury)) +
@@ -33,7 +33,7 @@ ggplot(rat, aes(x = factor(Municipality), y = injury)) +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   ggtitle("Rat Damage") +
   facet_grid(. ~ visit)
-ggsave("Graphs/Rat.png", width = 8, units = "in")
+ggsave("Graphs/Rat.png", width = 8, height = 8, units = "in")
 
 # golden apple snail damage
 ggplot(gas, aes(x = factor(Municipality), y = injury)) +
@@ -44,6 +44,6 @@ ggplot(gas, aes(x = factor(Municipality), y = injury)) +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   ggtitle("Golden Apple Snail Damage")
-ggsave("Graphs/GAS.png", width = 8, units = "in")
+ggsave("Graphs/GAS.png", width = 8, height = 8, units = "in")
 
 # eos
