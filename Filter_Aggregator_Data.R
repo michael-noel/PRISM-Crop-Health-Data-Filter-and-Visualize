@@ -170,20 +170,20 @@ str <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers, apply(PRISM[, gre
 
 names(bak)[c(1, 5, 7)] <- names(blb)[c(1, 5, 7)] <- names(bls)[c(1, 5, 7)] <- names(bst)[c(1, 5, 7)] <- names(fsm)[c(1, 5, 7)] <- names(dip)[c(1, 5, 7)] <- names(lba)[c(1, 5, 7)] <- names(nba)[c(1, 5, 7)]  <- names(nbs)[c(1, 5, 7)]  <- names(lsc)[c(1, 5, 7)] <- names(rsp)[c(1, 5, 7)] <- names(shr)[c(1, 5, 7)] <- names(shb)[c(1, 5, 7)] <- names(str)[c(1, 5, 7)] <- c("locID", "visit", "injury")
 
-bak.summary <- summaryBy((injury/tillers)*100~Municipality+visit, data = bak)
-blb.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = blb)
-bls.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = bls)
-bst.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = bst)
-fsm.summary <- summaryBy((injury/panicles)*100~Municipality+visit, data = fsm)
-dip.summary <- summaryBy((injury/panicles)*100~Municipality+visit, data = dip)
-lba.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = lba)
-nba.summary <- summaryBy((injury/tillers)*100~Municipality+visit, data = nba)
-nbs.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = nbs)
-lsc.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = lsc)
-rsp.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = rsp)
-shr.summary <- summaryBy((injury/tillers)*100~Municipality+visit, data = shr)
-shb.summary <- summaryBy((injury/tillers)*100~Municipality+visit, data = shb)
-str.summary <- summaryBy((injury/tillers)*100~Municipality+visit, data = str)
+bak.summary <- summaryBy((injury/tillers)*100~Municipality+visit, data = bak, FUN = median)
+blb.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = blb, FUN = median)
+bls.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = bls, FUN = median)
+bst.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = bst, FUN = median)
+fsm.summary <- summaryBy((injury/panicles)*100~Municipality+visit, data = fsm, FUN = median)
+dip.summary <- summaryBy((injury/panicles)*100~Municipality+visit, data = dip, FUN = median)
+lba.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = lba, FUN = median)
+nba.summary <- summaryBy((injury/tillers)*100~Municipality+visit, data = nba, FUN = median)
+nbs.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = nbs, FUN = median)
+lsc.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = lsc, FUN = median)
+rsp.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = rsp, FUN = median)
+shr.summary <- summaryBy((injury/tillers)*100~Municipality+visit, data = shr, FUN = median)
+shb.summary <- summaryBy((injury/tillers)*100~Municipality+visit, data = shb, FUN = median)
+str.summary <- summaryBy((injury/tillers)*100~Municipality+visit, data = str, FUN = median)
 
 names(bak.summary) <- names(blb.summary) <- names(bls.summary) <- names(bst.summary) <- names(fsm.summary) <- names(dip.summary) <- names(lba.summary) <- names(nba.summary) <- names(nbs.summary) <- names(lsc.summary) <- names(rsp.summary) <- names(shr.summary) <- names(shb.summary) <- names(str.summary) <- c("Municipality", "visit", "injury")
 
@@ -202,16 +202,36 @@ rgd <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern
 olf <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "orangeleaf", colnames(PRISM), perl = TRUE)], 1, mean))
 ylo <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "yellowdwarf", colnames(PRISM), perl = TRUE)], 1, mean))
 
-names(bbn) <- names(hbn) <- names(tun) <- names(grs) <- names(rgd) <- names(olf) <- names(ylo) <- c("locID", "Municipality", "Province", "Region", "visit", "injury")
+names(bbn) <- names(hbn) <- names(tun) <- names(grs) <- names(rgd) <- names(olf) <- names(ylo) <- c("locID", "Municipality", "Province", "Region", "visit", "rating")
+
+bbn.summary <- summaryBy(rating~Municipality+visit, data = bbn, FUN = median)
+hbn.summary <- summaryBy(rating~Municipality+visit, data = hbn, FUN = median)
+tun.summary <- summaryBy(rating~Municipality+visit, data = tun, FUN = median)
+grs.summary <- summaryBy(rating~Municipality+visit, data = grs, FUN = median)
+rgd.summary <- summaryBy(rating~Municipality+visit, data = rgd, FUN = median)
+olf.summary <- summaryBy(rating~Municipality+visit, data = olf, FUN = median)
+ylo.summary <- summaryBy(rating~Municipality+visit, data = ylo, FUN = median)
+
+names(tun.summary) <- names(grs.summary) <- names(rgd.summary) <- names(olf.summary) <- names(ylo.summary) <- names(bbn.summary)  <- names(hbn.summary) <- c("locID", "Municipality", "Province", "Region", "visit", "rating")
 
 #### generate data frames of weed data ####
 weedabove <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weedabove_area", colnames(PRISM), perl = TRUE)], 1, mean))
 weedbelow <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weedbelow_area", colnames(PRISM), perl = TRUE)], 1, mean))
 broadleaf <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weed_broadleaved", colnames(PRISM), perl = TRUE)], 1, mean))
-grasses <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weed_grass", colnames(PRISM), perl = TRUE)], 1, mean))
-sedges <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weed_sedge", colnames(PRISM), perl = TRUE)], 1, mean))
+grass <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weed_grass", colnames(PRISM), perl = TRUE)], 1, mean))
+sedge <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weed_sedge", colnames(PRISM), perl = TRUE)], 1, mean))
 small <- data.frame(PRISM[, c(12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weed_small", colnames(PRISM), perl = TRUE)], 1, mean))
+
 names(weedabove) <- names(weedbelow) <- names(broadleaf) <- names(grasses) <- names(sedges) <- names(small) <- c("locID", "Municipality", "Province", "Region", "visit", "rating")
+
+weedabove.summary <- summaryBy(rating~Municipality+visit, data = weedabove, FUN = median)
+weedbelow.summary <- summaryBy(rating~Municipality+visit, data = weedbelow, FUN = median)
+broadleaf.summary <- summaryBy(rating~Municipality+visit, data = broadleaf, FUN = median)
+grass.summary <- summaryBy(rating~Municipality+visit, data = grass, FUN = median)
+sedge.summary <- summaryBy(rating~Municipality+visit, data = sedge, FUN = median)
+small.summary <- summaryBy(rating~Municipality+visit, data = small, FUN = median)
+
+names(weedabove.summary) <- names(weedbelow.summary) <- names(broadleaf.summary) <- names(grass.summary) <- names(sedge.summary) <- names(small.summary) <- c("Municipality", "visit", "injury")
 
 #### Pest injuries ####
 lfd <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep(pattern = "leaffolder", colnames(PRISM), perl = TRUE)], 1, sum))
@@ -221,7 +241,11 @@ whm <- data.frame(PRISM[, c(12, 16:18)], visit$visit, leaves, apply(PRISM[, grep
 
 names(lfd) <- names(lfm) <- names(thp) <- names(whm) <- c("locID", "Municipality", "Province", "Region", "visit", "leaves", "injury")
 
-lfd.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = lfd)
-names(lfd.summary) <- c("Municipality", "visit", "injury")
+lfd.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = lfd, FUN = median)
+lfm.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = lfm, FUN = median)
+thp.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = thp, FUN = median)
+whm.summary <- summaryBy((injury/leaves)*100~Municipality+visit, data = whm, FUN = median)
+
+names(lfd.summary) <- names(lfm.summary) <- names(thp.summary) <- names(whm.summary) <- c("Municipality", "visit", "injury")
 
 #eos 
