@@ -164,7 +164,7 @@ shr <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[
 shb <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "sheathblight", colnames(PRISM), perl = TRUE)], 1, sum))
 str <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "stemrot", colnames(PRISM), perl = TRUE)], 1, sum))
 
-names(bak) <- names(blb) <- names(bls)[c(1, 5, 6, 7)] <- names(bst) <- names(fsm)[c(1, 5, 6, 7)] <- names(dip)[c(1, 5, 6, 7)] <- names(lba)[c(1, 5, 6, 7)] <- names(nba)[c(1, 5, 6, 7)]  <- names(nbs)[c(1, 5, 6, 7)]  <- names(lsc)[c(1, 5, 6, 7)] <- names(rsp)[c(1, 5, 6, 7)] <- names(shr)[c(1, 5, 6, 7)] <- names(shb)[c(1, 5, 6, 7)] <- names(str)[c(1, 5, 6, 7)] <- c("lat", "lon", "locID", "Municipality", "Province", "Region", "visit", "organ", "injury")
+names(bak) <- names(blb) <- names(bls) <- names(bst) <- names(fsm) <- names(dip) <- names(lba) <- names(nba)  <- names(nbs)  <- names(lsc) <- names(rsp) <- names(shr) <- names(shb) <- names(str) <- c("lat", "lon", "locID", "Municipality", "Province", "Region", "visit", "organ", "injury")
 
 bak.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = bak, FUN = median)
 blb.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = blb, FUN = median)
@@ -181,7 +181,7 @@ shr.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = shr, FU
 shb.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = shb, FUN = median)
 str.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = str, FUN = median)
 
-names(bak.summary) <- names(blb.summary) <- names(bls.summary) <- names(bst.summary) <- names(fsm.summary) <- names(dip.summary) <- names(lba.summary) <- names(nba.summary) <- names(nbs.summary) <- names(lsc.summary) <- names(rsp.summary) <- names(shr.summary) <- names(shb.summary) <- names(str.summary) <- c("Municipality", "visit", "injury", "organ", "perc.injury")
+names(bak.summary) <- names(blb.summary) <- names(bls.summary) <- names(bst.summary) <- names(fsm.summary) <- names(dip.summary) <- names(lba.summary) <- names(nba.summary) <- names(nbs.summary) <- names(lsc.summary) <- names(rsp.summary) <- names(shr.summary) <- names(shb.summary) <- names(str.summary) <- c("Municipality", "visit", "injury", "organ", "lat", "lon")
 
 # summarise by the percent injury ocurring for mapping
 bak.summary <- mutate(bak.summary, perc.injury = (injury/organ)*100)
@@ -223,7 +223,7 @@ rgd.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = rgd, FUN = me
 olf.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = olf, FUN = median)
 ylo.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = ylo, FUN = median)
 
-names(tun.summary) <- names(grs.summary) <- names(rgd.summary) <- names(olf.summary) <- names(ylo.summary) <- names(bbn.summary)  <- names(hbn.summary) <- c("Municipality", "visit", "rating")
+names(tun.summary) <- names(grs.summary) <- names(rgd.summary) <- names(olf.summary) <- names(ylo.summary) <- names(bbn.summary)  <- names(hbn.summary) <- c("Municipality", "visit", "rating", "lat", "lon")
 
 #### generate data frames of weed data ####
 weedabove <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "weedabove_area", colnames(PRISM), perl = TRUE)], 1, mean))

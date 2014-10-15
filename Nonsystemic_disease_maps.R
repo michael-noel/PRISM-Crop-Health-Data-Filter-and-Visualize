@@ -23,8 +23,10 @@ PHL.fortify <- fortify(PHL)
 # Bakanae
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = bak.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = bak.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Bakanae") +
   coord_map() +
@@ -34,8 +36,10 @@ ggsave("Graphs/Bakanae_map.png", width = 8, height = 8, units = "in")
 # BLB
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = blb.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = blb.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Bacterial Leaf Blight") +
   coord_map() +
@@ -45,8 +49,10 @@ ggsave("Graphs/Bacterial_leaf_blight_map.png", width = 8, height = 8, units = "i
 # BLS
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = bls.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = bls.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Bacterial Leaf Streak") +
   coord_map() +
@@ -56,8 +62,10 @@ ggsave("Graphs/Bacterial_leaf_streak_map.png", width = 8, height = 8, units = "i
 # False Smut
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = fsm.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = fsm.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("False Smut") +
   coord_map()
@@ -66,8 +74,10 @@ ggsave("Graphs/False_smut_map.png", width = 8, height = 8, units = "in")
 # Dirty Panicle
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = dip.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = dip.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Dirty Panicle") +
   coord_map()
@@ -76,8 +86,10 @@ ggsave("Graphs/Dirty_panicle_map.png", width = 8, height = 8, units = "in")
 # Leaf Blast
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = lba.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = lba.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Leaf Blast") +
   coord_map() +
@@ -87,8 +99,10 @@ ggsave("Graphs/Leaf_blast_map.png", width = 8, height = 8, units = "in")
 # Neck Blast
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = nba.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = nba.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Neck Blast") +
   coord_map()
@@ -97,8 +111,10 @@ ggsave("Graphs/Neck_blast_map.png", width = 8, height = 8, units = "in")
 # Narrow Brown Spot
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = nbs.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = nbs.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Narrow Brown Spot") +
   coord_map() +
@@ -108,8 +124,10 @@ ggsave("Graphs/Narrow_brown_spot_map.png", width = 8, height = 8, units = "in")
 # Leaf Scald
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = lsc.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = lsc.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Leaf Scald") +
   coord_map() +
@@ -119,8 +137,10 @@ ggsave("Graphs/Leaf_scald_map.png", width = 8, height = 8, units = "in")
 # Red Stripe
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = rsp.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = rsp.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Red Stripe") +
   coord_map() +
@@ -130,8 +150,10 @@ ggsave("Graphs/Red_stripe_map.png", width = 8, height = 8, units = "in")
 # Sheath Rot
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = shr.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = shr.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Sheath Rot") +
   coord_map() +
@@ -141,19 +163,23 @@ ggsave("Graphs/Sheath_rot_map.png", width = 8, height = 8, units = "in")
 # Sheath Blight
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = shb.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = shb.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Sheath Blight") +
   coord_map() +
   facet_grid(. ~ visit)
 ggsave("Graphs/Sheath_blight_map.png", width = 8, height = 8, units = "in")
 
-# Sheath Blight
+# Stem Rot
 ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
-  geom_point(data = str.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  geom_point(data = str.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Stem Rot") +
   coord_map() +
