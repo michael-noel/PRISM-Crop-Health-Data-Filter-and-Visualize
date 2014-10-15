@@ -151,9 +151,9 @@ blb <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*leaves, apply(PRIS
 bls <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum))
 bst <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)], 1, sum))
 fsm <- data.frame(PRISM[, c(12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "falsesmut", colnames(PRISM), perl = TRUE)], 1, sum))
-fsm <- na.omit(subset(fsm, fsm$visit.visit == "Ripening")) # no false smut before heading
+fsm <- na.omit(subset(fsm, visit.visit == "Ripening")) # no false smut before heading
 dip <- data.frame(PRISM[, c(12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "dirtypanicle", colnames(PRISM), perl = TRUE)], 1, sum))
-dip <- na.omit(subset(dip, fsm$visit.visit == "Ripening")) # no dirty panicles before heading
+dip <- na.omit(subset(dip, visit.visit == "Ripening")) # no dirty panicles before heading
 lba <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "leafblast", colnames(PRISM), perl = TRUE)], 1, sum))
 nba <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "neckblast", colnames(PRISM), perl = TRUE)], 1, sum))
 nba <- na.omit(subset(nba, nba$visit.visit == "Ripening")) # no neck blast until second visit
@@ -238,7 +238,7 @@ def <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*leaves, apply(PRIS
 wht <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*tillers, apply(PRISM[, grep(pattern = "whitehead", colnames(PRISM), perl = TRUE)], 1, sum))
 wht <- na.omit(subset(wht, visit.visit == "Ripening")) # no white head until second visit
 rgb <- data.frame(PRISM[, c(12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "ricegrainbug", colnames(PRISM), perl = TRUE)], 1, sum))
-rgb <- na.omit(subset(rbg, visit.visit == "Ripening")) # no grain bug damage until second visit
+rgb <- na.omit(subset(rgb, visit.visit == "Ripening")) # no grain bug damage until second visit
 rbg <- data.frame(PRISM[, c(12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "ricebug", colnames(PRISM), perl = TRUE)], 1, sum))
 dht <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "deadheart", colnames(PRISM), perl = TRUE)], 1, sum))
 
