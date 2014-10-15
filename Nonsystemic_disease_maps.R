@@ -54,7 +54,7 @@ map + geom_point(data = bst.summary, aes(x = lon, y = lat, size = perc.injury, c
   ggtitle("Bacterial Leaf Blight") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Bacterial_leaf_blight_map.png", width = 8, height = 8, units = "in")
+ggsave("Graphs/Brown_spot_map.png", width = 8, height = 8, units = "in")
 
 # BLS
 map + geom_point(data = bls.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
