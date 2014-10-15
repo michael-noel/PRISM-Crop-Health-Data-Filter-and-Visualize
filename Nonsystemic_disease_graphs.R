@@ -178,4 +178,3 @@ ggplot(str, aes(x = factor(Municipality), y = (injury/organ)*100)) +
 ggsave("Graphs/Stem_Rot.png", width = 8, units = "in")
 
 # eos 
-

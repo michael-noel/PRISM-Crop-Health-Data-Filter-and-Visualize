@@ -145,10 +145,6 @@ tillers <- apply(PRISM[, grep(pattern = "tiller_hill", colnames(PRISM), perl = T
 panicles <- apply(PRISM[, grep(pattern = "panicle_hill", colnames(PRISM), perl = TRUE)], 1, sum)
 leaves <- apply(PRISM[, grep(pattern = "leaves_tiller", colnames(PRISM), perl = TRUE)], 1, sum)
 
-correct.injury_levels <- function(x){
-  ifelse(x[, 4] > x[, 3], x[, 4] <- x[, 3], x[, 3])
-}
-
 #### generate data frames of non-systemic diseases, from 10 observations, for graphing ####
 bak <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "bakanae", colnames(PRISM), perl = TRUE)], 1, sum))
 blb <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "bacterialleafblight", colnames(PRISM), perl = TRUE)], 1, sum))
@@ -242,6 +238,7 @@ def <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*leaves, apply(PRIS
 wht <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*tillers, apply(PRISM[, grep(pattern = "whitehead", colnames(PRISM), perl = TRUE)], 1, sum))
 wht <- na.omit(subset(wht, visit.visit == "Ripening")) # no white head until second visit
 rgb <- data.frame(PRISM[, c(12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "ricegrainbug", colnames(PRISM), perl = TRUE)], 1, sum))
+rgb <- na.omit(subset(rbg, visit.visit == "Ripening")) # no grain bug damage until second visit
 rbg <- data.frame(PRISM[, c(12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "ricebug", colnames(PRISM), perl = TRUE)], 1, sum))
 dht <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "deadheart", colnames(PRISM), perl = TRUE)], 1, sum))
 

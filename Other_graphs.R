@@ -23,7 +23,7 @@ ggplot(visit, aes(x = factor(Municipality))) +
   ggtitle("Survey Visits by Municipality")
 ggsave("Graphs/Visits.png", width = 8, units = "in")
 
-# Rat
+# Rat damage
 ggplot(rat, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Rat Damaged Hills") +
@@ -35,7 +35,7 @@ ggplot(rat, aes(x = factor(Municipality), y = injury)) +
   facet_grid(. ~ visit)
 ggsave("Graphs/Rat.png", width = 8, units = "in")
 
-#  golden apple snail damage
+# golden apple snail damage
 ggplot(gas, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Missing Hills Due to Snail") +
