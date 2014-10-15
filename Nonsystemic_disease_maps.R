@@ -13,6 +13,7 @@ library(ggplot2)
 library(raster)
 library(plyr)
 library(doBy)
+library(RColorBrewer)
 
 source("Filter_Aggregator_Data.R")
 
@@ -23,11 +24,12 @@ names(map.fortify) <- c("long", "lat", "order", "hole", "piece", "group", "Munic
 PHL <- getData("GADM", country = "PHL", level = 0)
 PHL.fortify <- fortify(PHL)
 
-blb.map <- join(blb.summary, map.fortify, by = "Municipality")
-
 ggplot(PHL.fortify) +
-  geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#666666") +
-  geom_polygon(data = blb.map, aes(x = long, y = lat, fill = injury, colour = injury, group = group)) +
+  geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333") +
+  geom_point(data = bst.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous(range = c(3, 14), "Percent Incidence") +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Percent Incidence") + 
+  guides(size = "none") +
+  ggtitle("BLB") +
   coord_map() +
   facet_grid(. ~ visit)
   
