@@ -24,7 +24,7 @@ map <- ggplot(PHL.fortify) +
         geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333")
 
 # Bakanae
-map + geom_point(data = bak.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Percent Incidence") +
+map + geom_point(data = bak.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Incidence (%)") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Percent Incidence") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
