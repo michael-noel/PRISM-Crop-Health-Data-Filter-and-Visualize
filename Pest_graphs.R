@@ -12,7 +12,7 @@
 source("Filter_Aggregator_Data.R")
 
 # Leaf folder
-ggplot(lfd, aes(x = factor(Municipality), y = (injury/leaves)*100)) +
+ggplot(lfd, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Leaf Incidence (%)") +
   scale_x_discrete(name = "Municipality") +
@@ -24,7 +24,7 @@ ggplot(lfd, aes(x = factor(Municipality), y = (injury/leaves)*100)) +
 ggsave("Graphs/Leaf_folder.png", width = 8, units = "in")
 
 # leaf miner
-ggplot(lfm, aes(x = factor(Municipality), y = (injury/leaves)*100)) +
+ggplot(lfm, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Leaf Incidence (%)") +
   scale_x_discrete(name = "Municipality") +
@@ -36,7 +36,7 @@ ggplot(lfm, aes(x = factor(Municipality), y = (injury/leaves)*100)) +
 ggsave("Graphs/Leaf_miner.png", width = 8, units = "in")
 
 #thrip
-ggplot(thp, aes(x = factor(Municipality), y = (injury/leaves)*100)) +
+ggplot(thp, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Leaf Incidence (%)") +
   scale_x_discrete(name = "Municipality") +
@@ -48,7 +48,7 @@ ggplot(thp, aes(x = factor(Municipality), y = (injury/leaves)*100)) +
 ggsave("Graphs/Thrip.png", width = 8, units = "in")
 
 #whorl maggot
-ggplot(whm, aes(x = factor(Municipality), y = (injury/leaves)*100)) +
+ggplot(whm, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Leaf Incidence (%)") +
   scale_x_discrete(name = "Municipality") +
