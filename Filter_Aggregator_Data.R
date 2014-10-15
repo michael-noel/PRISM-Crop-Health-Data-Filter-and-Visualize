@@ -240,6 +240,7 @@ thp <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*leaves, apply(PRIS
 whm <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "whorl", colnames(PRISM), perl = TRUE)], 1, sum))
 def <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "defoliators", colnames(PRISM), perl = TRUE)], 1, sum))
 wht <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers*tillers, apply(PRISM[, grep(pattern = "whitehead", colnames(PRISM), perl = TRUE)], 1, sum))
+wht <- na.omit(subset(wht, visit.visit == "Ripening")) # no white head until second visit
 rgb <- data.frame(PRISM[, c(12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "ricegrainbug", colnames(PRISM), perl = TRUE)], 1, sum))
 rbg <- data.frame(PRISM[, c(12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "ricebug", colnames(PRISM), perl = TRUE)], 1, sum))
 dht <- data.frame(PRISM[, c(12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "deadheart", colnames(PRISM), perl = TRUE)], 1, sum))

@@ -59,4 +59,65 @@ ggplot(whm, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   ggtitle("Whorl Maggot Damage")
 ggsave("Graphs/Whorl_maggot.png", width = 8, units = "in")
 
+#Other defoliator
+ggplot(def, aes(x = factor(Municipality), y = (injury/organ)*100)) +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Leaf Incidence (%)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  facet_grid(. ~ visit) +
+  ggtitle("Other Defoliator Damage")
+ggsave("Graphs/Defoliator.png", width = 8, units = "in")
+
+#white head
+ggplot(wht, aes(x = factor(Municipality), y = (injury/organ)*100)) +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Tiller Incidence (%)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  facet_grid(. ~ visit) +
+  ggtitle("White Head Incidence")
+ggsave("Graphs/White_Head.png", width = 8, units = "in")
+
+#rice grain bug
+ggplot(rgb, aes(x = factor(Municipality), y = (injury/organ)*100)) +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Leaf Incidence (%)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  facet_grid(. ~ visit) +
+  ggtitle("Rice Grain Bug Damage")
+ggsave("Graphs/Rice_Grain_Bug.png", width = 8, units = "in")
+
+#rice bug
+ggplot(rbg, aes(x = factor(Municipality), y = (injury/organ)*100)) +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Leaf Incidence (%)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  facet_grid(. ~ visit) +
+  ggtitle("Rice Bug Damage")
+ggsave("Graphs/Rice_Bug.png", width = 8, units = "in")
+
+#dead heart
+ggplot(dht, aes(x = factor(Municipality), y = (injury/organ)*100)) +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Tiller Incidence (%)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  facet_grid(. ~ visit) +
+  ggtitle("Dead Heart")
+ggsave("Graphs/Dead_Heart.png", width = 8, units = "in")
+
+
 # eos
