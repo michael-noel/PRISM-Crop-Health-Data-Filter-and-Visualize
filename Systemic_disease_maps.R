@@ -23,7 +23,7 @@ PHL.fortify <- fortify(PHL)
 map <- ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333")
 
-# Bakanae
+# Bug burn
 map + geom_point(data = bbn.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
@@ -34,7 +34,7 @@ map + geom_point(data = bbn.summary, aes(x = lon, y = lat, size = rating, colour
   facet_grid(. ~ visit)
 ggsave("Graphs/Bug_burn_map.png", width = 8, height = 8, units = "in")
 
-# BLB
+# Hopper burn
 map + geom_point(data = hbn.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
@@ -45,7 +45,7 @@ map + geom_point(data = hbn.summary, aes(x = lon, y = lat, size = rating, colour
   facet_grid(. ~ visit)
 ggsave("Graphs/Hopper_burn_map.png", width = 8, height = 8, units = "in")
 
-# Brown Spot
+# Tungro
 map + geom_point(data = tun.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
@@ -56,7 +56,7 @@ map + geom_point(data = tun.summary, aes(x = lon, y = lat, size = rating, colour
   facet_grid(. ~ visit)
 ggsave("Graphs/Tungro_map.png", width = 8, height = 8, units = "in")
 
-# BLS
+# Grassy stunt
 map + geom_point(data = grs.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
@@ -67,7 +67,7 @@ map + geom_point(data = grs.summary, aes(x = lon, y = lat, size = rating, colour
   facet_grid(. ~ visit)
 ggsave("Graphs/Grassy_stunt_map.png", width = 8, height = 8, units = "in")
 
-# False Smut
+# Ragged Stunt
 map + geom_point(data = rgd.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
@@ -77,7 +77,7 @@ map + geom_point(data = rgd.summary, aes(x = lon, y = lat, size = rating, colour
   coord_map()
 ggsave("Graphs/Ragged_stunt_map.png", width = 8, height = 8, units = "in")
 
-# Dirty Panicle
+# Orange leaf
 map + geom_point(data = olf.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
@@ -87,7 +87,7 @@ map + geom_point(data = olf.summary, aes(x = lon, y = lat, size = rating, colour
   coord_map()
 ggsave("Graphs/Orange_leaf_map.png", width = 8, height = 8, units = "in")
 
-# Leaf Blast
+# Yellow dwarf
 map + geom_point(data = ylo.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
