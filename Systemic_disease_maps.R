@@ -24,7 +24,7 @@ map <- ggplot(PHL.fortify) +
   geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333")
 
 # Bakanae
-map + geom_point(data = bbn.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median\nRating") +
+map + geom_point(data = bbn.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -35,7 +35,7 @@ map + geom_point(data = bbn.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Bug_burn_map.png", width = 8, height = 8, units = "in")
 
 # BLB
-map + geom_point(data = hbn.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median\nRating") +
+map + geom_point(data = hbn.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -46,7 +46,7 @@ map + geom_point(data = hbn.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Hopper_burn_map.png", width = 8, height = 8, units = "in")
 
 # Brown Spot
-map + geom_point(data = tun.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median\nRating") +
+map + geom_point(data = tun.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -57,7 +57,7 @@ map + geom_point(data = tun.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Tungro_map.png", width = 8, height = 8, units = "in")
 
 # BLS
-map + geom_point(data = grs.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median\nRating") +
+map + geom_point(data = grs.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -68,7 +68,7 @@ map + geom_point(data = grs.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Grassy_stunt_map.png", width = 8, height = 8, units = "in")
 
 # False Smut
-map + geom_point(data = rgd.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median\nRating") +
+map + geom_point(data = rgd.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -78,7 +78,7 @@ map + geom_point(data = rgd.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Ragged_stunt_map.png", width = 8, height = 8, units = "in")
 
 # Dirty Panicle
-map + geom_point(data = olf.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median\nRating") +
+map + geom_point(data = olf.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -88,7 +88,7 @@ map + geom_point(data = olf.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Orange_leaf_map.png", width = 8, height = 8, units = "in")
 
 # Leaf Blast
-map + geom_point(data = ylo.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median\nRating") +
+map + geom_point(data = ylo.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + scale_size_continuous("Median\nRating") +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRating") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
