@@ -58,7 +58,7 @@ ggplot(bst, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   facet_grid(. ~ visit) +
   facet_grid(. ~ visit) +
   ggtitle("Brown Spot Incidence")
-ggsave("Graphs/BS.png", width = 8, height = 8, units = "in")
+ggsave("Graphs/Brown_Spot.png", width = 8, height = 8, units = "in")
 
 # false smut
 ggplot(fsm, aes(x = factor(Municipality), y = (injury/organ)*100)) +
