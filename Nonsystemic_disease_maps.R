@@ -20,8 +20,7 @@ source("Filter_Aggregator_Data.R")
 PHL <- getData("GADM", country = "PHL", level = 0)
 PHL.fortify <- fortify(PHL)
 
-map <- ggplot(PHL.fortify) +
-        geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333")
+map <- ggplot(PHL.fortify) + geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333")
 
 # Bakanae
 map + geom_point(data = bak.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Tiller\nIncidence (%)") +
