@@ -8,22 +8,24 @@
 # remarks 1     : ;
 # Licence:      : GPL2;
 ##############################################################################
+
+#### load packages ####
 library(rgdal)
 library(ggplot2)
-library(raster)
-library(plyr)
-library(doBy)
 library(RColorBrewer)
+#### end load packages ####
 
+#### Load data for mapping
 source("Filter_Aggregator_Data.R")
 
-PHL <- getData("GADM", country = "PHL", level = 0)
+PHL <- readOGR(dsn = "Data", layer = "PHL_NE_50m")
 PHL.fortify <- fortify(PHL)
-
 map <- ggplot(PHL.fortify) + geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333")
+#### End load data ####
 
+#### Begin mapping #####
 # Bakanae
-map + geom_point(data = bak.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Tiller\nIncidence (%)") +
+map + geom_point(data = bak.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Tiller\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Tiller\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -34,7 +36,7 @@ map + geom_point(data = bak.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Bakanae_map.png", width = 8, height = 8, units = "in")
 
 # BLB
-map + geom_point(data = blb.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)") +
+map + geom_point(data = blb.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Leaf\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -45,7 +47,7 @@ map + geom_point(data = blb.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Bacterial_leaf_blight_map.png", width = 8, height = 8, units = "in")
 
 # Brown Spot
-map + geom_point(data = bst.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)") +
+map + geom_point(data = bst.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Leaf\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -56,7 +58,7 @@ map + geom_point(data = bst.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Brown_spot_map.png", width = 8, height = 8, units = "in")
 
 # BLS
-map + geom_point(data = bls.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)") +
+map + geom_point(data = bls.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Leaf\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -67,7 +69,7 @@ map + geom_point(data = bls.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Bacterial_leaf_streak_map.png", width = 8, height = 8, units = "in")
   
 # False Smut
-map + geom_point(data = fsm.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Panicle\nIncidence (%)") +
+map + geom_point(data = fsm.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Panicle\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Panicle\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -77,7 +79,7 @@ map + geom_point(data = fsm.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/False_smut_map.png", width = 8, height = 8, units = "in")
 
 # Dirty Panicle
-map + geom_point(data = dip.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Panicle\nIncidence (%)") +
+map + geom_point(data = dip.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Panicle\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Panicle\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -87,7 +89,7 @@ map + geom_point(data = dip.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Dirty_panicle_map.png", width = 8, height = 8, units = "in")
 
 # Leaf Blast
-map + geom_point(data = lba.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)") +
+map + geom_point(data = lba.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Leaf\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -98,7 +100,7 @@ map + geom_point(data = lba.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Leaf_blast_map.png", width = 8, height = 8, units = "in")
 
 # Neck Blast
-map + geom_point(data = nba.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Panicle\nIncidence (%)") +
+map + geom_point(data = nba.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Panicle\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Panicle\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -108,7 +110,7 @@ map + geom_point(data = nba.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Neck_blast_map.png", width = 8, height = 8, units = "in")
 
 # Narrow Brown Spot
-map + geom_point(data = nbs.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)") +
+map + geom_point(data = nbs.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Leaf\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -119,7 +121,7 @@ map + geom_point(data = nbs.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Narrow_brown_spot_map.png", width = 8, height = 8, units = "in")
 
 # Leaf Scald
-map + geom_point(data = lsc.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)") +
+map + geom_point(data = lsc.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Leaf\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -130,7 +132,7 @@ map + geom_point(data = lsc.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Leaf_scald_map.png", width = 8, height = 8, units = "in")
 
 # Red Stripe
-map + geom_point(data = rsp.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)") +
+map + geom_point(data = rsp.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Leaf\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Leaf\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -141,7 +143,7 @@ map + geom_point(data = rsp.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Red_stripe_map.png", width = 8, height = 8, units = "in")
 
 # Sheath Rot
-map + geom_point(data = shr.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Tiller\nIncidence (%)") +
+map + geom_point(data = shr.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Tiller\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Tiller\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -152,7 +154,7 @@ map + geom_point(data = shr.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Sheath_rot_map.png", width = 8, height = 8, units = "in")
 
 # Sheath Blight
-map + geom_point(data = shb.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Tiller\nIncidence (%)") +
+map + geom_point(data = shb.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Tiller\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Tiller\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -163,7 +165,7 @@ map + geom_point(data = shb.summary, aes(x = lon, y = lat, size = perc.injury, c
 ggsave("Graphs/Sheath_blight_map.png", width = 8, height = 8, units = "in")
 
 # Stem Rot
-map + geom_point(data = str.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Tiller\nIncidence (%)") +
+map + geom_point(data = str.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + scale_size_continuous("Median Tiller\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median Tiller\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -172,5 +174,7 @@ map + geom_point(data = str.summary, aes(x = lon, y = lat, size = perc.injury, c
   coord_map() +
   facet_grid(. ~ visit)
 ggsave("Graphs/Stem_rot_map.png", width = 8, height = 8, units = "in")
+
+#### End mapping ####
 
 # eos
