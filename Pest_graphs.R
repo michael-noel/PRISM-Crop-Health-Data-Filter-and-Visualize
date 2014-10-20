@@ -2,7 +2,7 @@
 # title         : Pest_graphs.R;
 # purpose       : generate graphs of PRISM data;
 # producer      : prepared by A. Sparks;
-# last update   : in Los Baños, Philippines, Oct. 2014;
+# last update   : in Suphanburi, THA, Oct. 2014;
 # inputs        : Filtered PRISM data;
 # outputs       : graphs of PRISM data;
 # remarks 1     : ;
@@ -23,7 +23,7 @@ ggplot(lfd, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   ggtitle("Leaf Folder Damage")
 ggsave("Graphs/Leaf_folder.png", width = 8, height = 8, units = "in")
 
-# leaf miner
+# Leaf miner
 ggplot(lfm, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Leaf Incidence (%)") +
@@ -35,7 +35,7 @@ ggplot(lfm, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   ggtitle("Leaf Miner Damage")
 ggsave("Graphs/Leaf_miner.png", width = 8, height = 8, units = "in")
 
-#thrip
+# Thrip
 ggplot(thp, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Leaf Incidence (%)") +
@@ -47,7 +47,7 @@ ggplot(thp, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   ggtitle("Thrip Damage")
 ggsave("Graphs/Thrip.png", width = 8, height = 8, units = "in")
 
-#whorl maggot
+# Whorl maggot
 ggplot(whm, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Leaf Incidence (%)") +
@@ -59,7 +59,7 @@ ggplot(whm, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   ggtitle("Whorl Maggot Damage")
 ggsave("Graphs/Whorl_maggot.png", width = 8, height = 8, units = "in")
 
-#Other defoliator
+# Other defoliator
 ggplot(def, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Leaf Incidence (%)") +
@@ -71,7 +71,7 @@ ggplot(def, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   ggtitle("Other Defoliator Damage")
 ggsave("Graphs/Defoliator.png", width = 8, height = 8, units = "in")
 
-#white head
+# White head
 ggplot(wht, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Tiller Incidence (%)") +
@@ -83,7 +83,7 @@ ggplot(wht, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   ggtitle("White Head Incidence")
 ggsave("Graphs/White_Head.png", width = 8, height = 8, units = "in")
 
-#rice grain bug
+# Rice grain bug
 ggplot(rgb, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Panicle Incidence (%)") +
@@ -95,7 +95,7 @@ ggplot(rgb, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   ggtitle("Rice Grain Bug Damage")
 ggsave("Graphs/Rice_Grain_Bug.png", width = 8, height = 8, units = "in")
 
-#rice bug
+# Rice bug
 ggplot(rbg, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Panicile Incidence (%)") +
@@ -107,7 +107,7 @@ ggplot(rbg, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   ggtitle("Rice Bug Damage")
 ggsave("Graphs/Rice_Bug.png", width = 8, height = 8, units = "in")
 
-#dead heart
+# Dead heart
 ggplot(dht, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Tiller Incidence (%)") +
