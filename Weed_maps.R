@@ -26,8 +26,8 @@ map <- ggplot(PHL.fortify) + geom_map(map = PHL.fortify, aes(x = long, y = lat, 
 #### Begin mapping #####
 # Bakanae
 map + geom_point(data = weedabove.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + 
-  scale_size_continuous("Median\nWeedabove\nRating", range = c(3, 15)) +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nWeedabove\nRating") + 
+  scale_size_continuous("Median\nWeed\nAbove\nRating", range = c(3, 15)) +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nWeed\nAbove\nRating") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
   guides(size = "none") +
@@ -38,8 +38,8 @@ ggsave("Graphs/Weed_above_map.png", width = 8, height = 8, units = "in")
 
 # BLB
 map + geom_point(data = weedbelow.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + 
-  scale_size_continuous("Median\nWeedbelow\nRating", range = c(3, 15)) +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nWeedbelow\nRating") + 
+  scale_size_continuous("Median\nWeed\nBelow\nRating", range = c(3, 15)) +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nWeed\nBelow\nRating") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
   guides(size = "none") +

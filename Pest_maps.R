@@ -26,7 +26,7 @@ map <- ggplot(PHL.fortify) + geom_map(map = PHL.fortify, aes(x = long, y = lat, 
 #### Begin mapping #####
 # Leaffolder
 map + geom_point(data = lfd.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
-  scale_size_continuous("Median\nLeafolder\nInjury\nIncidence (%)", range = c(3, 15)) +
+  scale_size_continuous("Median\nLeaffolder\nInjury\nIncidence (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nLeaffolder\nInjury\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
@@ -62,8 +62,8 @@ ggsave("Graphs/Thrip_map.png", width = 8, height = 8, units = "in")
 
 # Whorl Maggot
 map + geom_point(data = whm.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
-  scale_size_continuous("Median\nWhorl Maggot\nInjury\nIncidence (%)", range = c(3, 15)) +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nWhorl Maggot\nInjury\nIncidence (%)") + 
+  scale_size_continuous("Median\nWhorl\nMaggot\nInjury\nIncidence (%)", range = c(3, 15)) +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nWhorl \nMaggot\nInjury\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
   guides(size = "none") +
@@ -74,8 +74,8 @@ ggsave("Graphs/Whorl_maggot_map.png", width = 8, height = 8, units = "in")
 
 # Other defoliator
 map + geom_point(data = def.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
-  scale_size_continuous("Median\nOther Defoliator\nInjury\nIncidence (%)", range = c(3, 15)) +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nOther Defoliator\nInjury\nIncidence (%)") + 
+  scale_size_continuous("Median\nOther\nDefoliator\nInjury\nIncidence (%)", range = c(3, 15)) +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nOther\nDefoliator\nInjury\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
   guides(size = "none") +
@@ -86,8 +86,8 @@ ggsave("Graphs/Other_defoliator_map.png", width = 8, height = 8, units = "in")
 
 # White head
 map + geom_point(data = wht.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
-  scale_size_continuous("Median\nWhite Head\nInjury\nIncidence (%)", range = c(3, 15)) +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nWhite Head\nInjury\nIncidence (%)") + 
+  scale_size_continuous("Median\nWhite\nHead\nInjury\nIncidence (%)", range = c(3, 15)) +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nWhite\nHead\nInjury\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
   guides(size = "none") +
@@ -97,8 +97,8 @@ ggsave("Graphs/White_head_map.png", width = 8, height = 8, units = "in")
 
 # Rice grain bug
 map + geom_point(data = rgb.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
-  scale_size_continuous("Median\nRice Grain Bug\nInjury\nIncidence (%)", range = c(3, 15)) +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRice Grain Bug\nInjury\nIncidence (%)") + 
+  scale_size_continuous("Median\nRice\nGrain\nBug\nInjury\nIncidence (%)", range = c(3, 15)) +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRice\nGrain\nBug\nInjury\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
   guides(size = "none") +
@@ -108,8 +108,8 @@ ggsave("Graphs/Rice_grain_bug_map.png", width = 8, height = 8, units = "in")
 
 # Rice bug
 map + geom_point(data = rbg.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
-  scale_size_continuous("Median\nRice Bug\nInjury\nIncidence (%)", range = c(3, 15)) +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRice Bug\nInjury\nIncidence (%)") + 
+  scale_size_continuous("Median\nRice\nBug\nInjury\nIncidence (%)", range = c(3, 15)) +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRice\nBug\nInjury\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
   guides(size = "none") +
@@ -119,8 +119,8 @@ map + geom_point(data = rbg.summary, aes(x = lon, y = lat, size = perc.injury, c
 
 # Dead heart
 map + geom_point(data = dht.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
-  scale_size_continuous("Median\nDead Heart\nInjury\nIncidence (%)", range = c(3, 15)) +
-  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nDead Heart\nInjury\nIncidence (%)") + 
+  scale_size_continuous("Median\nDead\nHeart\nInjury\nIncidence (%)", range = c(3, 15)) +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nDead\nHeart\nInjury\nIncidence (%)") + 
   scale_x_continuous("Longitude") +
   scale_y_continuous("Latitude") + 
   guides(size = "none") +
