@@ -2,14 +2,14 @@
 # title         : Systemic_disease_graphs.R;
 # purpose       : generate graphs of systemic diseases gathered as part of PRISM;
 # producer      : prepared by A. Sparks;
-# last update   : in Los Baños, Philippines, Oct. 2014;
+# last update   : in Bangkok, Thailand, Oct. 2014;
 # inputs        : Filtered PRISM data;
 # outputs       : graphs of disease data;
 # remarks 1     : ;
 # Licence:      : GPL2;
 ##############################################################################
 
-source("Filter_Aggregator_Data.R")
+source("Filter_Aggregator_Injury_Data.R")
 
 # bug burn
 ggplot(bbn, aes(x = factor(Municipality), y = rating)) +

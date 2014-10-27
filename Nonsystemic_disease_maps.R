@@ -2,7 +2,7 @@
 # title         : Nonsystemic_disease_maps.R;
 # purpose       : Map nonsystemic disease data from PRISM;
 # producer      : prepared by A. Sparks;
-# last update   : in Suphanbuiri, Thailand, Oct 2014;
+# last update   : in Bangkok, Thailand, Oct 2014;
 # inputs        : Aggregated PRISM data;
 # outputs       : Maps of PRISM data;
 # remarks 1     : ;
@@ -16,7 +16,7 @@ library(RColorBrewer)
 #### end load packages ####
 
 #### Load data for mapping
-source("Filter_Aggregator_Data.R")
+source("Filter_Aggregator_Injury_Data.R")
 
 PHL <- readOGR(dsn = "Data", layer = "PHL_NE_50m")
 PHL.fortify <- fortify(PHL)

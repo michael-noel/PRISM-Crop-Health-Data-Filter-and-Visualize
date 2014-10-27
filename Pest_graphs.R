@@ -2,14 +2,14 @@
 # title         : Pest_graphs.R;
 # purpose       : generate graphs of PRISM data;
 # producer      : prepared by A. Sparks;
-# last update   : in Suphanburi, THA, Oct. 2014;
+# last update   : in Bangkok, Thailand, Oct. 2014;
 # inputs        : Filtered PRISM data;
 # outputs       : graphs of PRISM data;
 # remarks 1     : ;
 # Licence:      : GPL2;
 ##############################################################################
 
-source("Filter_Aggregator_Data.R")
+source("Filter_Aggregator_Injury_Data.R")
 
 # Leaf folder
 ggplot(lfd, aes(x = factor(Municipality), y = (injury/organ)*100)) +

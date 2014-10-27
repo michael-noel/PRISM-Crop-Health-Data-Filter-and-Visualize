@@ -9,7 +9,7 @@
 # Licence:      : GPL2;
 ##############################################################################
 
-source("Filter_Aggregator_Data.R")
+source("Filter_Aggregator_Injury_Data.R")
 
 # bacterial leaf blight
 ggplot(bak, aes(x = factor(Municipality), y = (injury/organ)*100)) +
