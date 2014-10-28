@@ -123,9 +123,12 @@ missing <- is.na(PRISM[, 12]) # create logical index for NAs in PRISM[, c(8:9, 1
 PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
 PRISM <- PRISM[, -13] # drop column 13 now
 PRISM[, 12] <- as.numeric(PRISM[, 12]) # convert numbers to numeric format to remove leading zeros and remove any NAs from the data
-names(PRISM[, 12]) <- "locID"
+names(PRISM)[12] <- "locID"
 PRISM[, 12][PRISM[, 12] == 537] <- "5037" # There are errors in site ID numbers, these are the ones that can be corrected
 PRISM <- subset(PRISM, !is.na(PRISM[, 12])) # remove any records missing a location ID
+
+# Alangalang mis-recorded a ripening visit as the first visit, by missing the first visit 
+PRISM[, 21][PRISM[, 12] == 8018] <- "Ripening"
 
 #### Bohol has three munincipalities that combine into one
 bohol <- subset(PRISM, Province == "Bohol")
