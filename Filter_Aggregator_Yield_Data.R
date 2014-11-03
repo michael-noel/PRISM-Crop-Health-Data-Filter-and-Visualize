@@ -41,9 +41,11 @@ names(PRISM)[names(PRISM) == "group_contact.region"] <- "Region"
 
 #### Rename the provinces to proper names ####
 PRISM[, 14][PRISM[, 14] == "occidental mindoro"] <- "Occidental Mindoro"
+PRISM[, 14][PRISM[, 14] == "Occ.mindoro"] <- "Occidental Mindoro"
 
 #### Rename the Municipalities to proper names ####
 PRISM[, 13][PRISM[, 13] == "sablayan"] <- "Sablayan"
+PRISM[, 13][PRISM[, 13] == "Sta.cruz"] <- "Santa Cruz"
 
 #### Rename the regions to proper names ####
 PRISM[, 15][PRISM[, 15] == "region3"] <- "III"
