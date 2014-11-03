@@ -74,7 +74,4 @@ names(yield) <- c("locID", "Municipality", "Province", "Region", "Yield")
 #### Summarise the data by municipality ####
 yield.summary <- summaryBy(yield~Municipality, data = yield, FUN = mean)
 
-# summarise by the percent injury ocurring for mapping
-yield.summary <- mutate(bak.summary, perc.injury = (injury/organ)*100)
-
 #eos 
