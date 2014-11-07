@@ -81,7 +81,8 @@ map + geom_point(data = rgd.summary, aes(x = lon, y = lat, size = rating, colour
   scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Ragged Stunt Virus") +
-  coord_map()
+  coord_map() +
+  facet_grid(. ~ visit)
 ggsave("Graphs/Ragged_stunt_map.png", width = 8, height = 8, units = "in")
 
 # Orange leaf
@@ -92,7 +93,8 @@ map + geom_point(data = olf.summary, aes(x = lon, y = lat, size = rating, colour
   scale_y_continuous("Latitude") + 
   guides(size = "none") +
   ggtitle("Orange Leaf") +
-  coord_map()
+  coord_map() +
+  facet_grid(. ~ visit)
 ggsave("Graphs/Orange_leaf_map.png", width = 8, height = 8, units = "in")
 
 # Yellow dwarf

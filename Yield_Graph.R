@@ -2,12 +2,16 @@
 # title         : Yield_Graph.R;
 # purpose       : generate graphs of yield data gathered as part of PRISM;
 # producer      : prepared by A. Sparks;
-# last update   : in Bangkok, Thailand, Oct. 2014;
+# last update   : in Los Baños, Laguna, PI, Nov. 2014;
 # inputs        : Filtered PRISM data;
 # outputs       : graphs of yield data;
 # remarks 1     : ;
 # Licence:      : GPL2;
 ##############################################################################
+
+#### load packages ####
+library(ggplot2)
+#### end load packages ####
 
 source("Filter_Aggregator_Yield_Data.R")
 
@@ -19,6 +23,6 @@ ggplot(yield, aes(x = factor(Municipality), y = Yield)) +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   ggtitle("Wet Season 2014")
-ggsave("Graphs/Yield.png", width = 8, height = 8, units = "in")
+ggsave("Graphs/Yield_Graph.png", width = 8, height = 8, units = "in")
 
 #eos

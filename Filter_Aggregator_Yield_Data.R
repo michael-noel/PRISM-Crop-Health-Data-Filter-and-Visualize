@@ -2,7 +2,7 @@
 # title         : Filter_Aggregator_Data.R;
 # purpose       : Filter PRISM data as pulled from ODK Aggregator;
 # producer      : prepared by A. Sparks;
-# last update   : in Los Baños, Laguna, PHL, Oct 2014;
+# last update   : in Los Baños, Laguna, PHL, Nov. 2014;
 # inputs        : Raw PRISM data;
 # outputs       : Filtered PRISM data;
 # remarks 1     : ;
@@ -10,13 +10,8 @@
 ##############################################################################
 
 #### load packages ####
-library(rgdal) # to load shape files
-library(ggplot2) # for the map
-library(raster) # for getData
 library(reshape)
 library(doBy)
-library(sqldf)
-library(maptools)
 library(plyr)
 #### end load packages ####
 
