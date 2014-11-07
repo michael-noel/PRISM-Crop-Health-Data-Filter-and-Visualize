@@ -24,9 +24,9 @@ PHL.fortify <- fortify(PHL)
 map <- ggplot(PHL.fortify) + geom_map(map = PHL.fortify, aes(x = long, y = lat, map_id = id), fill = "#333333")
 #### End load data ####
 
-PRISM <- join(yield, PRISM, by = "locID", type = "inner")
+PRISM <- join(yield, PRISM, by = "locID", type = "inner") # join the two datasets to take the lat/lon from injuries only for locIDs with yield information
 
-yield.summary <- summaryBy(Yield+gps1_Latitude+gps1_Longitude~Municipality, data = PRISM, FUN = median, na.rm = TRUE)
+yield.summary <- summaryBy(Yield+gps1_Latitude+gps1_Longitude~Municipality, data = PRISM, FUN = median, na.rm = TRUE) # Create a summary data frame to generate the map
 
 map + geom_point(data = yield.summary, aes(x = gps1_Longitude.median, y =  gps1_Latitude.median, size = Yield.median, colour = Yield.median)) + 
   scale_size_continuous("Yield\n(Tons/ha)", range = c(3, 15)) +
