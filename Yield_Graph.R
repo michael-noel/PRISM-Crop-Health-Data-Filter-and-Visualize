@@ -20,3 +20,5 @@ ggplot(yield, aes(x = factor(Municipality), y = Yield)) +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   ggtitle("Wet Season 2014")
 ggsave("Graphs/Yield.png", width = 8, height = 8, units = "in")
+
+#eos

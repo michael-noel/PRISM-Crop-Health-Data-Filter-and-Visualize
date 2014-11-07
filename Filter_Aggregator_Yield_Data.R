@@ -42,10 +42,12 @@ names(PRISM)[names(PRISM) == "group_contact.region"] <- "Region"
 #### Rename the provinces to proper names ####
 PRISM[, 14][PRISM[, 14] == "occidental mindoro"] <- "Occidental Mindoro"
 PRISM[, 14][PRISM[, 14] == "Occ.mindoro"] <- "Occidental Mindoro"
+PRISM[, 14][PRISM[, 9] == "007018"] <- "Bohol" # Someone moved our plots from Bohol to Cebu?
 
 #### Rename the Municipalities to proper names ####
 PRISM[, 13][PRISM[, 13] == "sablayan"] <- "Sablayan"
 PRISM[, 13][PRISM[, 13] == "Sta.cruz"] <- "Santa Cruz"
+PRISM[, 13][PRISM[, 13] == "Alang alang"] <- "Alangalang"
 
 #### Rename the regions to proper names ####
 PRISM[, 15][PRISM[, 15] == "region3"] <- "III"
@@ -54,6 +56,9 @@ PRISM[, 15][PRISM[, 15] == "region6"] <- "VI"
 PRISM[, 15][PRISM[, 15] == "region7"] <- "VII"
 PRISM[, 15][PRISM[, 15] == "region8"] <- "VIII"
 PRISM[, 15][PRISM[, 15] == "region4b"] <- "IV-B"
+
+PRISM[, 17][PRISM[, 17] == "1ha"] <- 1
+PRISM[, 17] <- as.numeric(as.character(PRISM[, 17]))
 
 #### Merge the site ID columns ####
 missing <- is.na(PRISM[, 8]) # create logical index for NAs in PRISM[, 8]
@@ -74,6 +79,8 @@ yield <- data.frame(PRISM[, c(8, 12:14)], apply(PRISM[, grep(pattern = "yieldtha
 names(yield) <- c("locID", "Municipality", "Province", "Region", "Yield")
 
 #### Summarise the data by municipality ####
-yield.summary <- summaryBy(yield~Municipality, data = yield, FUN = mean)
+yield.mean.summary <- summaryBy(Yield~Municipality, data = yield, FUN = mean)
+
+yield.mean.summary
 
 #eos 
