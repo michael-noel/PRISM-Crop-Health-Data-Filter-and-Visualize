@@ -9,6 +9,10 @@
 # Licence:      : GPL2;
 ##############################################################################
 
+#### load packages ####
+library(ggplot2)
+#### end load packages ####
+
 source("Filter_Aggregator_Injury_Data.R")
 
 # bacterial leaf blight

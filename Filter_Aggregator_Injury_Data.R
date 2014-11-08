@@ -10,13 +10,9 @@
 ##############################################################################
 
 #### load packages ####
-library(rgdal) # to load shape files
-library(ggplot2) # for the map
-library(raster) # for getData
 library(reshape)
 library(doBy)
 library(sqldf)
-library(maptools)
 library(plyr)
 #### end load packages ####
 
@@ -28,11 +24,12 @@ library(plyr)
 # Reg7    August 4-8, 2014 (Joey) 
 # Reg8    August 11-15. 2014 (Joey)
 
-PRISM <- read.csv("~/Google Drive/tmp/PRISM_Crop_and_Injuries_V1_0_results.csv")
+PRISM <- read.csv("~/Google Drive/tmp/PRISM_Injuries.csv")
+PRISM <- PRISM[, -1]
 
-PRISM[, 2] <- as.character(substr(PRISM[, 2], 1, 10))
-PRISM[, 3] <- as.character(substr(PRISM[, 3], 1, 10))
-PRISM[, 4] <- as.character(substr(PRISM[, 4], 1, 10))
+PRISM[, 2] <- as.character(as.Date(PRISM[, 2], "%b %d, %Y"))
+PRISM[, 3] <- as.character(as.Date(PRISM[, 3], "%b %d, %Y"))
+PRISM[, 4] <- as.character(as.Date(PRISM[, 4], "%b %d, %Y"))
 PRISM[, 16] <- as.character(PRISM[, 16])
 PRISM[, 17] <- as.character(PRISM[, 17])
 PRISM[, 18] <- as.character(PRISM[, 18])
@@ -83,6 +80,11 @@ PRISM[, 17][PRISM[, 17] == "Sta. Cruz"] <- "Santa Cruz"
 PRISM[, 17][PRISM[, 17] == "RIZAL"] <- "Rizal"
 PRISM[, 17][PRISM[, 17] == "Tabuk city"] <- "Tabuk City"
 PRISM[, 17][PRISM[, 17] == "San miguel"] <- "San Miguel"
+PRISM[, 17][PRISM[, 17] == "San  miguel"] <- "San Miguel"
+PRISM[, 17][PRISM[, 17] == "san Miguel"] <- "San Miguel"
+PRISM[, 17][PRISM[, 17] == "San  Miguel"] <- "San Miguel"
+PRISM[, 17][PRISM[, 17] == "Sam Miguel"] <- "San Miguel"
+PRISM[, 17][PRISM[, 17] == "Sanmiguel"] <- "San Miguel"
 PRISM[, 17][PRISM[, 17] == "Tabuk"] <- "Tabuk City"
 PRISM[, 17][PRISM[, 17] == "Tabui"] <- "Tabuk City"
 PRISM[, 17][PRISM[, 17] == "sablayan"] <- "Sablayan"
@@ -91,6 +93,10 @@ PRISM[, 17][PRISM[, 17] == "Palangui"] <- "Polangui"
 PRISM[, 17][PRISM[, 15] == "Burabod"] <- "Castilla" # Someone doesn't know the difference between a town and a province
 PRISM[, 17][PRISM[, 16] == "Miluya"] <- "Castilla" # Someone doesn't know the difference between a baragnay and a Town
 PRISM[, 17][PRISM[, 16] == "Babalag East"] <- "Rizal" # No municipality was given
+PRISM[, 17][PRISM[, 17] == "Alang alang"] <- "Alangalang"
+PRISM[, 17][PRISM[, 17] == "Minalbac"] <- "Minalabac"
+PRISM[, 17][PRISM[, 17] == "minalabac"] <- "Minalabac"
+PRISM[, 17][PRISM[, 17] == "Polangue"] <- "Polangui"
 
 #### Rename the regions to proper names ####
 PRISM[, 19][PRISM[, 19] == "3"] <- "III"
@@ -106,7 +112,7 @@ PRISM[, 19][PRISM[, 16] == "Babalag East"] <- "CAR"
 PRISM <- within(PRISM, Region[Province == "Bohol"] <- "VII") # Fixes "NA" and "12" mis-entries
 
 #### Santa Cruz, region IV-B has one visit incorrectly recorded as visit 2, when it's the first ####
-tmp <- subset(PRISM, PRISM$Municipality == "Santa Cruz" & start == "2014-09-02")
+tmp <- subset(PRISM, Municipality == "Santa Cruz" & start == "2014-09-02")
 tmp[, 22][tmp[, 22] == "2nd"] <- "1st"
 PRISM <- PRISM[PRISM[, 17] != "Santa Cruz", ] 
 PRISM <- rbind(PRISM, tmp)
@@ -129,6 +135,10 @@ PRISM <- subset(PRISM, !is.na(PRISM[, 12])) # remove any records missing a locat
 
 # Alangalang mis-recorded a ripening visit as the first visit, by missing the first visit 
 PRISM[, 21][PRISM[, 12] == 8018] <- "Ripening"
+
+#### Hermosa has an extra field observation by mistake ####
+PRISM <- subset(PRISM, locID != 3024 | group_crop_info_crop_stage != 80) # remove first observation at ripening, incorrect data collected
+PRISM <- subset(PRISM, locID != 3028 | group_crop_info_crop_stage != 60) # remove first observation at ripening, incorrect data collected
 
 #### Bohol has three munincipalities that combine into one
 bohol <- subset(PRISM, Province == "Bohol")
