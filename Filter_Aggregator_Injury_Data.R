@@ -136,7 +136,16 @@ PRISM <- subset(PRISM, !is.na(PRISM[, 12])) # remove any records missing a locat
 # Alangalang mis-recorded a ripening visit as the first visit, by missing the first visit 
 PRISM[, 21][PRISM[, 12] == 8018] <- "Ripening"
 
-#### Hermosa has an extra field observation by mistake ####
+# Region III Misreported visit 2 as visit 1
+RIII <- subset(PRISM, locID == 3054 & datetime == "2014-10-20")
+RIII[, 21][RIII[, 21] == "Booting"] <- "Ripening"
+PRISM <- PRISM[-100, ] # drop original value
+PRISM <- data.frame(PRISM, RIII)
+
+#### Remove extra field observations ####
+## Keep only the second observation per growth stage visit
+PRISM <- subset(PRISM, locID != 7004 | datetime != "2014-08-27") # remove first observation at ripening, incorrect data collected
+PRISM <- subset(PRISM, locID != 3050 | datetime != "2014-10-04") # Obviously one of the ripening observations does not go with this locID, where does it go?
 PRISM <- subset(PRISM, locID != 3024 | group_crop_info_crop_stage != 80) # remove first observation at ripening, incorrect data collected
 PRISM <- subset(PRISM, locID != 3028 | group_crop_info_crop_stage != 60) # remove first observation at ripening, incorrect data collected
 
@@ -148,7 +157,8 @@ PRISM <- rbind(PRISM, bohol)
 
 ##### Visit number one or two? #####
 visit <- PRISM[, grep(pattern = "visitNo_label", colnames(PRISM), perl = TRUE)]
-visit <- data.frame(PRISM[, c(2, 12, 15:18)], visit)
+visit <- data.frame(PRISM[, c(2, 12, 15:18, 24)], visit)
+colnames(visit) <- c("Date", "locID", "Barangay", "Municipality", "Province", "Region", "GS", "visit")
 
 #### Growth stage ####
 gs <- PRISM[, grep(pattern = "crop_stage", colnames(PRISM), perl = TRUE)]
