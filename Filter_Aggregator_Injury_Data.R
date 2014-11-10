@@ -25,7 +25,9 @@ library(plyr)
 # Reg8    August 11-15. 2014 (Joey)
 
 PRISM <- read.csv("~/Google Drive/tmp/PRISM_Injuries.csv")
-PRISM <- PRISM[, -1]
+PRISM <- PRISM[, -1] # don't need submission date
+
+PRISM <- PRISM[-40, ] # duplicated on line 211
 
 PRISM[, 2] <- as.character(as.Date(PRISM[, 2], "%b %d, %Y"))
 PRISM[, 3] <- as.character(as.Date(PRISM[, 3], "%b %d, %Y"))
@@ -53,111 +55,108 @@ PRISM <- sqldf("Select * from PRISM WHERE Province NOT IN ('Kalinga', 'Rizal') O
 #Region VII Training Event
 PRISM <- sqldf("Select * from PRISM WHERE Province NOT IN ('Bohol') OR datetime NOT IN ('2014-08-06', '2014-08-07', '2014-08-08', '2014-08-09')")
 
+#### Merge the site ID columns ####
+missing <- is.na(PRISM[, 12]) # create logical index for NAs in PRISM
+PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
+PRISM <- PRISM[, -13] # drop column 13 now
+PRISM[, 12] <- as.numeric(PRISM[, 12]) # convert numbers to numeric format to remove leading zeros and remove any NAs from the data
+names(PRISM)[12] <- "locID"
+
+PRISM[, 12][PRISM[, 12] == 537] <- "5037" # There are errors in site ID numbers, these are the ones that can be corrected
+PRISM <- subset(PRISM, !is.na(PRISM[, 12])) # remove any records missing a location ID
+
 #### Rename the provinces to proper names ####
-PRISM[, 18][PRISM[, 18] == "Camarines sur"] <- "Camarines Sur"
-PRISM[, 18][PRISM[, 18] == "Cam.Sur"] <- "Camarines Sur"
-PRISM[, 18][PRISM[, 18] == "Cam.sur"] <- "Camarines Sur"
-PRISM[, 18][PRISM[, 18] == "Cam.Surm"] <- "Camarines Sur"
-PRISM[, 18][PRISM[, 18] == "Cam. Sur"] <- "Camarines Sur"
-PRISM[, 18][PRISM[, 18] == "Cam Sur"] <- "Camarines Sur"
-PRISM[, 18][PRISM[, 18] == "Cam sur"] <- "Camarines Sur"
-PRISM[, 18][PRISM[, 18] == "Cs"] <- "Camarines Sur"
-PRISM[, 18][PRISM[, 18] == "Occ.Mindoro"] <- "Occidental Mindoro"
-PRISM[, 18][PRISM[, 18] == "Occ.mindoro"] <- "Occidental Mindoro"
-PRISM[, 18][PRISM[, 18] == "occidental mindoro"] <- "Occidental Mindoro"
-PRISM[, 18][PRISM[, 18] == "Occ.mdo"] <- "Occidental Mindoro"
-PRISM[, 18][PRISM[, 18] == "Occ. Mindoro"] <- "Occidental Mindoro"
-PRISM[, 18][PRISM[, 18] == "Occ. Mindorp"] <- "Occidental Mindoro"
-PRISM[, 18][PRISM[, 15] == "Burabod"] <- "Sorsogon" # Someone doesn't know the difference between a town and a province
-PRISM[, 18][PRISM[, 16] == "Miluya"] <- "Sorsogon" # Someone doesn't know the difference between a barangay and a province
-PRISM[, 18][PRISM[, 18] == "bohol"] <- "Bohol"
-PRISM[, 18][PRISM[, 16] == "Babalag East"] <- "Kalinga" # Incorrectly labeled as Rizal Province
+PRISM[, 17][PRISM[, 17] == "Camarines sur"] <- "Camarines Sur"
+PRISM[, 17][PRISM[, 17] == "Cam.Sur"] <- "Camarines Sur"
+PRISM[, 17][PRISM[, 17] == "Cam.sur"] <- "Camarines Sur"
+PRISM[, 17][PRISM[, 17] == "Cam.Surm"] <- "Camarines Sur"
+PRISM[, 17][PRISM[, 17] == "Cam. Sur"] <- "Camarines Sur"
+PRISM[, 17][PRISM[, 17] == "Cam Sur"] <- "Camarines Sur"
+PRISM[, 17][PRISM[, 17] == "Cam sur"] <- "Camarines Sur"
+PRISM[, 17][PRISM[, 17] == "Cs"] <- "Camarines Sur"
+PRISM[, 17][PRISM[, 17] == "Occ.Mindoro"] <- "Occidental Mindoro"
+PRISM[, 17][PRISM[, 17] == "Occ.mindoro"] <- "Occidental Mindoro"
+PRISM[, 17][PRISM[, 17] == "occidental mindoro"] <- "Occidental Mindoro"
+PRISM[, 17][PRISM[, 17] == "Occ.mdo"] <- "Occidental Mindoro"
+PRISM[, 17][PRISM[, 17] == "Occ. Mindoro"] <- "Occidental Mindoro"
+PRISM[, 17][PRISM[, 17] == "Occ. Mindorp"] <- "Occidental Mindoro"
+PRISM[, 17][PRISM[, 15] == "Burabod"] <- "Sorsogon" # Someone doesn't know the difference between a town and a province
+PRISM[, 17][PRISM[, 16] == "Miluya"] <- "Sorsogon" # Someone doesn't know the difference between a barangay and a province
+PRISM[, 17][PRISM[, 17] == "bohol"] <- "Bohol"
+PRISM[, 17][PRISM[, 16] == "Babalag East"] <- "Kalinga" # Incorrectly labeled as Rizal Province
 
 #### Rename the Municipalities to proper names ####
-PRISM[, 17][PRISM[, 17] == "pilar"] <- "Pilar"
-PRISM[, 17][PRISM[, 17] == "Sta.Cruz"] <- "Santa Cruz"
-PRISM[, 17][PRISM[, 17] == "Sta. Cruz"] <- "Santa Cruz"
-PRISM[, 17][PRISM[, 17] == "RIZAL"] <- "Rizal"
-PRISM[, 17][PRISM[, 17] == "Tabuk city"] <- "Tabuk City"
-PRISM[, 17][PRISM[, 17] == "San miguel"] <- "San Miguel"
-PRISM[, 17][PRISM[, 17] == "San  miguel"] <- "San Miguel"
-PRISM[, 17][PRISM[, 17] == "san Miguel"] <- "San Miguel"
-PRISM[, 17][PRISM[, 17] == "San  Miguel"] <- "San Miguel"
-PRISM[, 17][PRISM[, 17] == "Sam Miguel"] <- "San Miguel"
-PRISM[, 17][PRISM[, 17] == "Sanmiguel"] <- "San Miguel"
-PRISM[, 17][PRISM[, 17] == "Tabuk"] <- "Tabuk City"
-PRISM[, 17][PRISM[, 17] == "Tabui"] <- "Tabuk City"
-PRISM[, 17][PRISM[, 17] == "sablayan"] <- "Sablayan"
-PRISM[, 17][PRISM[, 17] == "Sta.cruz"] <- "Santa Cruz"
-PRISM[, 17][PRISM[, 17] == "Palangui"] <- "Polangui"
-PRISM[, 17][PRISM[, 15] == "Burabod"] <- "Castilla" # Someone doesn't know the difference between a town and a province
-PRISM[, 17][PRISM[, 16] == "Miluya"] <- "Castilla" # Someone doesn't know the difference between a baragnay and a Town
-PRISM[, 17][PRISM[, 16] == "Babalag East"] <- "Rizal" # No municipality was given
-PRISM[, 17][PRISM[, 17] == "Alang alang"] <- "Alangalang"
-PRISM[, 17][PRISM[, 17] == "Minalbac"] <- "Minalabac"
-PRISM[, 17][PRISM[, 17] == "minalabac"] <- "Minalabac"
-PRISM[, 17][PRISM[, 17] == "Polangue"] <- "Polangui"
+PRISM[, 16][PRISM[, 16] == "pilar"] <- "Pilar"
+PRISM[, 16][PRISM[, 16] == "Sta.Cruz"] <- "Santa Cruz"
+PRISM[, 16][PRISM[, 16] == "Sta. Cruz"] <- "Santa Cruz"
+PRISM[, 16][PRISM[, 16] == "RIZAL"] <- "Rizal"
+PRISM[, 16][PRISM[, 16] == "Tabuk city"] <- "Tabuk City"
+PRISM[, 16][PRISM[, 16] == "San miguel"] <- "San Miguel"
+PRISM[, 16][PRISM[, 16] == "San  miguel"] <- "San Miguel"
+PRISM[, 16][PRISM[, 16] == "san Miguel"] <- "San Miguel"
+PRISM[, 16][PRISM[, 16] == "San  Miguel"] <- "San Miguel"
+PRISM[, 16][PRISM[, 16] == "Sam Miguel"] <- "San Miguel"
+PRISM[, 16][PRISM[, 16] == "Sanmiguel"] <- "San Miguel"
+PRISM[, 16][PRISM[, 16] == "Tabuk"] <- "Tabuk City"
+PRISM[, 16][PRISM[, 16] == "Tabui"] <- "Tabuk City"
+PRISM[, 16][PRISM[, 16] == "sablayan"] <- "Sablayan"
+PRISM[, 16][PRISM[, 16] == "Sta.cruz"] <- "Santa Cruz"
+PRISM[, 16][PRISM[, 16] == "Palangui"] <- "Polangui"
+PRISM[, 16][PRISM[, 15] == "Burabod"] <- "Castilla" # Someone doesn't know the difference between a town and a province
+PRISM[, 16][PRISM[, 16] == "Miluya"] <- "Castilla" # Someone doesn't know the difference between a baragnay and a Town
+PRISM[, 16][PRISM[, 16] == "Babalag East"] <- "Rizal" # No municipality was given
+PRISM[, 16][PRISM[, 16] == "Alang alang"] <- "Alangalang"
+PRISM[, 16][PRISM[, 16] == "Minalbac"] <- "Minalabac"
+PRISM[, 16][PRISM[, 16] == "minalabac"] <- "Minalabac"
+PRISM[, 16][PRISM[, 16] == "Polangue"] <- "Polangui"
 
 #### Rename the regions to proper names ####
-PRISM[, 19][PRISM[, 19] == "3"] <- "III"
-PRISM[, 19][PRISM[, 19] == "5"] <- "IV-B"
-PRISM[, 19][PRISM[, 19] == "6"] <- "V"
-PRISM[, 19][PRISM[, 19] == "7"] <- "VI"
-PRISM[, 19][PRISM[, 19] == "8"] <- "VII"
-PRISM[, 19][PRISM[, 19] == "9"] <- "VIII"
-PRISM[, 19][PRISM[, 19] == "16"] <- "CAR"
-PRISM[, 19][PRISM[, 16] == "Babalag East"] <- "CAR"
+PRISM[, 18][PRISM[, 18] == "3"] <- "III"
+PRISM[, 18][PRISM[, 18] == "5"] <- "IV-B"
+PRISM[, 18][PRISM[, 18] == "6"] <- "V"
+PRISM[, 18][PRISM[, 18] == "7"] <- "VI"
+PRISM[, 18][PRISM[, 18] == "8"] <- "VII"
+PRISM[, 18][PRISM[, 18] == "9"] <- "VIII"
+PRISM[, 18][PRISM[, 18] == "16"] <- "CAR"
+PRISM[, 18][PRISM[, 15] == "Babalag East"] <- "CAR"
+PRISM[, 18][PRISM[, 18] == "Sorsogon"] <- "V"
 
 #### Correct region numbers ####
 PRISM <- within(PRISM, Region[Province == "Bohol"] <- "VII") # Fixes "NA" and "12" mis-entries
 
 #### Santa Cruz, region IV-B has one visit incorrectly recorded as visit 2, when it's the first ####
 tmp <- subset(PRISM, Municipality == "Santa Cruz" & start == "2014-09-02")
-tmp[, 22][tmp[, 22] == "2nd"] <- "1st"
-PRISM <- PRISM[PRISM[, 17] != "Santa Cruz", ] 
+tmp[, 21][tmp[, 21] == "2nd"] <- "1st"
+PRISM <- PRISM[PRISM[, 16] != "Santa Cruz", ] 
 PRISM <- rbind(PRISM, tmp)
 
 # Some visits are incorrectly recorded, there are no third or fourth visits
-PRISM[, 22][PRISM[, 22] == "4th"] <- "1st"
-PRISM[, 22][PRISM[, 22] == "3rd"] <- "1st"
+#PRISM[, 22][PRISM[, 22] == "4th"] <- "1st"
+#PRISM[, 22][PRISM[, 22] == "3rd"] <- "1st"
 
-PRISM[, 22][PRISM[, 22] == "1st"] <- "Booting"
-PRISM[, 22][PRISM[, 22] == "2nd"] <- "Ripening"
-
-#### Merge the site ID columns ####
-missing <- is.na(PRISM[, 12]) # create logical index for NAs in PRISM[, c(8:9, 12, 16:18)]
-PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
-PRISM <- PRISM[, -13] # drop column 13 now
-PRISM[, 12] <- as.numeric(PRISM[, 12]) # convert numbers to numeric format to remove leading zeros and remove any NAs from the data
-names(PRISM)[12] <- "locID"
-PRISM[, 12][PRISM[, 12] == 537] <- "5037" # There are errors in site ID numbers, these are the ones that can be corrected
-PRISM <- subset(PRISM, !is.na(PRISM[, 12])) # remove any records missing a location ID
-
-# Alangalang mis-recorded a ripening visit as the first visit, by missing the first visit 
-PRISM[, 21][PRISM[, 12] == 8018] <- "Ripening"
-
-# Region III Misreported visit 2 as visit 1
-RIII <- subset(PRISM, locID == 3054 & datetime == "2014-10-20")
-RIII[, 21][RIII[, 21] == "Booting"] <- "Ripening"
-PRISM <- PRISM[-100, ] # drop original value
-PRISM <- data.frame(PRISM, RIII)
+PRISM[, 21][PRISM[, 24] <= 50] <- "Booting"
+PRISM[, 21][PRISM[, 24] >= 60] <- "Ripening"
 
 #### Remove extra field observations ####
 ## Keep only the second observation per growth stage visit
 PRISM <- subset(PRISM, locID != 7004 | datetime != "2014-08-27") # remove first observation at ripening, incorrect data collected
 PRISM <- subset(PRISM, locID != 3050 | datetime != "2014-10-04") # Obviously one of the ripening observations does not go with this locID, where does it go?
 PRISM <- subset(PRISM, locID != 3024 | group_crop_info_crop_stage != 80) # remove first observation at ripening, incorrect data collected
-PRISM <- subset(PRISM, locID != 3028 | group_crop_info_crop_stage != 60) # remove first observation at ripening, incorrect data collected
+PRISM <- subset(PRISM, locID != 3028 | group_crop_info_crop_stage != 60) # remove first observation at ripening, incorrect data collecte
+
+#### CAR Correction ####
+PRISM[, 16][PRISM[, 15] == "Babalag East"] <- "Rizal"
+PRISM[, 17][PRISM[, 15] == "Babalag East"] <- "Kalinga"
 
 #### Bohol has three munincipalities that combine into one
 bohol <- subset(PRISM, Province == "Bohol")
-bohol[, 16] <- bohol[, 17]
-PRISM <- PRISM[PRISM[, 17] != "Bohol", ] 
+bohol[, 15] <- bohol[, 16]
+PRISM <- PRISM[PRISM[, 16] != "Bohol", ] 
 PRISM <- rbind(PRISM, bohol)
 
 ##### Visit number one or two? #####
 visit <- PRISM[, grep(pattern = "visitNo_label", colnames(PRISM), perl = TRUE)]
-visit <- data.frame(PRISM[, c(2, 12, 15:18, 24)], visit)
+visit <- data.frame(PRISM[, c(2, 12, 15:18)], visit)
 colnames(visit) <- c("Date", "locID", "Barangay", "Municipality", "Province", "Region", "GS", "visit")
 
 #### Growth stage ####
