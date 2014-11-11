@@ -230,7 +230,11 @@ str.summary <- mutate(str.summary, perc.injury = (injury/organ)*100)
 #### generate data frames of snail and rat damage ####
 gas <- data.frame(PRISM[, c(1, 8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "area_gas", colnames(PRISM), perl = TRUE)], 1, mean))
 rat <- data.frame(PRISM[, c(1, 8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "pest_rat", colnames(PRISM), perl = TRUE)], 1, mean))
+
 names(gas) <- names(rat) <- c("date", "lat", "lon", "locID", "Municipality", "Province", "Region", "visit", "tillers", "injury")
+
+gas.summary <- summaryBy(injury+lat+lon~Municipality+visit, data = gas, FUN = median, na.rm = TRUE)
+rat.summary <- summaryBy(injury+lat+lon~Municipality+visit, data = rat, FUN = mean, na.rm = TRUE)
 
 #### generate data frames of systemic diseases, snail and bug/hopper burn ####
 bbn <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "bugburn", colnames(PRISM), perl = TRUE)], 1, mean))
