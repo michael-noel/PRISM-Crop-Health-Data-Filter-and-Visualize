@@ -14,6 +14,7 @@ library(reshape)
 library(doBy)
 library(sqldf)
 library(plyr)
+library(lubridate)
 #### end load packages ####
 
 # CAR     August 18-22, 2014 (Joey)
@@ -25,13 +26,12 @@ library(plyr)
 # Reg8    August 11-15. 2014 (Joey)
 
 PRISM <- read.csv("~/Google Drive/tmp/PRISM_Injuries.csv")
-PRISM <- PRISM[, -1] # don't need submission date
+PRISM <- PRISM[, -2] # drop formhub uuid, not needed
 
-PRISM <- PRISM[-40, ] # duplicated on line 211
-
-PRISM[, 2] <- as.character(as.Date(PRISM[, 2], "%b %d, %Y"))
-PRISM[, 3] <- as.character(as.Date(PRISM[, 3], "%b %d, %Y"))
-PRISM[, 4] <- as.character(as.Date(PRISM[, 4], "%b %d, %Y"))
+PRISM[, 1] <- parse_date_time(PRISM[, 1], "b d, Y I:M:S p") # use lubridate to filter out duplicate entries
+PRISM[, 2] <- as.character(as.Date(PRISM[, 2], "%b %d, %Y")) # these are just character, use for subsetting
+PRISM[, 3] <- as.character(as.Date(PRISM[, 3], "%b %d, %Y")) # these are just character, use for subsetting
+PRISM[, 4] <- as.character(as.Date(PRISM[, 4], "%b %d, %Y"))# these are just character, use for subsetting
 PRISM[, 16] <- as.character(PRISM[, 16])
 PRISM[, 17] <- as.character(PRISM[, 17])
 PRISM[, 18] <- as.character(PRISM[, 18])
@@ -57,13 +57,14 @@ PRISM <- sqldf("Select * from PRISM WHERE Province NOT IN ('Bohol') OR datetime 
 
 #### Merge the site ID columns ####
 missing <- is.na(PRISM[, 12]) # create logical index for NAs in PRISM
+PRISM[, 13] <- as.numeric(as.character(PRISM[, 13])) # convert column 13 to class numeric for merging with column 12
 PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
 PRISM <- PRISM[, -13] # drop column 13 now
-PRISM[, 12] <- as.numeric(PRISM[, 12]) # convert numbers to numeric format to remove leading zeros and remove any NAs from the data
 names(PRISM)[12] <- "locID"
+PRISM <- subset(PRISM, !is.na(PRISM[, 12])) # remove any records missing a location ID
 
 PRISM[, 12][PRISM[, 12] == 537] <- "5037" # There are errors in site ID numbers, these are the ones that can be corrected
-PRISM <- subset(PRISM, !is.na(PRISM[, 12])) # remove any records missing a location ID
+PRISM[, 12][PRISM[, 12] == 98]  <- 5061 # There is no locID 98, this is the observation for 5061 at booting stage 
 
 #### Rename the provinces to proper names ####
 PRISM[, 17][PRISM[, 17] == "Camarines sur"] <- "Camarines Sur"
@@ -101,6 +102,7 @@ PRISM[, 16][PRISM[, 16] == "Tabuk"] <- "Tabuk City"
 PRISM[, 16][PRISM[, 16] == "Tabui"] <- "Tabuk City"
 PRISM[, 16][PRISM[, 16] == "sablayan"] <- "Sablayan"
 PRISM[, 16][PRISM[, 16] == "Sta.cruz"] <- "Santa Cruz"
+PRISM[, 16][PRISM[, 16] == "Sta cruz"] <- "Santa Cruz"
 PRISM[, 16][PRISM[, 16] == "Palangui"] <- "Polangui"
 PRISM[, 16][PRISM[, 15] == "Burabod"] <- "Castilla" # Someone doesn't know the difference between a town and a province
 PRISM[, 16][PRISM[, 16] == "Miluya"] <- "Castilla" # Someone doesn't know the difference between a baragnay and a Town
@@ -109,6 +111,8 @@ PRISM[, 16][PRISM[, 16] == "Alang alang"] <- "Alangalang"
 PRISM[, 16][PRISM[, 16] == "Minalbac"] <- "Minalabac"
 PRISM[, 16][PRISM[, 16] == "minalabac"] <- "Minalabac"
 PRISM[, 16][PRISM[, 16] == "Polangue"] <- "Polangui"
+PRISM[, 16][PRISM[, 16] == "Sorsogon"] <- "Castilla"
+PRISM[, 16][PRISM[, 12] == 5061] <- "Castilla" #5061 is incorrectly placed in Pilar not Castilla
 
 #### Rename the regions to proper names ####
 PRISM[, 18][PRISM[, 18] == "3"] <- "III"
@@ -134,15 +138,16 @@ PRISM <- rbind(PRISM, tmp)
 #PRISM[, 22][PRISM[, 22] == "4th"] <- "1st"
 #PRISM[, 22][PRISM[, 22] == "3rd"] <- "1st"
 
-PRISM[, 21][PRISM[, 24] <= 50] <- "Booting"
-PRISM[, 21][PRISM[, 24] >= 60] <- "Ripening"
+PRISM[, 21][PRISM[, 24] <= 60] <- "Booting"
+PRISM[, 21][PRISM[, 24] >= 70] <- "Ripening"
 
 #### Remove extra field observations ####
 ## Keep only the second observation per growth stage visit
 PRISM <- subset(PRISM, locID != 7004 | datetime != "2014-08-27") # remove first observation at ripening, incorrect data collected
 PRISM <- subset(PRISM, locID != 3050 | datetime != "2014-10-04") # Obviously one of the ripening observations does not go with this locID, where does it go?
-PRISM <- subset(PRISM, locID != 3024 | group_crop_info_crop_stage != 80) # remove first observation at ripening, incorrect data collected
-PRISM <- subset(PRISM, locID != 3028 | group_crop_info_crop_stage != 60) # remove first observation at ripening, incorrect data collecte
+PRISM <- subset(PRISM, locID != 3024 | group_crop_info.crop_stage != 80) # remove first observation at ripening, incorrect data collected
+PRISM <- subset(PRISM, locID != 3028 | group_crop_info.crop_stage != 60) # remove first observation at ripening, incorrect data collected
+PRISM <- subset(PRISM, locID != 17010 | SubmissionDate != "2014-09-20 22:39:02") # remove the first submission, keep the second
 
 #### CAR Correction ####
 PRISM[, 16][PRISM[, 15] == "Babalag East"] <- "Rizal"
@@ -150,14 +155,15 @@ PRISM[, 17][PRISM[, 15] == "Babalag East"] <- "Kalinga"
 
 #### Bohol has three munincipalities that combine into one
 bohol <- subset(PRISM, Province == "Bohol")
-bohol[, 15] <- bohol[, 16]
-PRISM <- PRISM[PRISM[, 16] != "Bohol", ] 
+bohol[, 16] <- bohol[, 17]
+PRISM <- PRISM[PRISM[, 17] != "Bohol", ] 
 PRISM <- rbind(PRISM, bohol)
 
-##### Visit number one or two? #####
+#### Start creating individual data frames for graphs and maps ####
+## Visit number one or two? ##
 visit <- PRISM[, grep(pattern = "visitNo_label", colnames(PRISM), perl = TRUE)]
 visit <- data.frame(PRISM[, c(2, 12, 15:18)], visit)
-colnames(visit) <- c("Date", "locID", "Barangay", "Municipality", "Province", "Region", "GS", "visit")
+colnames(visit) <- c("Date", "locID", "Barangay", "Municipality", "Province", "Region", "visit")
 
 #### Growth stage ####
 gs <- PRISM[, grep(pattern = "crop_stage", colnames(PRISM), perl = TRUE)]
@@ -222,9 +228,9 @@ shb.summary <- mutate(shb.summary, perc.injury = (injury/organ)*100)
 str.summary <- mutate(str.summary, perc.injury = (injury/organ)*100)
 
 #### generate data frames of snail and rat damage ####
-gas <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "area_gas", colnames(PRISM), perl = TRUE)], 1, mean))
-rat <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "pest_rat", colnames(PRISM), perl = TRUE)], 1, mean))
-names(gas) <- names(rat) <- c("lat", "lon", "locID", "Municipality", "Province", "Region", "visit", "tillers", "injury")
+gas <- data.frame(PRISM[, c(1, 8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "area_gas", colnames(PRISM), perl = TRUE)], 1, mean))
+rat <- data.frame(PRISM[, c(1, 8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "pest_rat", colnames(PRISM), perl = TRUE)], 1, mean))
+names(gas) <- names(rat) <- c("date", "lat", "lon", "locID", "Municipality", "Province", "Region", "visit", "tillers", "injury")
 
 #### generate data frames of systemic diseases, snail and bug/hopper burn ####
 bbn <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "bugburn", colnames(PRISM), perl = TRUE)], 1, mean))
