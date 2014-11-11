@@ -123,7 +123,7 @@ ggplot(dht, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   ggtitle("Dead Heart")
 ggsave("Graphs/Dead_Heart.png", width = 8, height = 8, units = "in")
 
-# Rat damage
+# Rat damage during two visits
 ggplot(rat, aes(x = factor(Municipality), y = injury)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Average Rat Damaged Hills") +
@@ -134,6 +134,17 @@ ggplot(rat, aes(x = factor(Municipality), y = injury)) +
   ggtitle("Rat Damage") +
   facet_grid(. ~ visit)
 ggsave("Graphs/Rat.png", width = 8, height = 8, units = "in")
+
+# Rat AUIPC
+ggplot(rat.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nRat Damage by Municipality")
+ggsave("Graphs/Rat_AUIPC_Graph.png", width = 8, height = 8, units = "in")
 
 # golden apple snail damage
 ggplot(gas, aes(x = factor(Municipality), y = injury)) +

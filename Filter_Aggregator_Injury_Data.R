@@ -10,11 +10,12 @@
 ##############################################################################
 
 #### load packages ####
-library(reshape)
 library(doBy)
 library(sqldf)
 library(plyr)
 library(lubridate)
+library(agricolae)
+library(reshape2)
 #### end load packages ####
 
 # CAR     August 18-22, 2014 (Joey)
@@ -165,6 +166,9 @@ visit <- PRISM[, grep(pattern = "visitNo_label", colnames(PRISM), perl = TRUE)]
 visit <- data.frame(PRISM[, c(2, 12, 15:18)], visit)
 colnames(visit) <- c("Date", "locID", "Barangay", "Municipality", "Province", "Region", "visit")
 
+#### Create "dates" dataframe for AUIPC calculations using AUDPC from Agricolae ####
+dates <- c(1, 2) # Two visits per farmer field, just using relative for AUDPC calculation since there are only two and at different time periods
+
 #### Growth stage ####
 gs <- PRISM[, grep(pattern = "crop_stage", colnames(PRISM), perl = TRUE)]
 
@@ -227,14 +231,43 @@ shr.summary <- mutate(shr.summary, perc.injury = (injury/organ)*100)
 shb.summary <- mutate(shb.summary, perc.injury = (injury/organ)*100)
 str.summary <- mutate(str.summary, perc.injury = (injury/organ)*100)
 
+## Disease calculations for AUDPC ##
+bak.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = bak, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+bak.wide <- mutate(bak.wide, damage = audpc(bak.wide[, 3:4], dates, type = "relative"))
+blb.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = blb, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+blb.wide <- mutate(blb.wide, damage = audpc(blb.wide[, 3:4], dates, type = "relative"))
+bls.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = bls, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+bls.wide <- mutate(bls.wide, damage = audpc(bls.wide[, 3:4], dates, type = "relative"))
+bst.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = bst, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+bst.wide <- mutate(bst.wide, damage = audpc(bst.wide[, 3:4], dates, type = "relative"))
+lba.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = lba, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+lba.wide <- mutate(lba.wide, damage = audpc(lba.wide[, 3:4], dates, type = "relative"))
+nbs.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = nbs, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+nbs.wide <- mutate(nbs.wide, damage = audpc(nbs.wide[, 3:4], dates, type = "relative"))
+lsc.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = lsc, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+lsc.wide <- mutate(lsc.wide, damage = audpc(lsc.wide[, 3:4], dates, type = "relative"))
+rsp.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = rsp, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+rsp.wide <- mutate(rsp.wide, damage = audpc(rsp.wide[, 3:4], dates, type = "relative"))
+shr.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = shr, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+shr.wide <- mutate(shr.wide, damage = audpc(shr.wide[, 3:4], dates, type = "relative"))
+shb.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = shb, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+shb.wide <- mutate(shb.wide, damage = audpc(shb.wide[, 3:4], dates, type = "relative"))
+str.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = str, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+str.wide <- mutate(lba.wide, damage = audpc(str.wide[, 3:4], dates, type = "relative"))
+
 #### generate data frames of snail and rat damage ####
 gas <- data.frame(PRISM[, c(1, 8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "area_gas", colnames(PRISM), perl = TRUE)], 1, mean))
 rat <- data.frame(PRISM[, c(1, 8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "pest_rat", colnames(PRISM), perl = TRUE)], 1, mean))
 
 names(gas) <- names(rat) <- c("date", "lat", "lon", "locID", "Municipality", "Province", "Region", "visit", "tillers", "injury")
 
+# Summary for mapping and for AUIPC
 gas.summary <- summaryBy(injury+lat+lon~Municipality+visit, data = gas, FUN = median, na.rm = TRUE)
-rat.summary <- summaryBy(injury+lat+lon~Municipality+visit, data = rat, FUN = mean, na.rm = TRUE)
+rat.summary <- summaryBy(injury+lat+lon~Municipality+visit, data = rat, FUN = median, na.rm = TRUE)
+
+## Rat calculations for AUIPC ##
+rat.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = rat, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
+rat.wide <- mutate(rat.wide, damage = audpc(rat.wide[, 3:4], dates, type = "relative"))
 
 #### generate data frames of systemic diseases, snail and bug/hopper burn ####
 bbn <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, apply(PRISM[, grep(pattern = "bugburn", colnames(PRISM), perl = TRUE)], 1, mean))
