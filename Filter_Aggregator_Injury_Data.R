@@ -198,20 +198,20 @@ str <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[
 
 names(bak) <- names(blb) <- names(bls) <- names(bst) <- names(fsm) <- names(dip) <- names(lba) <- names(nba)  <- names(nbs)  <- names(lsc) <- names(rsp) <- names(shr) <- names(shb) <- names(str) <- c("lat", "lon", "locID", "Municipality", "Province", "Region", "visit", "organ", "injury")
 
-bak.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = bak, FUN = median, na.rm = TRUE)
-blb.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = blb, FUN = median, na.rm = TRUE)
-bls.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = bls, FUN = median, na.rm = TRUE)
-bst.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = bst, FUN = median, na.rm = TRUE)
-fsm.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = fsm, FUN = median, na.rm = TRUE)
-dip.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = dip, FUN = median, na.rm = TRUE)
-lba.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = lba, FUN = median, na.rm = TRUE)
-nba.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = nba, FUN = median, na.rm = TRUE)
-nbs.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = nbs, FUN = median, na.rm = TRUE)
-lsc.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = lsc, FUN = median, na.rm = TRUE)
-rsp.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = rsp, FUN = median, na.rm = TRUE)
-shr.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = shr, FUN = median, na.rm = TRUE)
-shb.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = shb, FUN = median, na.rm = TRUE)
-str.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = str, FUN = median, na.rm = TRUE)
+bak.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = bak, FUN = mean, na.rm = TRUE)
+blb.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = blb, FUN = mean, na.rm = TRUE)
+bls.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = bls, FUN = mean, na.rm = TRUE)
+bst.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = bst, FUN = mean, na.rm = TRUE)
+fsm.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = fsm, FUN = mean, na.rm = TRUE)
+dip.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = dip, FUN = mean, na.rm = TRUE)
+lba.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = lba, FUN = mean, na.rm = TRUE)
+nba.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = nba, FUN = mean, na.rm = TRUE)
+nbs.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = nbs, FUN = mean, na.rm = TRUE)
+lsc.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = lsc, FUN = mean, na.rm = TRUE)
+rsp.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = rsp, FUN = mean, na.rm = TRUE)
+shr.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = shr, FUN = mean, na.rm = TRUE)
+shb.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = shb, FUN = mean, na.rm = TRUE)
+str.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = str, FUN = mean, na.rm = TRUE)
 
 names(bak.summary) <- names(blb.summary) <- names(bls.summary) <- names(bst.summary) <- names(fsm.summary) <- names(dip.summary) <- names(lba.summary) <- names(nba.summary) <- names(nbs.summary) <- names(lsc.summary) <- names(rsp.summary) <- names(shr.summary) <- names(shb.summary) <- names(str.summary) <- c("Municipality", "visit", "injury", "organ", "lat", "lon")
 
@@ -262,8 +262,8 @@ rat <- data.frame(PRISM[, c(1, 8:9, 12, 16:18)], visit$visit, tillers, apply(PRI
 names(gas) <- names(rat) <- c("date", "lat", "lon", "locID", "Municipality", "Province", "Region", "visit", "tillers", "injury")
 
 # Summary for mapping and for AUIPC
-gas.summary <- summaryBy(injury+lat+lon~Municipality+visit, data = gas, FUN = median, na.rm = TRUE)
-rat.summary <- summaryBy(injury+lat+lon~Municipality+visit, data = rat, FUN = median, na.rm = TRUE)
+gas.summary <- summaryBy(injury+lat+lon~Municipality+visit, data = gas, FUN = mean, na.rm = TRUE)
+rat.summary <- summaryBy(injury+lat+lon~Municipality+visit, data = rat, FUN = mean, na.rm = TRUE)
 
 ## Rat calculations for AUIPC ##
 rat.wide <- dcast(summaryBy(injury~Region+Municipality+visit, data = rat, FUN = mean, na.rm = TRUE), Region+Municipality~visit, value.var = "injury.mean")
@@ -280,13 +280,13 @@ ylo <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, apply(PRISM[, grep(pa
 
 names(bbn) <- names(hbn) <- names(tun) <- names(grs) <- names(rgd) <- names(olf) <- names(ylo) <- c("lat", "lon", "locID", "Municipality", "Province", "Region", "visit", "rating")
 
-bbn.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = bbn, FUN = median, na.rm = TRUE)
-hbn.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = hbn, FUN = median, na.rm = TRUE)
-tun.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = tun, FUN = median, na.rm = TRUE)
-grs.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = grs, FUN = median, na.rm = TRUE)
-rgd.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = rgd, FUN = median, na.rm = TRUE)
-olf.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = olf, FUN = median, na.rm = TRUE)
-ylo.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = ylo, FUN = median, na.rm = TRUE)
+bbn.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = bbn, FUN = mean, na.rm = TRUE)
+hbn.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = hbn, FUN = mean, na.rm = TRUE)
+tun.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = tun, FUN = mean, na.rm = TRUE)
+grs.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = grs, FUN = mean, na.rm = TRUE)
+rgd.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = rgd, FUN = mean, na.rm = TRUE)
+olf.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = olf, FUN = mean, na.rm = TRUE)
+ylo.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = ylo, FUN = mean, na.rm = TRUE)
 
 names(tun.summary) <- names(grs.summary) <- names(rgd.summary) <- names(olf.summary) <- names(ylo.summary) <- names(bbn.summary)  <- names(hbn.summary) <- c("Municipality", "visit", "rating", "lat", "lon")
 
@@ -300,12 +300,12 @@ small <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, apply(PRISM[, grep(
 
 names(weedabove) <- names(weedbelow) <- names(broadleaf) <- names(grass) <- names(sedge) <- names(small) <- c("lat", "lon", "locID", "Municipality", "Province", "Region", "visit", "rating")
 
-weedabove.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = weedabove, FUN = median, na.rm = TRUE)
-weedbelow.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = weedbelow, FUN = median, na.rm = TRUE)
-broadleaf.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = broadleaf, FUN = median, na.rm = TRUE)
-grass.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = grass, FUN = median, na.rm = TRUE)
-sedge.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = sedge, FUN = median, na.rm = TRUE)
-small.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = small, FUN = median, na.rm = TRUE)
+weedabove.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = weedabove, FUN = mean, na.rm = TRUE)
+weedbelow.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = weedbelow, FUN = mean, na.rm = TRUE)
+broadleaf.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = broadleaf, FUN = mean, na.rm = TRUE)
+grass.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = grass, FUN = mean, na.rm = TRUE)
+sedge.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = sedge, FUN = mean, na.rm = TRUE)
+small.summary <- summaryBy(rating+lat+lon~Municipality+visit, data = small, FUN = mean, na.rm = TRUE)
 
 names(weedabove.summary) <- names(weedbelow.summary) <- names(broadleaf.summary) <- names(grass.summary) <- names(sedge.summary) <- names(small.summary) <- c("Municipality", "visit", "rating", "lat", "lon")
 
@@ -324,15 +324,15 @@ dht <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[
 
 names(lfd) <- names(lfm) <- names(thp) <- names(whm) <- names(def) <- names(wht) <- names(rgb) <- names(rbg) <- names(dht) <- c("lat", "lon", "locID", "Municipality", "Province", "Region", "visit", "organ", "injury")
 
-lfd.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = lfd, FUN = median, na.rm = TRUE)
-lfm.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = lfm, FUN = median, na.rm = TRUE)
-thp.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = thp, FUN = median, na.rm = TRUE)
-whm.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = whm, FUN = median, na.rm = TRUE)
-def.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = def, FUN = median, na.rm = TRUE)
-wht.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = wht, FUN = median, na.rm = TRUE)
-rgb.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = rgb, FUN = median, na.rm = TRUE)
-rbg.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = rbg, FUN = median, na.rm = TRUE)
-dht.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = dht, FUN = median, na.rm = TRUE)
+lfd.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = lfd, FUN = mean, na.rm = TRUE)
+lfm.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = lfm, FUN = mean, na.rm = TRUE)
+thp.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = thp, FUN = mean, na.rm = TRUE)
+whm.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = whm, FUN = mean, na.rm = TRUE)
+def.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = def, FUN = mean, na.rm = TRUE)
+wht.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = wht, FUN = mean, na.rm = TRUE)
+rgb.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = rgb, FUN = mean, na.rm = TRUE)
+rbg.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = rbg, FUN = mean, na.rm = TRUE)
+dht.summary <- summaryBy(injury+organ+lat+lon~Municipality+visit, data = dht, FUN = mean, na.rm = TRUE)
 
 names(lfd.summary) <- names(lfm.summary) <- names(thp.summary) <- names(whm.summary) <- names(def.summary) <- names(wht.summary) <- names(rgb.summary) <- names(rbg.summary) <- names(dht.summary) <- c("Municipality", "visit", "injury", "organ", "lat", "lon")
 

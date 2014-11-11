@@ -133,7 +133,7 @@ ggplot(rat, aes(x = factor(Municipality), y = injury)) +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   ggtitle("Rat Damage") +
   facet_grid(. ~ visit)
-ggsave("Graphs/Rat.png", width = 8, height = 8, units = "in")
+ggsave("Graphs/Rat_Graph.png", width = 8, height = 8, units = "in")
 
 # Rat AUIPC
 ggplot(rat.wide, aes(x = factor(Municipality), y = damage)) + 

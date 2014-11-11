@@ -130,28 +130,27 @@ map + geom_point(data = dht.summary, aes(x = lon, y = lat, size = perc.injury, c
   ggsave("Graphs/Dead_heart_map.png", width = 8, height = 8, units = "in")
 
 # Rat damage
-map + geom_point(data = rat.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
-  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Median\n\Rat\nDamage\nat\nHill\nLevel") +
-  scale_x_discrete(name = "Municipality") +
-  scale_fill_discrete(name = "Region") +
-  scale_colour_discrete(name = "Region") +
-  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  ggtitle("Rat Damage") +
+map + geom_point(data = rat.summary, aes(x = lon.median, y = lat.median, size = injury.median, colour = injury.median)) + 
+  scale_size_continuous("Median\nRat\nDamage\nIncidence\nat Hill\nLevel (%)", range = c(3, 15)) +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRat\nDamage\nIncidence\nat Hill\nLevel (%)") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
+  guides(size = "none") +
+  ggtitle("Rat Damage Incidence") +
+  coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Rat.png", width = 8, height = 8, units = "in")
+ggsave("Graphs/Rat_Map.png", width = 8, height = 8, units = "in")
 
 # golden apple snail damage
-map + geom_point(data = snail.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
-  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Median\n\Snail\nDamage\nat\nHill\nLevel") +
-  scale_x_discrete(name = "Municipality") +
-  scale_fill_discrete(name = "Region") +
-  scale_colour_discrete(name = "Region") +
-  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  ggtitle("Golden Apple Snail Damage")
-ggsave("Graphs/GAS.png", width = 8, height = 8, units = "in")
-
+map + geom_point(data = snail.summary, aes(x = lon.median, y = lat.median, size = injury.median, colour = injury.median)) + 
+  scale_size_continuous("Median\nSnail\nDamage\nIncidence\nat Hill\nLevel (%)", range = c(3, 15)) +
+  scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nSnail\nDamage\nIncidence\nat Hill\nLevel (%)") + 
+  scale_x_continuous("Longitude") +
+  scale_y_continuous("Latitude") + 
+  guides(size = "none") +
+  ggtitle("Snail Damage Incidence") +
+  coord_map()
+ggsave("Graphs/Snail_Map.png", width = 8, height = 8, units = "in")
 #### End mapping ####
 
 # eos
