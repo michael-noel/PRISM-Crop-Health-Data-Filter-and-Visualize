@@ -130,7 +130,7 @@ map + geom_point(data = dht.summary, aes(x = lon, y = lat, size = perc.injury, c
   ggsave("Graphs/Dead_heart_map.png", width = 8, height = 8, units = "in")
 
 # Rat damage
-map + geom_point(data = rat.summary, aes(x = lon.median, y = lat.median, size = injury.median, colour = injury.median)) + 
+map + geom_point(data = rat.summary, aes(x = lon.mean, y = lat.mean, size = injury.mean, colour = injury.mean)) + 
   scale_size_continuous("Median\nRat\nDamage\nIncidence\nat Hill\nLevel (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nRat\nDamage\nIncidence\nat Hill\nLevel (%)") + 
   scale_x_continuous("Longitude") +
@@ -142,7 +142,7 @@ map + geom_point(data = rat.summary, aes(x = lon.median, y = lat.median, size = 
 ggsave("Graphs/Rat_Map.png", width = 8, height = 8, units = "in")
 
 # golden apple snail damage
-map + geom_point(data = snail.summary, aes(x = lon.median, y = lat.median, size = injury.median, colour = injury.median)) + 
+map + geom_point(data = gas.summary, aes(x = lon.mean, y = lat.mean, size = injury.mean, colour = injury.mean)) + 
   scale_size_continuous("Median\nSnail\nDamage\nIncidence\nat Hill\nLevel (%)", range = c(3, 15)) +
   scale_colour_gradientn(colours = brewer.pal(7, "YlOrRd"), "Median\nSnail\nDamage\nIncidence\nat Hill\nLevel (%)") + 
   scale_x_continuous("Longitude") +
@@ -150,7 +150,7 @@ map + geom_point(data = snail.summary, aes(x = lon.median, y = lat.median, size 
   guides(size = "none") +
   ggtitle("Snail Damage Incidence") +
   coord_map()
-ggsave("Graphs/Snail_Map.png", width = 8, height = 8, units = "in")
+ggsave("Graphs/GAS_Map.png", width = 8, height = 8, units = "in")
 #### End mapping ####
 
 # eos
