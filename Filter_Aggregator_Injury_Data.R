@@ -82,6 +82,7 @@ PRISM[, 17][PRISM[, 17] == "occidental mindoro"] <- "Occidental Mindoro"
 PRISM[, 17][PRISM[, 17] == "Occ.mdo"] <- "Occidental Mindoro"
 PRISM[, 17][PRISM[, 17] == "Occ. Mindoro"] <- "Occidental Mindoro"
 PRISM[, 17][PRISM[, 17] == "Occ. Mindorp"] <- "Occidental Mindoro"
+PRISM[, 17][PRISM[, 17] == "Occ.mdo."] <- "Occidental Mindoro"
 PRISM[, 17][PRISM[, 15] == "Burabod"] <- "Sorsogon" # Someone doesn't know the difference between a town and a province
 PRISM[, 17][PRISM[, 16] == "Miluya"] <- "Sorsogon" # Someone doesn't know the difference between a barangay and a province
 PRISM[, 17][PRISM[, 17] == "bohol"] <- "Bohol"
@@ -125,6 +126,7 @@ PRISM[, 18][PRISM[, 18] == "9"] <- "VIII"
 PRISM[, 18][PRISM[, 18] == "16"] <- "CAR"
 PRISM[, 18][PRISM[, 15] == "Babalag East"] <- "CAR"
 PRISM[, 18][PRISM[, 18] == "Sorsogon"] <- "V"
+PRISM[, 18][PRISM[, 18] == 10] <- "VIII"
 
 #### Correct region numbers ####
 PRISM <- within(PRISM, Region[Province == "Bohol"] <- "VII") # Fixes "NA" and "12" mis-entries

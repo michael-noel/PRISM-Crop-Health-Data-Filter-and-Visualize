@@ -135,6 +135,18 @@ ggplot(rat, aes(x = factor(Municipality), y = injury)) +
   facet_grid(. ~ visit)
 ggsave("Graphs/Rat_Graph.png", width = 8, height = 8, units = "in")
 
+# golden apple snail damage
+ggplot(gas, aes(x = factor(Municipality), y = injury)) +
+  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
+  scale_y_continuous(name = "Average Missing Hills Due to Snail") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("Golden Apple Snail Damage")
+ggsave("Graphs/GAS_Graph.png", width = 8, height = 8, units = "in")
+
+#### Progress curve graphs ####
 # Rat AUIPC
 ggplot(rat.wide, aes(x = factor(Municipality), y = damage)) + 
   geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
@@ -145,16 +157,5 @@ ggplot(rat.wide, aes(x = factor(Municipality), y = damage)) +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   ggtitle("End of Season Summary\nRat Damage by Municipality")
 ggsave("Graphs/Rat_AUIPC_Graph.png", width = 8, height = 8, units = "in")
-
-# golden apple snail damage
-ggplot(gas, aes(x = factor(Municipality), y = injury)) +
-  geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
-  scale_y_continuous(name = "Average Missing Hills Due to Snail") +
-  scale_x_discrete(name = "Municipality") +
-  scale_fill_discrete(name = "Region") +
-  scale_colour_discrete(name = "Region") +
-  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
-  ggtitle("Golden Apple Snail Damage")
-ggsave("Graphs/GAS.png", width = 8, height = 8, units = "in")
 
 # eos
