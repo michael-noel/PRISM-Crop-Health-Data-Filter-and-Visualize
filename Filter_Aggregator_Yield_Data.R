@@ -42,6 +42,8 @@ PRISM[, 14][PRISM[, 9] == "007018"] <- "Bohol" # Someone moved our plots from Bo
 #### Rename the Municipalities to proper names ####
 PRISM[, 13][PRISM[, 13] == "sablayan"] <- "Sablayan"
 PRISM[, 13][PRISM[, 13] == "Sta.cruz"] <- "Santa Cruz"
+PRISM[, 13][PRISM[, 13] == "Sta. Cruz"] <- "Santa Cruz"
+PRISM[, 13][PRISM[, 13] == "Sta.Cruz"] <- "Santa Cruz"
 PRISM[, 13][PRISM[, 13] == "Alang alang"] <- "Alangalang"
 
 #### Rename the regions to proper names ####
@@ -55,13 +57,20 @@ PRISM[, 15][PRISM[, 15] == "region4b"] <- "IV-B"
 PRISM[, 17][PRISM[, 17] == "1ha"] <- 1
 PRISM[, 17] <- as.numeric(as.character(PRISM[, 17]))
 
+#### Correct missing location IDs ####
+ifelse(PRISM[, 10] == "recto sta. maria" & PRISM[, 12] == "Sablayan", PRISM[, 8] <- 17027, FALSE)
+ifelse(PRISM[, 10] == "Rogelio Villa" & PRISM[, 12] == "Santa Cruz", PRISM[, 8] <- 17050, FALSE)
+ifelse(PRISM[, 10] == "CONSUELO VILLAS" & PRISM[, 12] == "Santa Cruz", PRISM[, 8] <- 17041, FALSE)
+ifelse(PRISM[, 10] == "ROWELL BAUTISTA" & PRISM[, 12] == "Santa Cruz", PRISM[, 8] <- 17049, FALSE)
+ifelse(PRISM[, 10] == "Mahumot Eligio" & PRISM[, 12] == "San Miguel", PRISM[, 8] <- 7010, FALSE)
+ifelse(PRISM[, 10] == "Salvador Superada" & PRISM[, 12] == "Alangalang", PRISM[, 8] <- 8006, FALSE)
+
 #### Merge the site ID columns ####
 missing <- is.na(PRISM[, 8]) # create logical index for NAs in PRISM[, 8]
 PRISM[, 8][missing] <- PRISM[, 9][missing] # replace NAs with values from PRISM[, 8]
 PRISM <- PRISM[, -9] # drop column 8 now
 PRISM[, 8] <- as.numeric(PRISM[, 8])
-names(PRISM[, 8]) <- "locID"
-PRISM <- subset(PRISM, !is.na(PRISM[, 8])) # remove any records missing a location ID
+#PRISM <- subset(PRISM, !is.na(PRISM[, 8])) # remove any records missing a location ID
 
 #### Bohol has three munincipalities that combine into one
 bohol <- subset(PRISM, Province == "Bohol")
@@ -69,7 +78,7 @@ bohol[, 12] <- bohol[, 13]
 PRISM <- PRISM[PRISM[, 13] != "Bohol", ]
 PRISM <- rbind(PRISM, bohol)
 
-#### generate data frames of non-systemic diseases, from 10 observations, for graphing ####
+#### generate data frames for graphing ####
 yield <- data.frame(PRISM[, c(8, 12:14)], apply(PRISM[, grep(pattern = "yieldtha", colnames(PRISM), perl = TRUE)], 1, mean))
 names(yield) <- c("locID", "Municipality", "Province", "Region", "Yield")
 
