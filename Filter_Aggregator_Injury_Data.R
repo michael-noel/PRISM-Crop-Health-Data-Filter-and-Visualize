@@ -148,8 +148,8 @@ PRISM[, 21][PRISM[, 24] >= 70] <- "Ripening"
 ## Keep only the second observation per growth stage visit
 PRISM <- subset(PRISM, locID != 7004 | datetime != "2014-08-27") # remove first observation at ripening, incorrect data collected
 PRISM <- subset(PRISM, locID != 3050 | datetime != "2014-10-04") # Obviously one of the ripening observations does not go with this locID, where does it go?
-PRISM <- subset(PRISM, locID != 3024 | group_crop_info.crop_stage != 80) # remove first observation at ripening, incorrect data collected
-PRISM <- subset(PRISM, locID != 3028 | group_crop_info.crop_stage != 60) # remove first observation at ripening, incorrect data collected
+PRISM <- subset(PRISM, locID != 3024 | group_crop_info_crop_stage != 80) # remove first observation at ripening, incorrect data collected
+PRISM <- subset(PRISM, locID != 3028 | group_crop_info_crop_stage != 60) # remove first observation at ripening, incorrect data collected
 PRISM <- subset(PRISM, locID != 17010 | SubmissionDate != "2014-09-20 22:39:02") # remove the first submission, keep the second
 
 #### CAR Correction ####

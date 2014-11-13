@@ -18,7 +18,7 @@ source("Filter_Aggregator_Injury_Data.R")
 # how many observations per Municipality are there submitted so far?
 ggplot(visit, aes(x = factor(Municipality))) +
   geom_histogram(aes(colour = factor(Region), fill = factor(Region)), stat = "bin", position = "dodge", alpha = 0.65) +
-  scale_y_continuous(name = "Number of farmer fields") +
+  scale_y_continuous(name = "Number of farmer fields visited per PRISM site") +
   scale_x_discrete(name = "Municipality") +
   scale_fill_discrete(name = "Region") +
   scale_colour_discrete(name = "Region") +
