@@ -10,6 +10,7 @@
 ##############################################################################
 
 source("Filter_Aggregator_Injury_Data.R")
+source("Filter_Aggregator_Yield_Data.R")
 
 #### Summarise Data ####
 injuries <- data.frame(PRISM[, c(1, 8:9, 12, 16:19, 22:30)], 
@@ -35,26 +36,36 @@ names(injuries) <- c("SubmissionDate",
 #### End Summarising ####
 
 #### Export Data ####
-## Raw Data ##
-write.csv(arrange(subset(PRISM, Region == "III"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionIII_Raw.csv", row.names = FALSE)
-write.csv(arrange(subset(PRISM, Region == "IV-B"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionIV-B_Raw.csv", row.names = FALSE)
-write.csv(arrange(subset(PRISM, Region == "V"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionV_Raw.csv", row.names = FALSE)
-write.csv(arrange(subset(PRISM, Region == "VI"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVI_Raw.csv", row.names = FALSE)
-write.csv(arrange(subset(PRISM, Region == "VII"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVII_Raw.csv", row.names = FALSE)
-write.csv(arrange(subset(PRISM, Region == "VIII"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVIII_Raw.csv", row.names = FALSE)
-write.csv(arrange(subset(PRISM, Region == "CAR"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionCAR_Raw.csv", row.names = FALSE)
+## Raw Injury Data ##
+write.csv(arrange(subset(PRISM, Region == "III"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionIII_Injury_Raw.csv", row.names = FALSE)
+write.csv(arrange(subset(PRISM, Region == "IV-B"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionIV-B_Injury_Raw.csv", row.names = FALSE)
+write.csv(arrange(subset(PRISM, Region == "V"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionV_Injury_Raw.csv", row.names = FALSE)
+write.csv(arrange(subset(PRISM, Region == "VI"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVI_Injury_Raw.csv", row.names = FALSE)
+write.csv(arrange(subset(PRISM, Region == "VII"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVII_Injury_Raw.csv", row.names = FALSE)
+write.csv(arrange(subset(PRISM, Region == "VIII"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVIII_Injury_Raw.csv", row.names = FALSE)
+write.csv(arrange(subset(PRISM, Region == "CAR"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionCAR_Injury_Raw.csv", row.names = FALSE)
+## End Raw Injury Data ##
 
-## End Raw Data ##
+## Summarised Injury Data ##
+write.csv(arrange(subset(injuries, Region == "III"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionIII_Injury_Summary.csv", row.names = FALSE)
+write.csv(arrange(subset(injuries, Region == "IV-B"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionIV-B_Injury_Summary.csv", row.names = FALSE)
+write.csv(arrange(subset(injuries, Region == "V"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionV_Injury_Summary.csv", row.names = FALSE)
+write.csv(arrange(subset(injuries, Region == "VI"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVI_Injury_Summary.csv", row.names = FALSE)
+write.csv(arrange(subset(injuries, Region == "VII"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVII_Injury_Summary.csv", row.names = FALSE)
+write.csv(arrange(subset(injuries, Region == "VIII"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVIII_Injury_Summary.csv", row.names = FALSE)
+write.csv(arrange(subset(injuries, Region == "CAR"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionCAR_Injury_Summary.csv", row.names = FALSE)
+## End Summarised Injury Data ##
 
-## Summarised Data ##
-write.csv(arrange(subset(injuries, Region == "III"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionIII_Summary.csv", row.names = FALSE)
-write.csv(arrange(subset(injuries, Region == "IV-B"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionIV-B_Summary.csv", row.names = FALSE)
-write.csv(arrange(subset(injuries, Region == "V"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionV_Summary.csv", row.names = FALSE)
-write.csv(arrange(subset(injuries, Region == "VI"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVI_Summary.csv", row.names = FALSE)
-write.csv(arrange(subset(injuries, Region == "VII"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVII_Summary.csv", row.names = FALSE)
-write.csv(arrange(subset(injuries, Region == "VIII"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVIII_Summary.csv", row.names = FALSE)
-write.csv(arrange(subset(injuries, Region == "CAR"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionCAR_Summary.csv", row.names = FALSE)
-## End Summarised Data ##
+## Yield Data ##
+write.csv(arrange(subset(yield, Region == "III"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionIII_Yield.csv", row.names = FALSE)
+write.csv(arrange(subset(yield, Region == "IV-B"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionIV-B_Yield.csv", row.names = FALSE)
+write.csv(arrange(subset(yield, Region == "V"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionV_Yield.csv", row.names = FALSE)
+write.csv(arrange(subset(yield, Region == "VI"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVI_Yield.csv", row.names = FALSE)
+write.csv(arrange(subset(yield, Region == "VII"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVII_Yield.csv", row.names = FALSE)
+write.csv(arrange(subset(yield, Region == "VIII"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVIII_Yield.csv", row.names = FALSE)
+write.csv(arrange(subset(yield, Region == "CAR"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionCAR_Yield.csv", row.names = FALSE)
+## End Yield Data ##
+
 
 #### End Data Export ####
 

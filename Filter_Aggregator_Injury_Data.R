@@ -29,7 +29,7 @@ library(reshape2)
 PRISM <- read.csv("~/Google Drive/tmp/PRISM_Injuries.csv")
 PRISM <- PRISM[, -2] # drop formhub uuid, not needed
 
-PRISM[, 1] <- parse_date_time(PRISM[, 1], "b d, Y I:M:S p") # use lubridate to filter out duplicate entries
+PRISM[, 1] <- parse_date_time(PRISM[, 1], "b d, Y I:M:S p") # use lubridate to filter out duplicate entries if necessary
 PRISM[, 2] <- as.character(as.Date(PRISM[, 2], "%b %d, %Y")) # these are just character, use for subsetting
 PRISM[, 3] <- as.character(as.Date(PRISM[, 3], "%b %d, %Y")) # these are just character, use for subsetting
 PRISM[, 4] <- as.character(as.Date(PRISM[, 4], "%b %d, %Y"))# these are just character, use for subsetting
@@ -62,7 +62,7 @@ PRISM[, 13] <- as.numeric(as.character(PRISM[, 13])) # convert column 13 to clas
 PRISM[, 12][missing] <- PRISM[, 13][missing] # replace NAs with values from PRISM[, 13]
 PRISM <- PRISM[, -13] # drop column 13 now
 names(PRISM)[12] <- "locID"
-PRISM <- subset(PRISM, !is.na(PRISM[, 12])) # remove any records missing a location ID
+#PRISM <- subset(PRISM, !is.na(PRISM[, 12])) # remove any records missing a location ID
 
 PRISM[, 12][PRISM[, 12] == 537] <- "5037" # There are errors in site ID numbers, these are the ones that can be corrected
 PRISM[, 12][PRISM[, 12] == 98]  <- 5061 # There is no locID 98, this is the observation for 5061 at booting stage 
@@ -148,8 +148,8 @@ PRISM[, 21][PRISM[, 24] >= 70] <- "Ripening"
 ## Keep only the second observation per growth stage visit
 PRISM <- subset(PRISM, locID != 7004 | datetime != "2014-08-27") # remove first observation at ripening, incorrect data collected
 PRISM <- subset(PRISM, locID != 3050 | datetime != "2014-10-04") # Obviously one of the ripening observations does not go with this locID, where does it go?
-PRISM <- subset(PRISM, locID != 3024 | group_crop_info_crop_stage != 80) # remove first observation at ripening, incorrect data collected
-PRISM <- subset(PRISM, locID != 3028 | group_crop_info_crop_stage != 60) # remove first observation at ripening, incorrect data collected
+PRISM <- subset(PRISM, locID != 3024 | PRISM[, 24] != 80) # remove first observation at ripening, incorrect data collected
+PRISM <- subset(PRISM, locID != 3028 | PRISM[, 24] != 60) # remove first observation at ripening, incorrect data collected
 PRISM <- subset(PRISM, locID != 17010 | SubmissionDate != "2014-09-20 22:39:02") # remove the first submission, keep the second
 
 #### CAR Correction ####
@@ -351,3 +351,4 @@ rbg.summary <- mutate(rbg.summary, perc.injury = (injury/organ)*100)
 dht.summary <- mutate(dht.summary, perc.injury = (injury/organ)*100)
 
 #eos 
+
