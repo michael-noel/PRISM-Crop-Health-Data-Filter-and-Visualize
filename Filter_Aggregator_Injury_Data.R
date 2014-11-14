@@ -165,8 +165,9 @@ PRISM <- rbind(PRISM, bohol)
 #### Start creating individual data frames for graphs and maps ####
 ## Visit number one or two? ##
 visit <- PRISM[, grep(pattern = "visitNo_label", colnames(PRISM), perl = TRUE)]
-visit <- data.frame(PRISM[, c(2, 12, 15:18)], visit)
+visit <- data.frame(PRISM[, c(1, 12, 15:18)], visit)
 colnames(visit) <- c("Date", "locID", "Barangay", "Municipality", "Province", "Region", "visit")
+visit[, 1] <- as.Date(visit[, 1])
 
 #### Create "dates" dataframe for AUIPC calculations using AUDPC from Agricolae ####
 dates <- c(1, 2) # Two visits per farmer field, just using relative for AUDPC calculation since there are only two and at different time periods
@@ -185,12 +186,12 @@ blb <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply
 bls <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum))
 bst <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)], 1, sum))
 fsm <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "falsesmut", colnames(PRISM), perl = TRUE)], 1, sum))
-fsm <- na.omit(subset(fsm, visit.visit == "Ripening")) # no false smut before heading
+fsm.graph <- na.omit(subset(fsm, visit.visit == "Ripening")) # no false smut before heading
 dip <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "dirtypanicle", colnames(PRISM), perl = TRUE)], 1, sum))
-dip <- na.omit(subset(dip, visit.visit == "Ripening")) # no dirty panicles before heading
+dip.graph <- na.omit(subset(dip, visit.visit == "Ripening")) # no dirty panicles before heading
 lba <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "leafblast", colnames(PRISM), perl = TRUE)], 1, sum))
 nba <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "neckblast", colnames(PRISM), perl = TRUE)], 1, sum))
-nba <- na.omit(subset(nba, nba$visit.visit == "Ripening")) # no neck blast until second visit
+nba.graph <- na.omit(subset(nba, nba$visit.visit == "Ripening")) # no neck blast until second visit
 nbs <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "narrowbrownspot", (colnames(PRISM)), perl = TRUE)], 1, sum))
 lsc <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "leafscald", colnames(PRISM), perl = TRUE)], 1, sum))
 rsp <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "redstripe", colnames(PRISM), perl = TRUE)], 1, sum))
@@ -318,9 +319,9 @@ thp <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply
 whm <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "whorl", colnames(PRISM), perl = TRUE)], 1, sum))
 def <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "defoliators", colnames(PRISM), perl = TRUE)], 1, sum))
 wht <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*tillers, apply(PRISM[, grep(pattern = "whitehead", colnames(PRISM), perl = TRUE)], 1, sum))
-wht <- na.omit(subset(wht, visit.visit == "Ripening")) # no white head until second visit
+wht.graph <- na.omit(subset(wht, visit.visit == "Ripening")) # no white head until second visit
 rgb <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "ricegrainbug", colnames(PRISM), perl = TRUE)], 1, sum))
-rgb <- na.omit(subset(rgb, visit.visit == "Ripening")) # no grain bug damage until second visit
+rgb.graph <- na.omit(subset(rgb, visit.visit == "Ripening")) # no grain bug damage until second visit
 rbg <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "ricebug", colnames(PRISM), perl = TRUE)], 1, sum))
 dht <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "deadheart", colnames(PRISM), perl = TRUE)], 1, sum))
 

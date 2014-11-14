@@ -65,7 +65,7 @@ ggplot(bst, aes(x = factor(Municipality), y = (injury/organ)*100)) +
 ggsave("Graphs/Brown_Spot.png", width = 8, height = 8, units = "in")
 
 # false smut
-ggplot(fsm, aes(x = factor(Municipality), y = (injury/organ)*100)) +
+ggplot(fsm.graph, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Incidence at Panicle Level (%)") +
   scale_x_discrete(name = "Municipality") +
@@ -76,7 +76,7 @@ ggplot(fsm, aes(x = factor(Municipality), y = (injury/organ)*100)) +
 ggsave("Graphs/FSM.png", width = 8, height = 8, units = "in")
 
 # dirty panicle
-ggplot(dip, aes(x = factor(Municipality), y = (injury/organ)*100)) +
+ggplot(dip.graph, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Incidence at Panicle Level (%)") +
   scale_x_discrete(name = "Municipality") +
@@ -99,7 +99,7 @@ ggplot(lba, aes(x = factor(Municipality), y = (injury/organ)*100)) +
 ggsave("Graphs/Leaf_blast.png", width = 8, height = 8, units = "in")
 
 # neck blast
-ggplot(nba, aes(x = factor(Municipality), y = (injury/organ)*100)) +
+ggplot(nba.graph, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Incidence at Panicle Level (%)") +
   scale_x_discrete(name = "Municipality") +

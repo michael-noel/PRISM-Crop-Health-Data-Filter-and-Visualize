@@ -76,7 +76,7 @@ ggplot(def, aes(x = factor(Municipality), y = (injury/organ)*100)) +
 ggsave("Graphs/Defoliator.png", width = 8, height = 8, units = "in")
 
 # White head
-ggplot(wht, aes(x = factor(Municipality), y = (injury/organ)*100)) +
+ggplot(wht.graph, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Incidence at Tiller Level (%)") +
   scale_x_discrete(name = "Municipality") +
@@ -88,7 +88,7 @@ ggplot(wht, aes(x = factor(Municipality), y = (injury/organ)*100)) +
 ggsave("Graphs/White_Head.png", width = 8, height = 8, units = "in")
 
 # Rice grain bug
-ggplot(rgb, aes(x = factor(Municipality), y = (injury/organ)*100)) +
+ggplot(rgb.graph, aes(x = factor(Municipality), y = (injury/organ)*100)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Incidence at Panicle Level (%)") +
   scale_x_discrete(name = "Municipality") +

@@ -11,6 +11,7 @@
 
 #### load packages ####
 library(ggplot2)
+library(scales)
 #### end load packages ####
 
 source("Filter_Aggregator_Injury_Data.R")
@@ -39,6 +40,16 @@ ggplot(data = visit, aes(x = factor(locID))) +
   ggtitle("Survey Visits by Location ID")
 ggsave("Graphs/Loc_ID_Visits.png", width = 40, height = 8, units = "in")
 
-
+# when did the regions submit data?
+ggplot(visit, aes(x = Date)) +
+  geom_histogram(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, position = "dodge", binwidth = 1) +
+  scale_y_continuous(name = "Number of injury results submitted") +
+  scale_x_date(breaks = "1 week", minor_breaks = "1 day", labels = date_format("%d-%b")) +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.8, size = 7)) +
+  ggtitle("Survey Visits Submitted by Date of Submission") +
+  facet_grid(. ~ Region)
+ggsave("Graphs/Injury_Submissions_by_Date.png", width = 16, height = 8, units = "in")
 
 # eos

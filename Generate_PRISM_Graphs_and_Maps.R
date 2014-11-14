@@ -21,4 +21,6 @@ source("Weed_graphs.R")
 source("Yield_graph.R")
 source("Yield_map.R")
 
+source("Cleaned_Data_for_Regions.R")
+
 #eos

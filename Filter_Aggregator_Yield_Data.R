@@ -58,8 +58,8 @@ PRISM[, 17][PRISM[, 17] == "1ha"] <- 1
 PRISM[, 17] <- as.numeric(as.character(PRISM[, 17]))
 
 #### Correct missing location IDs ####
-ifelse(PRISM[, 10] == "recto sta. maria" & PRISM[, 12] == "Sablayan", PRISM[, 8] <- 17027, FALSE)
-ifelse(PRISM[, 10] == "Rogelio Villa" & PRISM[, 12] == "Santa Cruz", PRISM[, 8] <- 17050, FALSE)
+ifelse(PRISM[, 11] == "recto sta. maria" & PRISM[, 13] == "Sablayan", as.numeric(PRISM[, 8] <- 17027), as.numeric(PRISM[, 8] <- PRISM[, 8]))
+ifelse(PRISM[, 11] == "Rogelio Villa" & PRISM[, 13] == "Santa Cruz", as.numeric(PRISM[, 8] <- 17050), as.numeric(PRISM[, 8] <- PRISM[, 8]))
 ifelse(PRISM[, 10] == "CONSUELO VILLAS" & PRISM[, 12] == "Santa Cruz", PRISM[, 8] <- 17041, FALSE)
 ifelse(PRISM[, 10] == "ROWELL BAUTISTA" & PRISM[, 12] == "Santa Cruz", PRISM[, 8] <- 17049, FALSE)
 ifelse(PRISM[, 10] == "Mahumot Eligio" & PRISM[, 12] == "San Miguel", PRISM[, 8] <- 7010, FALSE)
