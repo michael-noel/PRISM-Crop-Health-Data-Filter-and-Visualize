@@ -61,14 +61,6 @@ PRISM[, 16][PRISM[, 16] == "region4b"] <- "IV-B"
 PRISM[, 18][PRISM[, 18] == "1ha"] <- 1
 PRISM[, 18] <- as.numeric(as.character(PRISM[, 18]))
 
-#### Correct missing location IDs ####
-# ifelse(PRISM[, 11] == "recto sta. maria" & PRISM[, 13] == "Sablayan", as.numeric(PRISM[, 8] <- 17027), as.numeric(PRISM[, 8] <- PRISM[, 8]))
-# ifelse(PRISM[, 11] == "Rogelio Villa" & PRISM[, 13] == "Santa Cruz", as.numeric(PRISM[, 8] <- 17050), as.numeric(PRISM[, 8] <- PRISM[, 8]))
-# ifelse(PRISM[, 10] == "CONSUELO VILLAS" & PRISM[, 12] == "Santa Cruz", PRISM[, 8] <- 17041, FALSE)
-# ifelse(PRISM[, 10] == "ROWELL BAUTISTA" & PRISM[, 12] == "Santa Cruz", PRISM[, 8] <- 17049, FALSE)
-# ifelse(PRISM[, 10] == "Mahumot Eligio" & PRISM[, 12] == "San Miguel", PRISM[, 8] <- 7010, FALSE)
-# ifelse(PRISM[, 10] == "Salvador Superada" & PRISM[, 12] == "Alangalang", PRISM[, 8] <- 8006, FALSE)
-
 #### Merge the site ID columns ####
 missing <- is.na(PRISM[, 9]) # create logical index for NAs in PRISM[, 8]
 PRISM[, 9][missing] <- PRISM[, 10][missing] # replace NAs with values from PRISM[, 8]
