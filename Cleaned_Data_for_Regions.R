@@ -10,7 +10,6 @@
 ##############################################################################
 
 source("Filter_Aggregator_Injury_Data.R")
-source("Filter_Aggregator_Yield_Data.R")
 
 #### Summarise Data ####
 injuries <- data.frame(PRISM[, c(1, 8:9, 12, 16:19, 22:30)], 
@@ -55,6 +54,9 @@ write.csv(arrange(subset(injuries, Region == "VII"), Municipality, SubmissionDat
 write.csv(arrange(subset(injuries, Region == "VIII"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionVIII_Injury_Summary.csv", row.names = FALSE)
 write.csv(arrange(subset(injuries, Region == "CAR"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionCAR_Injury_Summary.csv", row.names = FALSE)
 ## End Summarised Injury Data ##
+
+#### Yield data ####
+source("Filter_Aggregator_Yield_Data.R")
 
 ## Yield Data ##
 write.csv(arrange(subset(yield, Region == "III"), Municipality, SubmissionDate), "Crop Health Data for Regions/RegionIII_Yield.csv", row.names = FALSE)

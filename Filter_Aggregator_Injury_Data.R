@@ -176,15 +176,93 @@ dates <- c(1, 2) # Two visits per farmer field, just using relative for AUDPC ca
 gs <- PRISM[, grep(pattern = "crop_stage", colnames(PRISM), perl = TRUE)]
 
 #### tillers, panicle and leaf counts ####
-tillers <- apply(PRISM[, grep(pattern = "tiller_hill", colnames(PRISM), perl = TRUE)], 1, sum)
-panicles <- apply(PRISM[, grep(pattern = "panicle_hill", colnames(PRISM), perl = TRUE)], 1, sum)
-leaves <- apply(PRISM[, grep(pattern = "leaves_tiller", colnames(PRISM), perl = TRUE)], 1, sum)
+## split into groups for weighted averages ##
+tillers <- data.frame(PRISM[, grep(pattern = "group_1_[[:graph:]]*tiller_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_2_[[:graph:]]*tiller_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_3_[[:graph:]]*tiller_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_4_[[:graph:]]*tiller_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_5_[[:graph:]]*tiller_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_6_[[:graph:]]*tiller_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_7_[[:graph:]]*tiller_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_8_[[:graph:]]*tiller_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_9_[[:graph:]]*tiller_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_10_[[:graph:]]*tiller_hill", colnames(PRISM), perl = TRUE)])
+names(tillers) <- c("Tillers_Hill_1", "Tillers_Hill_2", "Tillers_Hill_3", "Tillers_Hill_4", "Tillers_Hill_5", "Tillers_Hill_6", "Tillers_Hill_7", "Tillers_Hill_8", "Tillers_Hill_9", "Tillers_Hill_10")
+
+panicles <- data.frame(PRISM[, grep(pattern = "group_1_[[:graph:]]*panicle_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_2_[[:graph:]]*panicle_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_3_[[:graph:]]*panicle_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_4_[[:graph:]]*panicle_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_5_[[:graph:]]*panicle_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_6_[[:graph:]]*panicle_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_7_[[:graph:]]*panicle_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_8_[[:graph:]]*panicle_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_9_[[:graph:]]*panicle_hill", colnames(PRISM), perl = TRUE)],
+                      PRISM[, grep(pattern = "group_10_[[:graph:]]*panicle_hill", colnames(PRISM), perl = TRUE)])
+names(panicles) <- c("Panicles_Hill_1", "Panicles_Hill_2", "Panicles_Hill_3", "Panicles_Hill_4", "Panicles_Hill_5", "Panicles_Hill_6", "Panicles_Hill_7", "Panicles_Hill_8", "Panicles_Hill_9", "Panicles_Hill_10")
+
+leaves <- data.frame(PRISM[, grep(pattern = "group_1_[[:graph:]]*leaves_tiller", colnames(PRISM), perl = TRUE)],
+                       PRISM[, grep(pattern = "group_2_[[:graph:]]*leaves_tiller", colnames(PRISM), perl = TRUE)],
+                       PRISM[, grep(pattern = "group_3_[[:graph:]]*leaves_tiller", colnames(PRISM), perl = TRUE)],
+                       PRISM[, grep(pattern = "group_4_[[:graph:]]*leaves_tiller", colnames(PRISM), perl = TRUE)],
+                       PRISM[, grep(pattern = "group_5_[[:graph:]]*leaves_tiller", colnames(PRISM), perl = TRUE)],
+                       PRISM[, grep(pattern = "group_6_[[:graph:]]*leaves_tiller", colnames(PRISM), perl = TRUE)],
+                       PRISM[, grep(pattern = "group_7_[[:graph:]]*leaves_tiller", colnames(PRISM), perl = TRUE)],
+                       PRISM[, grep(pattern = "group_8_[[:graph:]]*leaves_tiller", colnames(PRISM), perl = TRUE)],
+                       PRISM[, grep(pattern = "group_9_[[:graph:]]*leaves_tiller", colnames(PRISM), perl = TRUE)],
+                       PRISM[, grep(pattern = "group_10_[[:graph:]]*leaves_tiller", colnames(PRISM), perl = TRUE)])
+
+names(leaves) <- c("Leaves_Hill_1", "Leaves_Hill_2", "Leaves_Hill_3", "Leaves_Hill_4", "Leaves_Hill_5", "Leaves_Hill_6", "Leaves_Hill_7", "Leaves_Hill_8", "Leaves_Hill_9", "Leaves_Hill_10")
 
 #### generate data frames of non-systemic diseases, from 10 observations, for graphing ####
-bak <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers, apply(PRISM[, grep(pattern = "bakanae", colnames(PRISM), perl = TRUE)], 1, sum))
-blb <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "bacterialleafblight", colnames(PRISM), perl = TRUE)], 1, sum))
-bls <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "bacterialleafstreak", colnames(PRISM), perl = TRUE)], 1, sum))
-bst <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers*leaves, apply(PRISM[, grep(pattern = "(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)], 1, sum))
+bak <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, tillers, 
+                  PRISM[, grep(pattern = "group_1_[[:graph:]]*bakanae", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_2_[[:graph:]]*bakanae", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_3_[[:graph:]]*bakanae", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_4_[[:graph:]]*bakanae", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_5_[[:graph:]]*bakanae", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_6_[[:graph:]]*bakanae", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_7_[[:graph:]]*bakanae", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_8_[[:graph:]]*bakanae", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_9_[[:graph:]]*bakanae", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_10_[[:graph:]]*bakanae", colnames(PRISM), perl = TRUE)])
+
+blb <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, leaves, 
+                  PRISM[, grep(pattern = "group_1_[[:graph:]]*bacterialleafblight", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_2_[[:graph:]]*bacterialleafblight", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_3_[[:graph:]]*bacterialleafblight", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_4_[[:graph:]]*bacterialleafblight", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_5_[[:graph:]]*bacterialleafblight", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_6_[[:graph:]]*bacterialleafblight", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_7_[[:graph:]]*bacterialleafblight", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_8_[[:graph:]]*bacterialleafblight", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_9_[[:graph:]]*bacterialleafblight", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_10_[[:graph:]]*bacterialleafblight", colnames(PRISM), perl = TRUE)])
+
+bls <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, leaves, 
+                  PRISM[, grep(pattern = "group_1_[[:graph:]]*bacterialleafstreak", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_2_[[:graph:]]*bacterialleafstreak", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_3_[[:graph:]]*bacterialleafstreak", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_4_[[:graph:]]*bacterialleafstreak", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_5_[[:graph:]]*bacterialleafstreak", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_6_[[:graph:]]*bacterialleafstreak", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_7_[[:graph:]]*bacterialleafstreak", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_8_[[:graph:]]*bacterialleafstreak", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_9_[[:graph:]]*bacterialleafstreak", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_10_[[:graph:]]*bacterialleafstreak", colnames(PRISM), perl = TRUE)])
+
+bst <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, leaves, 
+                  PRISM[, grep(pattern = "group_1_[[:graph:]]*(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_2_[[:graph:]]*(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_3_[[:graph:]]*(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_4_[[:graph:]]*(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_5_[[:graph:]]*(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_6_[[:graph:]]*(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_7_[[:graph:]]*(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_8_[[:graph:]]*(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_9_[[:graph:]]*(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)],
+                  PRISM[, grep(pattern = "group_10_[[:graph:]]*(?<!narrow)(?i)brownspot", colnames(PRISM), perl = TRUE)])
+
 fsm <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "falsesmut", colnames(PRISM), perl = TRUE)], 1, sum))
 fsm.graph <- na.omit(subset(fsm, visit.visit == "Ripening")) # no false smut before heading
 dip <- data.frame(PRISM[, c(8:9, 12, 16:18)], visit$visit, panicles, apply(PRISM[, grep(pattern = "dirtypanicle", colnames(PRISM), perl = TRUE)], 1, sum))
