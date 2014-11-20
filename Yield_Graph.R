@@ -23,6 +23,6 @@ ggplot(yield, aes(x = factor(Municipality), y = Yield)) +
   scale_colour_discrete(name = "Region") +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   ggtitle("Wet Season 2014")
-ggsave("Graphs/Yield_Graph.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Yield_Graph.png", width = 8, height = 8, units = "in")
 
 #eos
