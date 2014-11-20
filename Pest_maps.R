@@ -34,7 +34,7 @@ map + geom_point(data = lfd.summary, aes(x = lon, y = lat, size = perc.injury, c
   ggtitle("Leaffolder Injury Incidence") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Leaffolder_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Leaffolder_map.png", width = 8, height = 8, units = "in")
 
 # Leafminer
 map + geom_point(data = lfm.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
@@ -46,7 +46,7 @@ map + geom_point(data = lfm.summary, aes(x = lon, y = lat, size = perc.injury, c
   ggtitle("Leafminer Injury Incidence") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Leafminer_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Leafminer_map.png", width = 8, height = 8, units = "in")
 
 # Thrips
 map + geom_point(data = thp.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
@@ -58,7 +58,7 @@ map + geom_point(data = thp.summary, aes(x = lon, y = lat, size = perc.injury, c
   ggtitle("Thrip Injury Incidence") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Thrip_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Thrip_map.png", width = 8, height = 8, units = "in")
 
 # Whorl Maggot
 map + geom_point(data = whm.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
@@ -70,7 +70,7 @@ map + geom_point(data = whm.summary, aes(x = lon, y = lat, size = perc.injury, c
   ggtitle("Whorl Maggot Incidence") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Whorl_maggot_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Whorl_maggot_map.png", width = 8, height = 8, units = "in")
 
 # Other defoliator
 map + geom_point(data = def.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
@@ -82,7 +82,7 @@ map + geom_point(data = def.summary, aes(x = lon, y = lat, size = perc.injury, c
   ggtitle("Other Defoliator Incidence") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Other_defoliator_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Other_defoliator_map.png", width = 8, height = 8, units = "in")
 
 # White head
 map + geom_point(data = wht.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
@@ -93,7 +93,7 @@ map + geom_point(data = wht.summary, aes(x = lon, y = lat, size = perc.injury, c
   guides(size = "none") +
   ggtitle("White Head Incidence") +
   coord_map() +
-ggsave("Graphs/White_head_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/White_head_map.png", width = 8, height = 8, units = "in")
 
 # Rice grain bug
 map + geom_point(data = rgb.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
@@ -104,7 +104,7 @@ map + geom_point(data = rgb.summary, aes(x = lon, y = lat, size = perc.injury, c
   guides(size = "none") +
   ggtitle("Rice Grain Bug Incidence") +
   coord_map() +
-ggsave("Graphs/Rice_grain_bug_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Rice_grain_bug_map.png", width = 8, height = 8, units = "in")
 
 # Rice bug
 map + geom_point(data = rbg.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
@@ -115,7 +115,7 @@ map + geom_point(data = rbg.summary, aes(x = lon, y = lat, size = perc.injury, c
   guides(size = "none") +
   ggtitle("Rice Bug Incidence") +
   coord_map() +
-  ggsave("Graphs/Rice_bug_map.png", width = 8, height = 8, units = "in")
+  ggsave("Injury_Graphs/Rice_bug_map.png", width = 8, height = 8, units = "in")
 
 # Dead heart
 map + geom_point(data = dht.summary, aes(x = lon, y = lat, size = perc.injury, colour = perc.injury)) + 
@@ -127,7 +127,7 @@ map + geom_point(data = dht.summary, aes(x = lon, y = lat, size = perc.injury, c
   ggtitle("Dead Heart Incidence") +
   coord_map() +
   facet_grid(. ~ visit)
-  ggsave("Graphs/Dead_heart_map.png", width = 8, height = 8, units = "in")
+  ggsave("Injury_Graphs/Dead_heart_map.png", width = 8, height = 8, units = "in")
 
 # Rat damage
 map + geom_point(data = rat.summary, aes(x = lon.mean, y = lat.mean, size = injury.mean, colour = injury.mean)) + 
@@ -139,7 +139,7 @@ map + geom_point(data = rat.summary, aes(x = lon.mean, y = lat.mean, size = inju
   ggtitle("Rat Damage Incidence") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Rat_Map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Rat_Map.png", width = 8, height = 8, units = "in")
 
 # golden apple snail damage
 map + geom_point(data = gas.summary, aes(x = lon.mean, y = lat.mean, size = injury.mean, colour = injury.mean)) + 
@@ -150,7 +150,7 @@ map + geom_point(data = gas.summary, aes(x = lon.mean, y = lat.mean, size = inju
   guides(size = "none") +
   ggtitle("Snail Damage Incidence") +
   coord_map()
-ggsave("Graphs/GAS_Map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/GAS_Map.png", width = 8, height = 8, units = "in")
 #### End mapping ####
 
 # eos
