@@ -37,6 +37,6 @@ map + geom_point(data = yield.summary, aes(x = gps1.Longitude.median, y =  gps1.
   guides(size = "none") +
   ggtitle("2014 Wet Season Observed Yield") +
   coord_map()
-ggsave("Graphs/Yield_Map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Yield_Map.png", width = 8, height = 8, units = "in")
 
 #eos
