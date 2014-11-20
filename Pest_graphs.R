@@ -158,4 +158,115 @@ ggplot(rat.wide, aes(x = factor(Municipality), y = damage)) +
   ggtitle("End of Season Summary\nRat Damage by Municipality")
 ggsave("Injury_Graphs/Rat_AUIPC_Graph.png", width = 8, height = 8, units = "in")
 
+# Leaf folder AUIPC
+ggplot(lfd.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nLeaf Folder Damage by Municipality")
+ggsave("Injury_Graphs/Leaf_folder_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+# Leaf miner AUIPC
+ggplot(lfm.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nLeaf Miner Damage by Municipality")
+ggsave("Injury_Graphs/Leaf_miner_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+# Thrip AUIPC
+ggplot(thp.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nThrip Damage by Municipality")
+ggsave("Injury_Graphs/Thrip_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+# Whorl maggot AUIPC
+ggplot(whm.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nWhorl Maggot Damage by Municipality")
+ggsave("Injury_Graphs/Whorl_maggot_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+# Other defoliator AUIPC
+ggplot(def.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nOther Defoliator Damage by Municipality")
+ggsave("Injury_Graphs/Defoliator_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+# White head AUIPC
+ggplot(wht.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nWhite Head Incidence by Municipality")
+ggsave("Injury_Graphs/White_Head_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+# Rice grain bug AUIPC
+ggplot(rgb.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nRice Grain Bug Damage by Municipality")
+ggsave("Injury_Graphs/Rice_Grain_Bug_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+# Rice bug AUIPC
+ggplot(rbg.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nRice Bug Damage by Municipality")
+ggsave("Injury_Graphs/Rice_Bug_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+# Dead heart AUIPC
+ggplot(dht.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nDead Heart Incidence by Municipality")
+ggsave("Injury_Graphs/Dead_Heart_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+# Golden apple snail AUIPC
+ggplot(gas.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nGolden Apple Snail Damage by Municipality")
+ggsave("Injury_Graphs/GAS_Graph.png", width = 8, height = 8, units = "in")
+
+
 # eos
