@@ -34,7 +34,7 @@ map + geom_point(data = weedabove.summary, aes(x = lon, y = lat, size = rating, 
   ggtitle("Weeds Above Canopy") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Weed_above_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Weed_above_map.png", width = 8, height = 8, units = "in")
 
 # BLB
 map + geom_point(data = weedbelow.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + 
@@ -46,7 +46,7 @@ map + geom_point(data = weedbelow.summary, aes(x = lon, y = lat, size = rating, 
   ggtitle("Weed Below the Canopy") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Weed_below_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Weed_below_map.png", width = 8, height = 8, units = "in")
 
 # Grass
 map + geom_point(data = grass.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + 
@@ -58,7 +58,7 @@ map + geom_point(data = grass.summary, aes(x = lon, y = lat, size = rating, colo
   ggtitle("Grasses") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Grassy_weed_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Grassy_weed_map.png", width = 8, height = 8, units = "in")
 
 # Broadleaf weed
 map + geom_point(data = broadleaf.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + 
@@ -70,7 +70,7 @@ map + geom_point(data = broadleaf.summary, aes(x = lon, y = lat, size = rating, 
   ggtitle("Broadleaf Weeds") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Broadleaf_weed_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Broadleaf_weed_map.png", width = 8, height = 8, units = "in")
 
 # Sedge
 map + geom_point(data = sedge.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + 
@@ -82,7 +82,7 @@ map + geom_point(data = sedge.summary, aes(x = lon, y = lat, size = rating, colo
   ggtitle("Sedge Ranking") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Sedge_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Sedge_map.png", width = 8, height = 8, units = "in")
 
 # Small weeds
 map + geom_point(data = small.summary, aes(x = lon, y = lat, size = rating, colour = rating)) + 
@@ -94,7 +94,7 @@ map + geom_point(data = small.summary, aes(x = lon, y = lat, size = rating, colo
   ggtitle("Small Weed Ranking") +
   coord_map() +
   facet_grid(. ~ visit)
-ggsave("Graphs/Small_weed_map.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Small_weed_map.png", width = 8, height = 8, units = "in")
 
 #### End mapping ####
 
