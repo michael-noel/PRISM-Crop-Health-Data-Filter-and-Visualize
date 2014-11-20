@@ -26,7 +26,7 @@ ggplot(visit, aes(x = factor(Municipality))) +
   theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
   facet_grid(. ~ visit) +
   ggtitle("Survey Visits by Municipality")
-ggsave("Graphs/Visits.png", width = 8, height = 8, units = "in")
+ggsave("Injury_Graphs/Visits.png", width = 8, height = 8, units = "in")
 
 # Graph of locID visits
 ggplot(data = visit, aes(x = factor(locID))) +
@@ -38,7 +38,7 @@ ggplot(data = visit, aes(x = factor(locID))) +
   theme(axis.text.x = element_text(angle = 90, hjust = 0.8)) +
   facet_grid(. ~ visit) +
   ggtitle("Survey Visits by Location ID")
-ggsave("Graphs/Loc_ID_Visits.png", width = 40, height = 8, units = "in")
+ggsave("Injury_Graphs/Loc_ID_Visits.png", width = 40, height = 8, units = "in")
 
 # when did the regions submit data?
 ggplot(visit, aes(x = Date)) +
@@ -50,6 +50,6 @@ ggplot(visit, aes(x = Date)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 0.8, size = 7)) +
   ggtitle("Survey Visits Submitted by Date of Submission") +
   facet_grid(. ~ Region)
-ggsave("Graphs/Injury_Submissions_by_Date.png", width = 16, height = 8, units = "in")
+ggsave("Injury_Graphs/Injury_Submissions_by_Date.png", width = 16, height = 8, units = "in")
 
 # eos
