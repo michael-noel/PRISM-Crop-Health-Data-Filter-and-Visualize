@@ -63,7 +63,7 @@ ggplot(grs, aes(x = factor(Municipality), y = rating)) +
   ggtitle("Grassy Stunt Area")
 ggsave("Injury_Graphs/Grassy_stunt.png", width = 8, height = 8, units = "in")
 
-# grassy stunt damage
+# rice ragged stunt damage
 ggplot(rgd, aes(x = factor(Municipality), y = rating)) +
   geom_boxplot(aes(colour = factor(Region), fill = factor(Region)), alpha = 0.65, outlier.colour = "darkred", outlier.size = 4) +
   scale_y_continuous(name = "Rating of Area Affected") +
@@ -97,5 +97,45 @@ ggplot(ylo, aes(x = factor(Municipality), y = rating)) +
   facet_grid(. ~ visit) +
   ggtitle("Yellow Dwarf Area Area")
 ggsave("Injury_Graphs/Yellow_dwarf.png", width = 8, height = 8, units = "in")
+
+
+#### Progress curve graphs ####
+# bug burn AUIPC
+ggplot(bbn.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nBug Burn Severity by Municipality")
+ggsave("Injury_Graphs/Bug_burn_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+# hopper burn AUIPC
+ggplot(hbn.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under injury progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nHopper Burn Severity by Municipality")
+ggsave("Injury_Graphs/Hopper_burn_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+# tungro AUDPC
+ggplot(rat.wide, aes(x = factor(Municipality), y = damage)) + 
+  geom_histogram(aes(colour = (Region), fill = factor(Region)), alpha = 0.65, stat = "identity") +
+  scale_y_continuous(name = "Area under disease progress curve (larger equals more injuries)") +
+  scale_x_discrete(name = "Municipality") +
+  scale_fill_discrete(name = "Region") +
+  scale_colour_discrete(name = "Region") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 0.8)) +
+  ggtitle("End of Season Summary\nTungro by Municipality")
+ggsave("Injury_Graphs/Tungro_AUIPC_Graph.png", width = 8, height = 8, units = "in")
+
+
+
+
+
 
 # eos
